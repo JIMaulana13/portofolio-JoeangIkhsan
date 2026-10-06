@@ -105,7 +105,7 @@
             </div>
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">4 Proyek</div>
-              <div class="text-xs text-slate-400 mt-1">Sains Data & Rekayasa ML</div>
+              <div class="text-xs text-slate-400 mt-1">Data Science & Machine learning</div>
             </div>
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">Menteri</div>
@@ -131,7 +131,7 @@
               <img src="photo.jpeg" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
               <div class="absolute bottom-4 left-4 right-4">
-                <span class="px-3 py-1 bg-indigo-600/80 backdrop-blur-md rounded-full text-xs font-semibold text-white">Mahasiswa Sains Data</span>
+                <span class="px-3 py-1 bg-indigo-600/80 backdrop-blur-md rounded-full text-xs font-semibold text-white">Mahasiswa Teknologi Sains Data</span>
                 <p class="text-lg font-bold text-white mt-1">Joeang Ikhsan Maulana</p>
                 <p class="text-xs text-slate-300">Surabaya • Nganjuk, Jawa Timur</p>
               </div>
@@ -140,7 +140,7 @@
             <div class="space-y-3 text-xs text-slate-300">
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
                 <span class="text-slate-400">Pendidikan</span>
-                <span class="font-medium text-white">S1 Sains Data, UNAIR (2024–Skrg)</span>
+                <span class="font-medium text-white">S1 Teknologi Sains Data, UNAIR (2024–Skrg)</span>
               </div>
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
                 <span class="text-slate-400">Jalur Prestasi</span>
@@ -169,11 +169,10 @@
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <!-- Kolom Gambar Poster & Sertifikat -->
-        <div class="lg:col-span-5 space-y-4">
+        <!-- Kolom Kiri: Fokus Penuh untuk Poster Riset -->
+        <div class="lg:col-span-5">
           <div class="glass-card p-4 rounded-3xl border border-emerald-500/20">
             <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 relative group">
-              <!-- Ganti src ke images/poster-hki.jpg -->
               <img src="posterHKI.jpeg" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" />
               <div class="p-3 bg-slate-900/90 border-t border-slate-800 flex justify-between items-center text-xs">
                 <span class="text-emerald-400 font-bold">Poster Riset Fasilitas Kesehatan 38 Provinsi</span>
@@ -181,22 +180,12 @@
               </div>
             </div>
           </div>
-          <!-- Card Slot Sertifikat -->
-          <div class="glass-card p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
-            <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-800 shrink-0">
-              <!-- Ganti src ke images/sertifikat-preview.jpg -->
-              <img src="HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover">
-            </div>
-            <div class="text-xs">
-              <span class="font-bold text-white block">Surat Pencatatan Ciptaan DJKI</span>
-              <span class="text-slate-400 block mt-0.5">Permohonan: EC002026056074 (28 April 2026)</span>
-              <span class="text-emerald-400 font-semibold block mt-0.5">Masa Lindung: Berlaku 50 Tahun</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Detail Analisis & Metodologi -->
+        <!-- Kolom Kanan: Detail Legalitas, Metodologi, & Kartu Sertifikat Berdampingan Sejajar -->
         <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Rincian Legalitas -->
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-file-contract text-emerald-400"></i> Informasi Hak Cipta Terdaftar
@@ -219,6 +208,7 @@
             </div>
           </div>
 
+          <!-- Metodologi Statistik Nonparametrik -->
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-chart-pie text-cyan-400"></i> Metodologi Statistik Nonparametrik
@@ -238,10 +228,26 @@
               </div>
             </div>
           </div>
+
+          <!-- Kartu Preview Sertifikat (Dipindah ke Sisi Kanan) -->
+          <div class="glass-card p-5 rounded-2xl border border-slate-800 flex items-center gap-5">
+            <div class="w-20 h-24 rounded-xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/60 shadow-md">
+              <img src="HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover">
+            </div>
+            <div class="text-xs space-y-1">
+              <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 font-semibold text-[10px] inline-block mb-1">
+                Dokumen Resmi DJKI
+              </span>
+              <h4 class="font-bold text-white text-sm">Surat Pencatatan Ciptaan DJKI</h4>
+              <p class="text-slate-400">Nomor Permohonan: <span class="text-slate-300">EC002026056074 (28 April 2026)</span></p>
+              <p class="text-emerald-400 font-medium">Masa Lindung: Berlaku 50 Tahun sejak diumumkan</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
-
+    
     <!-- SECTION PROYEK UTAMA (4 PROYEK SAINS DATA & MACHINE LEARNING) -->
     <section id="projects" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
@@ -259,7 +265,7 @@
               <img src="Rshiny.png" alt="Analisis IKG 2023" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold">
-                R & Shiny Dashboard (2025)
+                RShiny Dashboard (2025)
               </span>
             </div>
             
@@ -474,7 +480,7 @@
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
-            <p class="text-xs text-indigo-400 font-medium">BEM FTMM Universitas Airlangga</p>
+            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2026</p>
             <p class="text-xs text-slate-300 leading-relaxed pt-1">
               Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.
             </p>
@@ -504,9 +510,9 @@
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Sekolah BEM FTMM 2024</h3>
-            <p class="text-xs text-indigo-400 font-medium">Penempatan Belajar di Kementerian Adkesma</p>
+            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2024</p>
             <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Aktif dalam praktik advokasi langsung dan dinobatkan sebagai Staf Terbaik Kementerian Adkesma pada program kaderisasi tahunan.
+              Aktif dalam praktik advokasi langsung dan terpilih sebagai staf terbaik Kementerian Adkesma pada Sekolah BEM FTMM.
             </p>
           </div>
         </div>
@@ -561,7 +567,7 @@
             <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
             <span class="text-[11px] text-slate-400 font-medium">Sept 2025</span>
           </div>
-          <h3 class="text-base font-bold text-white">ICATAM × I-PACT 2025</h3>
+          <h3 class="text-base font-bold text-white">ICATAM × i-PACT 2025</h3>
           <p class="text-xs text-indigo-400 font-medium">International Conference (Univ. Malaya & VIT)</p>
           <p class="text-xs text-slate-300 leading-relaxed">
             Operator sistem audio visual 2 hari penuh untuk kebutuhan presentasi narasumber internasional dan kelancaran multimedia konferensi.
@@ -571,7 +577,7 @@
         <!-- 3. SMART-INTECH (Operator) -->
         <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
           <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Teknis</span>
+            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator multimedia</span>
             <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
           </div>
           <h3 class="text-base font-bold text-white">Seminar Nasional SMART-INTECH</h3>
@@ -662,54 +668,98 @@
       </div>
     </section>
 
-    <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL & AUTOMATION) -->
+   <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL) -->
     <section id="pelatihan" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Pengembangan Diri</span>
-        <h2 class="text-3xl font-extrabold text-white">Pelatihan Kepemimpinan & Manajemen (LKMM)</h2>
-        <p class="text-xs text-slate-400 mt-1">Jenjang kaderisasi manajerial resmi dan peningkatan keahlian otomasi proses.</p>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Pengembangan Kepemimpinan</span>
+        <h2 class="text-3xl font-extrabold text-white">Jenjang Pelatihan Manajemen Mahasiswa (LKMM)</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Pelatihan terkait manajerial resmi tingkat perguruan tinggi yang ditempuh secara berjenjang dari tingkat dasar hingga lanjut.
+        </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Container Grid 3 Kolom -->
+      <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- LKMM-TL -->
-        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-indigo-500">
-          <span class="text-[11px] px-2.5 py-0.5 rounded bg-indigo-950 text-indigo-300 font-semibold">Juli 2026</span>
-          <h3 class="text-base font-bold text-white">LKMM-TL</h3>
-          <p class="text-xs text-indigo-400 font-medium">Tingkat Lanjut</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Menganalisis problematika riil masyarakat melalui pendekatan data untuk merumuskan grand design program pemberdayaan berkelanjutan serta indikator evaluasi (KPI).
-          </p>
+        <!-- LKMM-TD -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-teal-500">
+          <div>
+            <!-- Slot Gambar LKMM-TD (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
+            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
+              <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-teal-950/90 border border-teal-800 text-teal-300 font-semibold">
+                November 2025
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-2">
+              <h3 class="text-lg font-bold text-white">LKMM-TD</h3>
+              <p class="text-xs text-teal-400 font-medium">Tingkat Dasar</p>
+              <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                Mempelajari fondasi kepemimpinan personal, komunikasi interpersonal efektif, dinamika kerja tim, serta pengambilan keputusan dalam organisasi.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
+              Fokus: Komunikasi & Manajemen Tim
+            </span>
+          </div>
         </div>
 
         <!-- LKMM-TM -->
-        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-sky-500">
-          <span class="text-[11px] px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 font-semibold">Juni 2026</span>
-          <h3 class="text-base font-bold text-white">LKMM-TM</h3>
-          <p class="text-xs text-sky-400 font-medium">Tingkat Menengah</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Manajemen organisasi strategis, analisis SWOT, penyusunan Rencana Pengembangan Organisasi (RPO), dan studi lapangan rekomendasi bisnis UMKM.
-          </p>
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-sky-500">
+          <div>
+            <!-- Slot Gambar LKMM-TM (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
+            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
+              <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-sky-950/90 border border-sky-800 text-sky-300 font-semibold">
+                Juni 2026
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-2">
+              <h3 class="text-lg font-bold text-white">LKMM-TM</h3>
+              <p class="text-xs text-sky-400 font-medium">Tingkat Menengah</p>
+              <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                Manajemen organisasi strategis, analisis SWOT, perancangan RPO (Rencana Pengembangan Organisasi), serta studi lapangan solusi bisnis UMKM.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
+              Fokus: Strategi Organisasi & Riset Lapangan
+            </span>
+          </div>
         </div>
 
-        <!-- LKMM-TD -->
-        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-teal-500">
-          <span class="text-[11px] px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 font-semibold">November 2025</span>
-          <h3 class="text-base font-bold text-white">LKMM-TD</h3>
-          <p class="text-xs text-teal-400 font-medium">Tingkat Dasar</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Fondasi kepemimpinan personal, komunikasi interpersonal efektif, dinamika kerja tim, serta teknik pengambilan keputusan solutif dalam organisasi.
-          </p>
-        </div>
-
-        <!-- RPA WEBINAR -->
-        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-amber-500">
-          <span class="text-[11px] px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 font-semibold">Agustus 2026</span>
-          <h3 class="text-base font-bold text-white">UiPath × IOH One</h3>
-          <p class="text-xs text-amber-400 font-medium">Automation Webinar</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Mempelajari implementasi Robotic Process Automation (RPA) berbasis UiPath untuk otomatisasi alur kerja dan efisiensi transformasi proses digital.
-          </p>
+        <!-- LKMM-TL -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-indigo-500">
+          <div>
+            <!-- Slot Gambar LKMM-TL (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
+            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
+              <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-950/90 border border-indigo-800 text-indigo-300 font-semibold">
+                Juli 2026
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-2">
+              <h3 class="text-lg font-bold text-white">LKMM-TL</h3>
+              <p class="text-xs text-indigo-400 font-medium">Tingkat Lanjut</p>
+              <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian–peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
+              Fokus: Kebijakan Publik & Pengabdian Berbasis Data
+            </span>
+          </div>
         </div>
 
       </div>
