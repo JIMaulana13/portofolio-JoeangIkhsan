@@ -22,16 +22,39 @@
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.4);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.2);
+    }
+    .nav-scrolled {
+      background: rgba(10, 15, 30, 0.9) !important;
+      border-bottom-color: rgba(99, 102, 241, 0.3) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    .filter-btn.active {
+      background-color: rgb(79 70 229);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    }
+    .tab-content {
+      animation: fadeIn 0.35s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white relative">
 
-  <!-- NAVBAR -->
-  <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-800/80">
+  <!-- Scroll Progress Bar -->
+  <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-indigo-500 via-sky-400 to-teal-400 z-[60] w-0 transition-all duration-75"></div>
+
+  <!-- Dynamic Glass Navbar -->
+  <header id="main-nav" class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-800/80 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#home" class="flex items-center gap-3 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition">
@@ -39,17 +62,18 @@
         </div>
         <div>
           <span class="text-base font-bold tracking-tight block">Joeang Ikhsan M.</span>
-          <span class="text-xs text-slate-400 block font-normal">Data Science • UNAIR</span>
+          <span class="text-xs text-slate-400 block font-normal">Teknologi Sains Data • UNAIR</span>
         </div>
       </a>
       
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#about" class="hover:text-indigo-400 transition">Tentang</a>
-        <a href="#hki" class="hover:text-indigo-400 transition">HKI & Riset</a>
-        <a href="#projects" class="hover:text-indigo-400 transition">Proyek Data</a>
-        <a href="#organisasi" class="hover:text-indigo-400 transition">Organisasi</a>
-        <a href="#kepanitiaan" class="hover:text-indigo-400 transition">Kepanitiaan</a>
-        <a href="#pengmas" class="hover:text-indigo-400 transition">Pengmas</a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="#about" class="nav-link hover:text-indigo-400 transition py-1">Tentang</a>
+        <a href="#hki" class="nav-link hover:text-indigo-400 transition py-1">HKI & Riset</a>
+        <a href="#projects" class="nav-link hover:text-indigo-400 transition py-1">Proyek Data</a>
+        <a href="#organisasi" class="nav-link hover:text-indigo-400 transition py-1">Organisasi</a>
+        <a href="#kepanitiaan" class="nav-link hover:text-indigo-400 transition py-1">Kepanitiaan</a>
+        <a href="#pelatihan" class="nav-link hover:text-indigo-400 transition py-1">Pelatihan & LKMM</a>
+        <a href="#pengmas" class="nav-link hover:text-indigo-400 transition py-1">Pengmas</a>
         <a href="#contact" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition text-xs font-semibold shadow-md shadow-indigo-600/20">Kontak</a>
       </nav>
     </div>
@@ -57,32 +81,31 @@
 
   <main class="pt-24 space-y-32">
 
-    <!-- HERO SECTION -->
-    <section id="home" class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
+    <!-- HERO & INTRO SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Terbuka untuk Kolaborasi & Riset Data
+            Siap untuk Kolaborasi Analisis Data & Organisasi
           </div>
           
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Menghubungkan <span class="bg-gradient-to-r from-indigo-400 via-sky-400 to-teal-300 bg-clip-text text-transparent">Analisis Data</span> dengan Kepemimpinan Nyata.
+            Eksplorasi <span class="bg-gradient-to-r from-indigo-400 via-sky-400 to-teal-300 bg-clip-text text-transparent">Sains Data</span>, Solusi Nyata, & Kepemimpinan.
           </h1>
           
           <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-            Halo! Saya <strong>Joeang Ikhsan Maulana</strong>, mahasiswa Teknologi Sains Data Universitas Airlangga. Berpengalaman dalam pemodelan statistika, pemrograman data (Python & R), perancangan sistem pakar keuangan, serta kepemimpinan advokasi mahasiswa.
+            Halo! Saya <strong>Joeang Ikhsan Maulana</strong>, mahasiswa Teknologi Sains Data Universitas Airlangga yang berfokus pada statistika terapan, pemodelan data (Python & R), rekayasa machine learning, serta kepemimpinan advokasi mahasiswa.
           </p>
 
-          <!-- Quick Metrics -->
           <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800">
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">1 Resmi</div>
-              <div class="text-xs text-slate-400 mt-1">Hak Cipta DJKI Kemenkum RI</div>
+              <div class="text-xs text-slate-400 mt-1">Hak Cipta Kemenkum RI</div>
             </div>
             <div>
-              <div class="text-2xl font-extrabold text-indigo-400">88.5%</div>
-              <div class="text-xs text-slate-400 mt-1">R² Model Regresi IKG 2023</div>
+              <div class="text-2xl font-extrabold text-indigo-400">4 Proyek</div>
+              <div class="text-xs text-slate-400 mt-1">Sains Data & Rekayasa ML</div>
             </div>
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">Menteri</div>
@@ -91,21 +114,21 @@
           </div>
 
           <div class="flex flex-wrap gap-4 pt-2">
-            <a href="#hki" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
-              <i class="fa-solid fa-certificate"></i> Lihat Karya HKI & Riset
+            <a href="#projects" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+              <i class="fa-solid fa-diagram-project"></i> Jelajahi 4 Proyek Data
             </a>
             <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium text-sm transition flex items-center gap-2">
-              <i class="fa-brands fa-linkedin text-sky-400"></i> Terhubung di LinkedIn
+              <i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn Profile
             </a>
           </div>
         </div>
 
-        <!-- Hero Visual Profile Card -->
+        <!-- Profile Card -->
         <div class="lg:col-span-5">
           <div class="glass-card p-6 rounded-3xl relative overflow-hidden group">
             <div class="aspect-square w-full rounded-2xl overflow-hidden bg-slate-800 relative mb-6">
-              <!-- Ganti src dengan foto aslimu jika ada -->
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <!-- Ganti src ke images/profile.jpg jika foto aslimu sudah siap -->
+              <img src="images/photo.jpeg" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
               <div class="absolute bottom-4 left-4 right-4">
                 <span class="px-3 py-1 bg-indigo-600/80 backdrop-blur-md rounded-full text-xs font-semibold text-white">Mahasiswa Sains Data</span>
@@ -117,15 +140,15 @@
             <div class="space-y-3 text-xs text-slate-300">
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
                 <span class="text-slate-400">Pendidikan</span>
-                <span class="font-medium text-white">S1 Teknologi Sains Data, UNAIR</span>
+                <span class="font-medium text-white">S1 Sains Data, UNAIR (2024–Skrg)</span>
               </div>
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span class="text-slate-400">Penghargaan</span>
-                <span class="font-medium text-amber-300">Most Dedicated Staff 2025</span>
-              </div>
-              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span class="text-slate-400">Riwayat Sekolah</span>
+                <span class="text-slate-400">Jalur Prestasi</span>
                 <span class="font-medium text-white">Akselerasi MAN 4 Jombang (Nilai 91,37)</span>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+                <span class="text-slate-400">Apresiasi</span>
+                <span class="font-medium text-amber-300">Most Dedicated Staff 2025</span>
               </div>
             </div>
           </div>
@@ -133,47 +156,59 @@
       </div>
     </section>
 
-    <!-- SECTION HKI & RISET KESEHATAN -->
+    <!-- SECTION HKI & RISET NONPARAMETRIK -->
     <section id="hki" class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
           <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Kekayaan Intelektual Resmi</span>
-          <h2 class="text-3xl font-extrabold text-white">Hak Cipta Terdaftar & Metodologi Riset</h2>
+          <h2 class="text-3xl font-extrabold text-white">Hak Cipta Kemenkum RI & Poster Riset</h2>
         </div>
         <div class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2">
-          <i class="fa-solid fa-stamp"></i> No. Pencatatan: 001213309 (DJKI Kemenkum RI)
+          <i class="fa-solid fa-stamp"></i> No. Pencatatan: 001213309 (2026)
         </div>
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- Kolom Poster Riset -->
-        <div class="lg:col-span-5 glass-card p-4 rounded-3xl border border-emerald-500/20">
-          <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 group relative">
-            <!-- Ganti src dengan file poster aslimu, misal images/poster-hki.jpg -->
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" />
-            <div class="p-4 bg-slate-900 border-t border-slate-800">
-              <span class="text-xs font-bold text-emerald-400 uppercase">Judul Ciptaan</span>
-              <h3 class="text-base font-bold text-white mt-0.5">Uji Nonparametrik Ketersediaan Layanan</h3>
-              <p class="text-xs text-slate-400 mt-1">Jenis Ciptaan: Poster Ilmiah • Berlaku 50 Tahun sejak diumumkan (1 Jan 2026)</p>
+        <!-- Kolom Gambar Poster & Sertifikat -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="glass-card p-4 rounded-3xl border border-emerald-500/20">
+            <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 relative group">
+              <!-- Ganti src ke images/poster-hki.jpg -->
+              <img src="images/posterHKI.jpeg" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" />
+              <div class="p-3 bg-slate-900/90 border-t border-slate-800 flex justify-between items-center text-xs">
+                <span class="text-emerald-400 font-bold">Poster Riset Fasilitas Kesehatan 38 Provinsi</span>
+                <span class="text-slate-400">Jenis: Poster Ilmiah</span>
+              </div>
+            </div>
+          </div>
+          <!-- Card Slot Sertifikat -->
+          <div class="glass-card p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-800 shrink-0">
+              <!-- Ganti src ke images/sertifikat-preview.jpg -->
+              <img src="images/HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover">
+            </div>
+            <div class="text-xs">
+              <span class="font-bold text-white block">Surat Pencatatan Ciptaan DJKI</span>
+              <span class="text-slate-400 block mt-0.5">Permohonan: EC002026056074 (28 April 2026)</span>
+              <span class="text-emerald-400 font-semibold block mt-0.5">Masa Lindung: Berlaku 50 Tahun</span>
             </div>
           </div>
         </div>
 
-        <!-- Kolom Detail HKI & Statistik Nonparametrik -->
+        <!-- Detail Analisis & Metodologi -->
         <div class="lg:col-span-7 space-y-6">
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-file-shield text-emerald-400"></i> Rincian Legalitas Surat Pencatatan Ciptaan
+              <i class="fa-solid fa-file-contract text-emerald-400"></i> Informasi Hak Cipta Terdaftar
             </h3>
             <div class="grid sm:grid-cols-2 gap-4 text-xs">
               <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                <span class="text-slate-400 block mb-1">Nomor Permohonan</span>
-                <span class="font-semibold text-slate-200">EC002026056074 (28 April 2026)</span>
-              </div>
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
                 <span class="text-slate-400 block mb-1">Pemegang Hak Cipta</span>
                 <span class="font-semibold text-slate-200">Universitas Airlangga</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <span class="text-slate-400 block mb-1">Status Legalitas</span>
+                <span class="font-semibold text-emerald-400">Resmi Terbit (Kementerian Hukum RI)</span>
               </div>
               <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 sm:col-span-2">
                 <span class="text-slate-400 block mb-1">Tim Pencipta</span>
@@ -184,183 +219,294 @@
             </div>
           </div>
 
-          <!-- Metodologi Analisis pada Poster -->
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-chart-pie text-cyan-400"></i> Metodologi & Temuan Riset (38 Provinsi)
+              <i class="fa-solid fa-chart-pie text-cyan-400"></i> Metodologi Statistik Nonparametrik
             </h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Menganalisis disparitas sarana prasarana kesehatan dan ketersediaan tenaga medis di 38 provinsi di Indonesia menggunakan serangkaian uji nonparametrik:
-            </p>
             <div class="grid sm:grid-cols-2 gap-3 text-xs">
               <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
                 <strong class="text-indigo-400 block mb-1">Uji Kruskal-Wallis & Dunn</strong>
-                <p class="text-slate-400">Menemukan perbedaan signifikan preferensi perawatan jalan di 8 kategori fasilitas kesehatan (Puskesmas & Praktik Dokter berbeda jauh dari faskes lain).</p>
+                <p class="text-slate-400">Mendeteksi perbedaan signifikan persentase rawat jalan di 8 jenis faskes (Puskesmas & Dokter Praktik berbeda signifikan dari fasilitas lain).</p>
               </div>
               <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
                 <strong class="text-indigo-400 block mb-1">Uji Friedman & Wilcoxon</strong>
-                <p class="text-slate-400">Membuktikan perbedaan median tenaga medis antartahun (2015, 2016, 2017) didorong oleh lompatan perubahan signifikan pada periode 2017.</p>
+                <p class="text-slate-400">Menguji tren median nakes 2015–2017; lonjakan signifikan terbukti muncul kuat pada perbandingan periode 2017.</p>
               </div>
               <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 sm:col-span-2">
                 <strong class="text-indigo-400 block mb-1">Korelasi Spearman</strong>
-                <p class="text-slate-400">Hubungan asosiatif positif dan signifikan antar ketersediaan 6 kategori fasilitas kesehatan (RS, RS Bersalin, Poliklinik, Puskesmas, Pustu, Apotek).</p>
+                <p class="text-slate-400">Menunjukkan relasi asosiatif positif antar ketersediaan faskes (RS, RS Bersalin, Poliklinik, Puskesmas, Pustu, dan Apotek) secara komprehensif.</p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- SECTION PROYEK DATA & ANALITIKA -->
+    <!-- SECTION PROYEK UTAMA (4 PROYEK SAINS DATA & MACHINE LEARNING) -->
     <section id="projects" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Portofolio Data</span>
-        <h2 class="text-3xl font-extrabold text-white">Studi Ekonometrika & Rekayasa Perangkat Lunak</h2>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Portofolio Unggulan</span>
+        <h2 class="text-3xl font-extrabold text-white">4 Proyek Analisis Data & Machine Learning</h2>
+        <p class="text-xs text-slate-400 mt-1">Eksplorasi ekonometrika, NLP deep learning, social media mining, hingga perancangan sistem pakar.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
         
-        <!-- PROYEK 1: IKG 2023 -->
-        <div class="glass-card p-8 rounded-3xl space-y-6">
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold">
-              Riset Ekonometrika • R & Shiny
-            </span>
-            <span class="text-xs text-slate-400">Tahun 2025</span>
-          </div>
-
+        <!-- PROYEK 1: IKG INDONESIA 2023 -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
-            <h3 class="text-2xl font-bold text-white mb-2">Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Memodelkan faktor penentu ketimpangan gender menggunakan <strong>Regresi Linear Berganda (OLS)</strong> dan mengelompokkan 34 provinsi dengan <strong>K-Means Clustering</strong> (Data BPS & KemenPPPA 2023).
-            </p>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-300 space-y-1">
-            <div class="text-indigo-400 font-bold">// Persamaan Regresi OLS Teruji:</div>
-            <div>IKG = 0.3812 + 0.5361(MTF) + 0.6278(MHPK20) - 0.3866(R_Leg) - 0.2895(R_TPAK)</div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-3 text-center text-xs">
-            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="block text-slate-400">R-Squared</span>
-              <strong class="text-emerald-400 text-base">88.52%</strong>
+            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
+              <img src="images/Rshiny.png" alt="Analisis IKG 2023" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold">
+                R & Shiny Dashboard (2025)
+              </span>
             </div>
-            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="block text-slate-400">F-Statistic</span>
-              <strong class="text-indigo-400 text-base">44.70</strong>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="block text-slate-400">Cluster Opt.</span>
-              <strong class="text-cyan-400 text-base">k = 3</strong>
+            
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-bold text-white">Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Pemodelan ekonometrika dengan <strong>Regresi Linear Berganda OLS</strong> dan segmentasi wilayah 34 provinsi menggunakan <strong>K-Means Clustering</strong> untuk merumuskan kebijakan berbasis data (Data BPS & KemenPPPA 2023).
+              </p>
+              
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300">
+                <span class="text-indigo-400 font-bold block mb-1">// Persamaan Model OLS:</span>
+                IKG = 0.3812 + 0.5361(MTF) + 0.6278(MHPK20) - 0.3866(R_Leg) - 0.2895(R_TPAK)
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">R² Score</span>
+                  <span class="text-emerald-400 font-bold">88.52%</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">F-Stat</span>
+                  <span class="text-indigo-400 font-bold">44.70</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Klaster</span>
+                  <span class="text-cyan-400 font-bold">k = 3</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">R Shiny Dashboard</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Principal Component Analysis</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Uji Asumsi Normalitas & VIF</span>
+          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">R</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">R Shiny</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">OLS Regression</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means & PCA</span>
           </div>
         </div>
 
-        <!-- PROYEK 2: FINHEALTH UMKM -->
-        <div class="glass-card p-8 rounded-3xl space-y-6">
-          <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
-              Expert System • Python & Flask
-            </span>
-            <span class="text-xs text-slate-400">Tahun 2025</span>
-          </div>
-
+        <!-- PROYEK 2: ASPECT & EMOTION NLP BENCANA (INDOBERT) -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
-            <h3 class="text-2xl font-bold text-white mb-2">FinHealth: Expert System Kesehatan Finansial UMKM</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Membangun aplikasi web berbasis sistem pakar yang menganalisis indikator rasio likuiditas, arus kas kasir, serta performa omset penjualan untuk memberikan rekomendasi otomatis bagi pelaku usaha mikro.
-            </p>
-          </div>
+            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
+              <img src="images/NLP.png" alt="Aspect and Emotion Analysis Disaster Response" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-rose-600/90 text-white text-xs font-semibold">
+                Deep Learning & NLP (2026)
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-bold text-white">Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Pemodelan bahasa alami untuk mengklasifikasikan <strong>9 Aspek</strong> dan <strong>6 Kategori Emosi</strong> dari opini publik terhadap penanganan bencana Gempa M7.7 NTT dan Karhutla Kalimantan (2.890 korpus teks X & TikTok).
+              </p>
+              
+              <div class="space-y-2 text-xs">
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-microchip text-rose-400 mt-0.5"></i>
+                  <span><strong>Komparasi 5 Model & Optuna:</strong> Menguji SVM, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan IndoBERT. IndoBERT unggul sebagai arsitektur terbaik dengan Macro-F1 0,359 (Aspek) & 0,384 (Emosi).</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-chart-pie text-amber-400 mt-0.5"></i>
+                  <span><strong>Inferensi Populasi:</strong> Isu gempa terbukti didominasi emosi <em>Sadness</em> atas korban (A1), sedangkan isu karhutla didominasi <em>Anger</em> atas regulasi dan penegakan hukum (A7).</span>
+                </div>
+              </div>
 
-          <div class="space-y-3 text-xs">
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-              <i class="fa-solid fa-server text-cyan-400 mt-1"></i>
-              <div>
-                <strong class="text-white block">Backend REST API Terstruktur</strong>
-                <p class="text-slate-400">Dibangun menggunakan Python Flask untuk memproses perhitungan logika pakar dan kalkulasi rasio keuangan.</p>
+              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Populasi Teks</span>
+                  <span class="text-rose-400 font-bold">2.890 Data</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Model Terbaik</span>
+                  <span class="text-indigo-400 font-bold">IndoBERT</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Akurasi Emosi</span>
+                  <span class="text-emerald-400 font-bold">73.53%</span>
+                </div>
               </div>
             </div>
-            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-              <i class="fa-solid fa-lightbulb text-amber-400 mt-1"></i>
-              <div>
-                <strong class="text-white block">Diagnosa Finansial Ramah Pelaku Usaha</strong>
-                <p class="text-slate-400">Mentransformasikan output akuntansi kompleks menjadi langkah aksi perbaikan kas yang mudah dipahami.</p>
+          </div>
+          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">PyTorch</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">IndoBERT</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Optuna</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Aspect & Emotion Analysis</span>
+          </div>
+        </div>
+
+        <!-- PROYEK 3: SOCIAL MEDIA CLUSTERING (TIKTOK FLU A) -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
+              <img src="images/wordcloud.png" alt="TikTok Social Media Mining Flu A" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-teal-600/90 text-white text-xs font-semibold">
+                Social Media Mining & SNA (2026)
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-bold text-white">Social Media Mining & Clustering: Tren Isu Flu A di TikTok</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Analisis penambangan teks dan jejaring sosial dari ribuan data postingan TikTok menggunakan <strong>Apify Scraper</strong>, permodelan teks berbasis <strong>TF-IDF & K-Means Clustering</strong>, serta pemetaan struktur relasi isu melalui <strong>Social Network Analysis (SNA)</strong>.
+              </p>
+              
+              <div class="space-y-2 text-xs">
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-diagram-project text-teal-400 mt-0.5"></i>
+                  <span><strong>K-Means (k=8) & LDA Topic Modelling:</strong> Mengelompokkan spektrum wacana ke dalam 8 topik inti dan mengungkap dominasi konten akun media berita dibandingkan diskusi kesehatan murni.</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-circle-nodes text-sky-400 mt-0.5"></i>
+                  <span><strong>Social Network Analysis (356 Node, 958 Edge):</strong> Memetakan graf <em>co-occurrence hashtag</em> untuk mendeteksi komunitas topik dan sentralitas tagar #influenza & #kesehatan.</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Data Teks</span>
+                  <span class="text-teal-400 font-bold">261 Post</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Total Interaksi</span>
+                  <span class="text-indigo-400 font-bold">41.3M Likes</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Struktur Graf</span>
+                  <span class="text-cyan-400 font-bold">958 Relasi</span>
+                </div>
               </div>
             </div>
           </div>
+          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Apify Scraper</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means & LDA</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">NetworkX (SNA)</span>
+          </div>
+        </div>
 
-          <div class="flex flex-wrap gap-2 text-xs pt-4">
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Python</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Flask REST API</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Expert System Logic</span>
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300">Financial Ratio Analysis</span>
+        <!-- PROYEK 4: FINHEALTH UMKM -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
+              <img src="images/finhealth.jpeg" alt="FinHealth Expert System" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-cyan-600/90 text-white text-xs font-semibold">
+                Expert System & REST API (2025)
+              </span>
+            </div>
+            
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-bold text-white">FinHealth: Expert System Kesehatan Finansial UMKM</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Aplikasi web sistem pakar yang menganalisis rasio keuangan, arus kas, dan performa omzet penjualan secara otomatis serta menghasilkan saran perbaikan operasional bagi pelaku UMKM.
+              </p>
+              
+              <div class="space-y-2 text-xs">
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-server text-cyan-400 mt-0.5"></i>
+                  <span>Backend REST API berbasis <strong>Python (Flask)</strong> yang menghubungkan mesin inferensi pakar ke antarmuka pengguna.</span>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
+                  <i class="fa-solid fa-check-double text-emerald-400 mt-0.5"></i>
+                  <span>Solusi manajemen keuangan yang sederhana, praktis, dan ramah pengguna non-akuntan.</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Backend</span>
+                  <span class="text-cyan-400 font-bold">Python Flask</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Arsitektur</span>
+                  <span class="text-indigo-400 font-bold">REST API</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Domain</span>
+                  <span class="text-emerald-400 font-bold">UMKM Finance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Flask</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Expert System</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Financial Analysis</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- SECTION PENGALAMAN ORGANISASI BERFOTO -->
+    <!-- SECTION ORGANISASI BERFOTO -->
     <section id="organisasi" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Kepemimpinan Mahasiswa</span>
-        <h2 class="text-3xl font-extrabold text-white">Rekam Jejak Organisasi & Advokasi</h2>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Kepemimpinan</span>
+        <h2 class="text-3xl font-extrabold text-white">Pengalaman Organisasi BEM FTMM</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- KARTU 1: Menteri 2026 -->
         <div class="glass-card rounded-3xl overflow-hidden group">
           <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Menteri Adkesma FTMM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src="images/Mandala.jpeg" alt="Menteri Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-bold">2026 – Sekarang</span>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-bold">2026 – Sekarang</span>
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
             <p class="text-xs text-indigo-400 font-medium">BEM FTMM Universitas Airlangga</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-2">
-              Memimpin kementerian strategis untuk pelayanan advokasi, beasiswa, dan perlindungan hak mahasiswa lintas lima program studi FTMM serta bertindak sebagai negosiator utama dengan dekanat.
+            <p class="text-xs text-slate-300 leading-relaxed pt-1">
+              Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.
             </p>
           </div>
         </div>
 
-        <!-- KARTU 2: Dirjen 2025 -->
         <div class="glass-card rounded-3xl overflow-hidden group">
           <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Dirjen Adkesma FTMM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src="images/Peta.jpeg" alt="Dirjen Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-amber-400 border border-amber-500/30 text-xs font-bold">Most Dedicated Staff 2025</span>
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Dirjen Kesejahteraan Mahasiswa</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kabinet Pelita Semesta BEM FTMM (2025)</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-2">
-              Mengoordinasikan jaring aspirasi, pengawalan banding UKT, serta memfasilitasi audiensi resmi dengan pemangku kebijakan fakultas.
+            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2025</p>
+            <p class="text-xs text-slate-300 leading-relaxed pt-1">
+              Mengoordinasikan jaring aspirasi finansial, evaluasi banding UKT, dan audiensi resmi bersama pimpinan fakultas.
             </p>
           </div>
         </div>
 
-        <!-- KARTU 3: Sekolah BEM 2024 -->
         <div class="glass-card rounded-3xl overflow-hidden group">
           <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Sekolah BEM FTMM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src="images/sekbem.jpeg" alt="Sekolah BEM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-emerald-400 border border-emerald-500/30 text-xs font-bold">Staf Terbaik 2024</span>
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Sekolah BEM FTMM 2024</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-2">
-              Berpartisipasi aktif dalam kaderisasi kepemimpinan, riset kebijakan kampus, dan berhasil terpilih sebagai Staf Terbaik Kementerian Adkesma 2024.
+            <p class="text-xs text-indigo-400 font-medium">Penempatan Belajar di Kementerian Adkesma</p>
+            <p class="text-xs text-slate-300 leading-relaxed pt-1">
+              Aktif dalam praktik advokasi langsung dan dinobatkan sebagai Staf Terbaik Kementerian Adkesma pada program kaderisasi tahunan.
             </p>
           </div>
         </div>
@@ -368,66 +514,202 @@
       </div>
     </section>
 
-    <!-- SECTION KEPANITIAAN BERBENTUK ALUR (ROADMAP TIMELINE) -->
+    <!-- SECTION KEPANITIAAN BERDASARKAN KELOMPOK PERAN (INTERACTIVE FILTER) -->
     <section id="kepanitiaan" class="max-w-7xl mx-auto px-6">
-      <div class="mb-12">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Manajemen Kegiatan</span>
+      <div class="mb-8">
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Manajemen Acara & Event</span>
         <h2 class="text-3xl font-extrabold text-white">Alur Pengalaman Kepanitiaan</h2>
-        <p class="text-xs text-slate-400 mt-1">Perjalanan pengelolaan acara berskala fakultas, universitas, hingga internasional.</p>
+        <p class="text-xs text-slate-400 mt-1">Pilih kategori peran di bawah ini untuk melihat detail tugas dan tanggung jawabnya:</p>
       </div>
 
-      <div class="relative border-l-2 border-indigo-500/30 ml-4 md:ml-32 space-y-12">
+      <div class="flex flex-wrap gap-2.5 mb-10 pb-2 border-b border-slate-800">
+        <button onclick="filterCommittee('all')" class="filter-btn active px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i class="fa-solid fa-list mr-1"></i> Semua Pengalaman (9)
+        </button>
+        <button onclick="filterCommittee('operator')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i class="fa-solid fa-headset mr-1"></i> Operator & Multimedia
+        </button>
+        <button onclick="filterCommittee('korlap')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i class="fa-solid fa-bullhorn mr-1"></i> Koordinasi Lapangan (Korlap)
+        </button>
+        <button onclick="filterCommittee('ketupat')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i class="fa-solid fa-user-tie mr-1"></i> Ketua Pelaksana
+        </button>
+        <button onclick="filterCommittee('perlengkapan')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
+          <i class="fa-solid fa-boxes-stacked mr-1"></i> Acara & Perlengkapan
+        </button>
+      </div>
 
-        <!-- Item 1: Inbound Internasional 2026 -->
-        <div class="relative pl-8 group">
-          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950 group-hover:scale-125 transition"></div>
-          <div class="md:-left-32 md:absolute md:text-right md:w-24 text-xs font-bold text-indigo-400 top-1">Sept 2026</div>
-          <div class="glass-card p-6 rounded-2xl space-y-2">
-            <div class="inline-block px-2.5 py-0.5 rounded bg-sky-950/80 border border-sky-800 text-sky-300 text-xs font-medium">Internasional</div>
-            <h3 class="text-base font-bold text-white">Operator & Staf Perlengkapan | EXCEED × NEWTON 2026</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Mendukung pelaksanaan student inbound bagi delegasi dari 7 perguruan tinggi terkemuka asal Malaysia dan Thailand; mengoperasikan sistem multimedia dan mitigasi kendala teknis acara secara real-time.
-            </p>
+      <div id="committee-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 tab-content">
+
+        <!-- 1. EXCEED x NEWTON (Operator) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator & Multimedia</span>
+            <span class="text-[11px] text-slate-400 font-medium">Sept 2026</span>
           </div>
+          <h3 class="text-base font-bold text-white">EXCEED × NEWTON 2026</h3>
+          <p class="text-xs text-indigo-400 font-medium">Student Inbound Malaysia & Thailand</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Mendukung pelaksanaan inbound 7 universitas mancanegara di FTMM & FST UNAIR, mengoperasikan perangkat audio visual serta menangani kendala teknis secara langsung.
+          </p>
         </div>
 
-        <!-- Item 2: Korlap KARSA 2026 -->
-        <div class="relative pl-8 group">
-          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950 group-hover:scale-125 transition"></div>
-          <div class="md:-left-32 md:absolute md:text-right md:w-24 text-xs font-bold text-indigo-400 top-1">Jun – Ags 2026</div>
-          <div class="glass-card p-6 rounded-2xl space-y-2">
-            <div class="inline-block px-2.5 py-0.5 rounded bg-indigo-950/80 border border-indigo-800 text-indigo-300 text-xs font-medium">Leadership Lapangan</div>
-            <h3 class="text-base font-bold text-white">Koordinator Divisi Koordinasi Lapangan | KARSA FTMM 2026</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Memimpin divisi operasional lapangan dalam mengarahkan mobilitas ratusan mahasiswa baru, memitigasi risiko kontinjensi di lokasi, dan menyelaraskan komando antarpanitia inti.
-            </p>
+        <!-- 2. ICATAM x I-PACT (Operator) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
+            <span class="text-[11px] text-slate-400 font-medium">Sept 2025</span>
           </div>
+          <h3 class="text-base font-bold text-white">ICATAM × I-PACT 2025</h3>
+          <p class="text-xs text-indigo-400 font-medium">International Conference (Univ. Malaya & VIT)</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Operator sistem audio visual 2 hari penuh untuk kebutuhan presentasi narasumber internasional dan kelancaran multimedia konferensi.
+          </p>
         </div>
 
-        <!-- Item 3: Ketua Posko Finansial -->
-        <div class="relative pl-8 group">
-          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950 group-hover:scale-125 transition"></div>
-          <div class="md:-left-32 md:absolute md:text-right md:w-24 text-xs font-bold text-indigo-400 top-1">Des 25 – Jan 26</div>
-          <div class="glass-card p-6 rounded-2xl space-y-2">
-            <div class="inline-block px-2.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-xs font-medium">Ketua Pelaksana</div>
-            <h3 class="text-base font-bold text-white">Ketua Pelaksana | Posko Finansial Mahasiswa</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Memimpin perancangan dan operasionalisasi posko advokasi banding UKT dan pendampingan beasiswa finansial selama 2 termin secara terstruktur bagi mahasiswa terdampak ekonomi.
-            </p>
+        <!-- 3. SMART-INTECH (Operator) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Teknis</span>
+            <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
           </div>
+          <h3 class="text-base font-bold text-white">Seminar Nasional SMART-INTECH</h3>
+          <p class="text-xs text-indigo-400 font-medium">Fakultas Teknologi Maju dan Multidisiplin</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Mengendalikan perangkat presentasi, audio, dan sistem live event untuk mendukung pemaparan narasumber tingkat nasional.
+          </p>
         </div>
 
-        <!-- Item 4: Konferensi Internasional ICATAM x I-PACT 2025 -->
-        <div class="relative pl-8 group">
-          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950 group-hover:scale-125 transition"></div>
-          <div class="md:-left-32 md:absolute md:text-right md:w-24 text-xs font-bold text-indigo-400 top-1">Sept 2025</div>
-          <div class="glass-card p-6 rounded-2xl space-y-2">
-            <div class="inline-block px-2.5 py-0.5 rounded bg-sky-950/80 border border-sky-800 text-sky-300 text-xs font-medium">Konferensi Internasional</div>
-            <h3 class="text-base font-bold text-white">Operator Multimedia | ICATAM × I-PACT 2025</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Mengawal operasional teknis audio visual konferensi riset internasional yang melibatkan Universitas Malaya dan Vellore Institute of Technology (VIT).
-            </p>
+        <!-- 4. KARSA 2026 (Korlap) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Koordinator Divisi</span>
+            <span class="text-[11px] text-slate-400 font-medium">Jun – Ags 2026</span>
           </div>
+          <h3 class="text-base font-bold text-white">KARSA FTMM 2026</h3>
+          <p class="text-xs text-indigo-400 font-medium">Koordinator Divisi Koordinasi Lapangan</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Memimpin divisi korlap dalam mengatur mobilisasi ratusan maba, alur teknis harian orientasi, serta mitigasi cepat risiko insidental di lapangan.
+          </p>
+        </div>
+
+        <!-- 5. KARSA 2025 (Korlap) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Korlap</span>
+            <span class="text-[11px] text-slate-400 font-medium">Jun – Ags 2025</span>
+          </div>
+          <h3 class="text-base font-bold text-white">KARSA FTMM 2025</h3>
+          <p class="text-xs text-indigo-400 font-medium">Staff Koordinasi Lapangan</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Mengatur ketertiban 502 mahasiswa baru dari lima program studi FTMM selama orientasi 3 hari dan menjadi jembatan informasi panitia inti.
+          </p>
+        </div>
+
+        <!-- 6. COLAB FTMM 2025 (Korlap) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Lapangan</span>
+            <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
+          </div>
+          <h3 class="text-base font-bold text-white">COLAB FTMM 2025</h3>
+          <p class="text-xs text-indigo-400 font-medium">Staff Koordinasi Lapangan</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Mengarahkan alur kegiatan peserta, menjaga ketepatan waktu susunan rundown acara, dan menangani kendala teknis lapangan.
+          </p>
+        </div>
+
+        <!-- 7. Posko Finansial Mahasiswa (Ketua Pelaksana) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="ketupat">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 text-[11px] font-semibold">Ketua Pelaksana</span>
+            <span class="text-[11px] text-slate-400 font-medium">Des 25 – Jan 26</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Posko Finansial Mahasiswa</h3>
+          <p class="text-xs text-emerald-400 font-medium">Kementerian Adkesma BEM FTMM</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Memimpin perancangan dan operasionalisasi posko advokasi keringanan UKT serta pendampingan beasiswa finansial bagi mahasiswa selama 2 termin penuh.
+          </p>
+        </div>
+
+        <!-- 8. Scholprep x Inspiration (Acara) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="perlengkapan">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-amber-950 border border-amber-800 text-amber-300 text-[11px] font-semibold">Koordinator Acara</span>
+            <span class="text-[11px] text-slate-400 font-medium">Nov 2025</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Scholprep × Inspiration</h3>
+          <p class="text-xs text-indigo-400 font-medium">Koordinator Divisi Acara</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Menyusun konsep, rundown seminar & pelatihan beasiswa, koordinasi dengan pembicara, serta memandu jalannya acara secara on-time.
+          </p>
+        </div>
+
+        <!-- 9. Synreach & Logistik (Perlengkapan) -->
+        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="perlengkapan">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded bg-amber-950 border border-amber-800 text-amber-300 text-[11px] font-semibold">Koordinator Perlengkapan</span>
+            <span class="text-[11px] text-slate-400 font-medium">2024 – 2025</span>
+          </div>
+          <h3 class="text-base font-bold text-white">Synreach FTMM, Diskusi Bulanan & BBTM</h3>
+          <p class="text-xs text-indigo-400 font-medium">Koordinator Sub-Divisi Perlengkapan</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Bertanggung jawab penuh atas pengadaan, distribusi, dan inventarisasi peralatan Dekan Cup Synreach (7 bulan), 5 sesi Diskusi Bulanan, dan Bring Back The Memory 2024.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL & AUTOMATION) -->
+    <section id="pelatihan" class="max-w-7xl mx-auto px-6">
+      <div class="mb-10">
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Pengembangan Diri</span>
+        <h2 class="text-3xl font-extrabold text-white">Pelatihan Kepemimpinan & Manajemen (LKMM)</h2>
+        <p class="text-xs text-slate-400 mt-1">Jenjang kaderisasi manajerial resmi dan peningkatan keahlian otomasi proses.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- LKMM-TL -->
+        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-indigo-500">
+          <span class="text-[11px] px-2.5 py-0.5 rounded bg-indigo-950 text-indigo-300 font-semibold">Juli 2026</span>
+          <h3 class="text-base font-bold text-white">LKMM-TL</h3>
+          <p class="text-xs text-indigo-400 font-medium">Tingkat Lanjut</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Menganalisis problematika riil masyarakat melalui pendekatan data untuk merumuskan grand design program pemberdayaan berkelanjutan serta indikator evaluasi (KPI).
+          </p>
+        </div>
+
+        <!-- LKMM-TM -->
+        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-sky-500">
+          <span class="text-[11px] px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 font-semibold">Juni 2026</span>
+          <h3 class="text-base font-bold text-white">LKMM-TM</h3>
+          <p class="text-xs text-sky-400 font-medium">Tingkat Menengah</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Manajemen organisasi strategis, analisis SWOT, penyusunan Rencana Pengembangan Organisasi (RPO), dan studi lapangan rekomendasi bisnis UMKM.
+          </p>
+        </div>
+
+        <!-- LKMM-TD -->
+        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-teal-500">
+          <span class="text-[11px] px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 font-semibold">November 2025</span>
+          <h3 class="text-base font-bold text-white">LKMM-TD</h3>
+          <p class="text-xs text-teal-400 font-medium">Tingkat Dasar</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Fondasi kepemimpinan personal, komunikasi interpersonal efektif, dinamika kerja tim, serta teknik pengambilan keputusan solutif dalam organisasi.
+          </p>
+        </div>
+
+        <!-- RPA WEBINAR -->
+        <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-amber-500">
+          <span class="text-[11px] px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 font-semibold">Agustus 2026</span>
+          <h3 class="text-base font-bold text-white">UiPath × IOH One</h3>
+          <p class="text-xs text-amber-400 font-medium">Automation Webinar</p>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Mempelajari implementasi Robotic Process Automation (RPA) berbasis UiPath untuk otomatisasi alur kerja dan efisiensi transformasi proses digital.
+          </p>
         </div>
 
       </div>
@@ -436,7 +718,7 @@
     <!-- SECTION PENGABDIAN MASYARAKAT & DOKUMENTASI -->
     <section id="pengmas" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
-        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">Dampak Sosial & Komunitas</span>
+        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">Dampak Sosial</span>
         <h2 class="text-3xl font-extrabold text-white">Dokumentasi Pengabdian Masyarakat</h2>
       </div>
 
@@ -446,29 +728,26 @@
             <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
               Mojokerto • 2025 – Sekarang
             </span>
-            <h3 class="text-2xl font-bold text-white">Pengembangan Platform Digital Promosi UMKM Dawarblandong</h3>
+            <h3 class="text-2xl font-bold text-white">Digitalisasi & Website Promosi UMKM Dawarblandong</h3>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Membantu memperluas jangkauan pasar dan digitalisasi jenama pelaku usaha mikro di Kecamatan Dawarblandong, Kabupaten Mojokerto. Meliputi pembuatan website profil usaha, katalog produk terintegrasi, serta pendampingan langsung literasi platform digital bagi pelaku usaha.
+              Program pendampingan dan digital branding bagi pelaku UMKM di Kecamatan Dawarblandong, Kabupaten Mojokerto. Meliputi perancangan etalase website promosi terpadu, pembuatan materi katalog digital, dan pelatihan penggunaan platform daring secara berkesinambungan.
             </p>
             <div class="flex flex-wrap gap-2 text-xs">
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Website Development</span>
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Pemberdayaan UMKM</span>
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Literasi Digital</span>
+              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Pemberdayaan Masyarakat</span>
+              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Web Development</span>
+              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Literasi Digital UMKM</span>
             </div>
           </div>
           
           <div class="lg:col-span-5 grid grid-cols-2 gap-3">
-            <!-- Dokumentasi 1 -->
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80" alt="Dokumentasi UMKM" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+              <img src="images/pengmas1.JPG" alt="UMKM Dawarblandong" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
             </div>
-            <!-- Dokumentasi 2 -->
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80" alt="Pendampingan UMKM" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+              <img src="images/pengmas2.JPG" alt="Panita Pengabdian Masyarakat" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
             </div>
-            <!-- Dokumentasi 3 -->
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative col-span-2">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Diskusi Warga & Tim Pengmas" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <img src="images/pengmas3.JPG" alt="Foto Keberangkatan" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
             </div>
           </div>
         </div>
@@ -478,24 +757,64 @@
     <!-- FOOTER / KONTAK -->
     <footer id="contact" class="border-t border-slate-800/80 bg-slate-950 py-16">
       <div class="max-w-7xl mx-auto px-6 text-center space-y-6">
-        <h2 class="text-2xl font-bold text-white">Mari Terhubung dan Berkolaborasi</h2>
+        <h2 class="text-2xl font-bold text-white">Mari Berdiskusi & Berkolaborasi</h2>
         <p class="text-xs text-slate-400 max-w-md mx-auto">
-          Tertarik mendiskusikan riset data, advokasi kemahasiswaan, atau peluang kolaborasi lainnya?
+          Terbuka untuk riset pemodelan sains data, inisiasi program kemahasiswaan, maupun proyek pengembangan web lainnya.
         </p>
         <div class="flex justify-center items-center gap-4 pt-2">
-          <a href="mailto:joeang.ikhsan.maulana-2024@ftmm.unair.ac.id" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition">
-            <i class="fa-solid fa-envelope"></i> Kirim Email
+          <a href="mailto:joeang.ikhsan.maulana-2024@ftmm.unair.ac.id" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition shadow-lg shadow-indigo-600/30">
+            <i class="fa-solid fa-envelope"></i> Kirim Pesan Email
           </a>
           <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-semibold flex items-center gap-2 transition">
-            <i class="fa-brands fa-linkedin text-sky-400"></i> Profil LinkedIn
+            <i class="fa-brands fa-linkedin text-sky-400"></i> Hubungkan di LinkedIn
           </a>
         </div>
         <p class="text-[11px] text-slate-600 pt-8">
-          © 2026 Joeang Ikhsan Maulana • Dibuat dengan Tailwind CSS & Siap Deploy di Vercel
+          © 2026 Joeang Ikhsan Maulana • Dibuat dengan senyum dan ice caffee latte
         </p>
       </div>
     </footer>
 
   </main>
+
+  <!-- SCRIPT DINAMIS -->
+  <script>
+    // 1. Reading Progress Bar & Dynamic Header Effect on Scroll
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+
+      const nav = document.getElementById('main-nav');
+      if (winScroll > 40) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+
+    // 2. Filter Interaktif Kelompok Kepanitiaan
+    function filterCommittee(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      const cards = document.querySelectorAll('.comm-card');
+      const container = document.getElementById('committee-grid');
+      
+      container.classList.remove('tab-content');
+      void container.offsetWidth;
+      container.classList.add('tab-content');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
