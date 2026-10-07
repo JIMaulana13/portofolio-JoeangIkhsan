@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joeang Ikhsan Maulana | Data Science & Leadership Portfolio</title>
   
+  <!-- Teks ini yang ditambahkan untuk Favicon -->
+  <link rel="icon" href="logo.jpg" type="image/png">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -66,15 +69,15 @@
         </div>
       </a>
       
-      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+      <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-300">
         <a href="#about" class="nav-link hover:text-indigo-400 transition py-1">Tentang</a>
-        <a href="#hki" class="nav-link hover:text-indigo-400 transition py-1">HKI & Riset</a>
-        <a href="#projects" class="nav-link hover:text-indigo-400 transition py-1">Proyek Data</a>
+        <a href="#skills" class="nav-link hover:text-indigo-400 transition py-1">Keahlian</a>
+        <a href="#hki" class="nav-link hover:text-indigo-400 transition py-1">HKI</a>
+        <a href="#projects" class="nav-link hover:text-indigo-400 transition py-1">Project</a>
         <a href="#organisasi" class="nav-link hover:text-indigo-400 transition py-1">Organisasi</a>
         <a href="#kepanitiaan" class="nav-link hover:text-indigo-400 transition py-1">Kepanitiaan</a>
         <a href="#pelatihan" class="nav-link hover:text-indigo-400 transition py-1">Pelatihan</a>
         <a href="#pengmas" class="nav-link hover:text-indigo-400 transition py-1">Pengabdian</a>
-        <a href="#contact" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition text-xs font-semibold shadow-md shadow-indigo-600/20">Kontak</a>
       </nav>
     </div>
   </header>
@@ -95,7 +98,7 @@
           </h1>
           
           <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-            Halo! Saya <strong>Joeang Ikhsan Maulana</strong>, mahasiswa Teknologi Sains Data Universitas Airlangga yang berfokus pada statistika terapan, pemodelan data (Python & R), rekayasa machine learning, serta kepemimpinan advokasi mahasiswa.
+            Halo! Saya <strong>Joeang Ikhsan Maulana</strong>, mahasiswa Teknologi Sains Data Universitas Airlangga yang berfokus pada statistika terapan, pemodelan data (Python & R), rekayasa machine learning, serta kepemimpinan bidang advokasi mahasiswa.
           </p>
 
           <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800">
@@ -105,7 +108,7 @@
             </div>
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">4 Proyek</div>
-              <div class="text-xs text-slate-400 mt-1">Data Science & Machine learning</div>
+              <div class="text-xs text-slate-400 mt-1">Data Science & Rekayasa Meachine Learning</div>
             </div>
             <div>
               <div class="text-2xl font-extrabold text-indigo-400">Menteri</div>
@@ -114,11 +117,15 @@
           </div>
 
           <div class="flex flex-wrap gap-4 pt-2">
-            <a href="#projects" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
-              <i class="fa-solid fa-diagram-project"></i> Jelajahi 4 Proyek Data
+            <!-- Tautan File CV Lokal (Pastikan ada file CV_Joeang_Ikhsan_Maulana.pdf di GitHub root) -->
+            <a href="CV_Joeang Ikhsan Maulana.pdf" download class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+              <i class="fa-solid fa-download"></i> Unduh CV (PDF)
+            </a>
+            <a href="#projects" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-diagram-project"></i> Lihat 4 Proyek Data
             </a>
             <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium text-sm transition flex items-center gap-2">
-              <i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn Profile
+              <i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn
             </a>
           </div>
         </div>
@@ -127,8 +134,7 @@
         <div class="lg:col-span-5">
           <div class="glass-card p-6 rounded-3xl relative overflow-hidden group">
             <div class="aspect-square w-full rounded-2xl overflow-hidden bg-slate-800 relative mb-6">
-              <!-- Ganti src ke images/profile.jpg jika foto aslimu sudah siap -->
-              <img src="photo.jpeg" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <img src="photo.jpeg" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
               <div class="absolute bottom-4 left-4 right-4">
                 <span class="px-3 py-1 bg-indigo-600/80 backdrop-blur-md rounded-full text-xs font-semibold text-white">Mahasiswa Teknologi Sains Data</span>
@@ -140,7 +146,7 @@
             <div class="space-y-3 text-xs text-slate-300">
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
                 <span class="text-slate-400">Pendidikan</span>
-                <span class="font-medium text-white">S1 Teknologi Sains Data, UNAIR (2024–Skrg)</span>
+                <span class="font-medium text-white">S1 Teknologi Sains Data, UNAIR (2024–now)</span>
               </div>
               <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
                 <span class="text-slate-400">Jalur Prestasi</span>
@@ -153,6 +159,51 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SECTION KEAHLIAN / TECH STACK -->
+    <section id="skills" class="max-w-7xl mx-auto px-6">
+      <div class="mb-8">
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Tech Stack & Kompetensi</span>
+        <h2 class="text-3xl font-extrabold text-white">Keahlian Profesional</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        
+        <!-- Hard Skills -->
+        <div class="glass-card p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-code text-indigo-400"></i> Data Science & Web Development
+          </h3>
+          <p class="text-sm text-slate-400 mb-5 leading-relaxed">Pengalaman dalam membangun model Machine Learning, statistika inferensial, serta arsitektur backend sistem pakar.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Python</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">R & RStudio</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Flask REST API</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">PyTorch / Transformers</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Scikit-Learn</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Optuna</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Data Visualization</span>
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">HTML/CSS/JS</span>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="glass-card p-8 rounded-3xl">
+          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-users text-emerald-400"></i> Leadership & Manajemen
+          </h3>
+          <p class="text-sm text-slate-400 mb-5 leading-relaxed">Terlatih dalam memimpin tim lintas divisi, negosiasi tingkat fakultas, penyelesaian masalah, dan manajemen acara skala besar.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Team Leadership</span>
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Project Management</span>
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Public Speaking</span>
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Problem Solving</span>
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Cross-functional Collaboration</span>
+            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Crisis Management</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -169,23 +220,19 @@
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <!-- Kolom Kiri: Fokus Penuh untuk Poster Riset -->
         <div class="lg:col-span-5">
           <div class="glass-card p-4 rounded-3xl border border-emerald-500/20">
             <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 relative group">
-              <img src="posterHKI.jpeg" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" />
+              <img src="posterHKI.jpeg" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80'" />
               <div class="p-3 bg-slate-900/90 border-t border-slate-800 flex justify-between items-center text-xs">
-                <span class="text-emerald-400 font-bold">Poster Riset Fasilitas Kesehatan 38 Provinsi</span>
+                <span class="text-emerald-400 font-bold">Poster Riset Fasilitas Kesehatan</span>
                 <span class="text-slate-400">Jenis: Poster Ilmiah</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Kolom Kanan: Detail Legalitas, Metodologi, & Kartu Sertifikat Berdampingan Sejajar -->
         <div class="lg:col-span-7 space-y-6">
-          
-          <!-- Rincian Legalitas -->
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-file-contract text-emerald-400"></i> Informasi Hak Cipta Terdaftar
@@ -208,7 +255,6 @@
             </div>
           </div>
 
-          <!-- Metodologi Statistik Nonparametrik -->
           <div class="glass-card p-6 rounded-3xl space-y-4">
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
               <i class="fa-solid fa-chart-pie text-cyan-400"></i> Metodologi Statistik Nonparametrik
@@ -229,10 +275,9 @@
             </div>
           </div>
 
-          <!-- Kartu Preview Sertifikat (Dipindah ke Sisi Kanan) -->
           <div class="glass-card p-5 rounded-2xl border border-slate-800 flex items-center gap-5">
             <div class="w-20 h-24 rounded-xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/60 shadow-md">
-              <img src="HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover">
+              <img src="HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&q=80'">
             </div>
             <div class="text-xs space-y-1">
               <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 font-semibold text-[10px] inline-block mb-1">
@@ -247,8 +292,8 @@
         </div>
       </div>
     </section>
-    
-    <!-- SECTION PROYEK UTAMA (4 PROYEK SAINS DATA & MACHINE LEARNING) -->
+
+    <!-- SECTION PROYEK UTAMA (4 PROYEK DENGAN GITHUB LINKS) -->
     <section id="projects" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
         <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Portofolio Unggulan</span>
@@ -262,7 +307,7 @@
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
             <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="Rshiny.png" alt="Analisis IKG 2023" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <img src="Rshiny.png" alt="Analisis IKG 2023" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold">
                 RShiny Dashboard (2025)
@@ -294,21 +339,28 @@
                   <span class="text-cyan-400 font-bold">k = 3</span>
                 </div>
               </div>
+
+              <!-- Tombol GitHub IKG -->
+              <div class="mt-4 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JIMaulana13/analisis-ikg-2023" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-700 hover:border-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
+                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
+                </a>
+              </div>
             </div>
           </div>
           <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">R</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">R Shiny</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">RShiny</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">OLS Regression</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means & PCA</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means</span>
           </div>
         </div>
 
-        <!-- PROYEK 2: ASPECT & EMOTION NLP BENCANA (INDOBERT) -->
+        <!-- PROYEK 2: ASPECT & EMOTION NLP BENCANA -->
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
             <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="NLP.png" alt="Aspect and Emotion Analysis Disaster Response" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <img src="NLP.png" alt="Aspect and Emotion Analysis Disaster Response" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-rose-600/90 text-white text-xs font-semibold">
                 Deep Learning & NLP (2026)
@@ -318,33 +370,40 @@
             <div class="p-6 space-y-4">
               <h3 class="text-xl font-bold text-white">Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)</h3>
               <p class="text-xs text-slate-300 leading-relaxed">
-                Pemodelan bahasa alami untuk mengklasifikasikan <strong>9 Aspek</strong> dan <strong>6 Kategori Emosi</strong> dari opini publik terhadap penanganan bencana Gempa M7.7 NTT dan Karhutla Kalimantan (2.890 korpus teks X & TikTok).
+                Pemodelan bahasa alami untuk mengklasifikasikan <strong>9 Aspek</strong> dan <strong>6 Kategori Emosi</strong> opini publik terhadap penanganan bencana Gempa M7.7 NTT & Karhutla Kalimantan (2.890 korpus teks X & TikTok).
               </p>
               
               <div class="space-y-2 text-xs">
                 <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
                   <i class="fa-solid fa-microchip text-rose-400 mt-0.5"></i>
-                  <span><strong>Komparasi 5 Model & Optuna:</strong> Menguji SVM, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan IndoBERT. IndoBERT unggul sebagai arsitektur terbaik dengan Macro-F1 0,359 (Aspek) & 0,384 (Emosi).</span>
+                  <span><strong>Komparasi 5 Model & Optuna:</strong> Menguji SVM, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan IndoBERT. IndoBERT unggul (Macro-F1 0,359 Aspek & 0,384 Emosi).</span>
                 </div>
                 <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
                   <i class="fa-solid fa-chart-pie text-amber-400 mt-0.5"></i>
-                  <span><strong>Inferensi Populasi:</strong> Isu gempa terbukti didominasi emosi <em>Sadness</em> atas korban (A1), sedangkan isu karhutla didominasi <em>Anger</em> atas regulasi dan penegakan hukum (A7).</span>
+                  <span><strong>Inferensi Populasi:</strong> Isu gempa didominasi emosi <em>Sadness</em> atas korban (A1), sedangkan isu karhutla didominasi <em>Anger</em> atas penegakan hukum (A7).</span>
                 </div>
               </div>
 
               <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Populasi Teks</span>
-                  <span class="text-rose-400 font-bold">2.890 Data</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Model Terbaik</span>
+                  <span class="text-slate-400 block text-[10px]">Model Utama</span>
                   <span class="text-indigo-400 font-bold">IndoBERT</span>
                 </div>
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <span class="text-slate-400 block text-[10px]">Akurasi Emosi</span>
                   <span class="text-emerald-400 font-bold">73.53%</span>
                 </div>
+                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Tuning</span>
+                  <span class="text-rose-400 font-bold">Optuna TPE</span>
+                </div>
+              </div>
+
+              <!-- Tombol GitHub NLP -->
+              <div class="mt-4 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JIMaulana13/nlp-analisisemosi" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-rose-600 border border-slate-700 hover:border-rose-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
+                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
+                </a>
               </div>
             </div>
           </div>
@@ -352,15 +411,14 @@
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">PyTorch</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">IndoBERT</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Optuna</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Aspect & Emotion Analysis</span>
           </div>
         </div>
 
-        <!-- PROYEK 3: SOCIAL MEDIA CLUSTERING (TIKTOK FLU A) -->
+        <!-- PROYEK 3: SOCIAL MEDIA CLUSTERING (TIKTOK) -->
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
             <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="wordcloud.png" alt="TikTok Social Media Mining Flu A" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <img src="wordcloud.png" alt="TikTok Social Media Mining Flu A" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-teal-600/90 text-white text-xs font-semibold">
                 Social Media Mining & SNA (2026)
@@ -370,27 +428,27 @@
             <div class="p-6 space-y-4">
               <h3 class="text-xl font-bold text-white">Social Media Mining & Clustering: Tren Isu Flu A di TikTok</h3>
               <p class="text-xs text-slate-300 leading-relaxed">
-                Analisis penambangan teks dan jejaring sosial dari ribuan data postingan TikTok menggunakan <strong>Apify Scraper</strong>, permodelan teks berbasis <strong>TF-IDF & K-Means Clustering</strong>, serta pemetaan struktur relasi isu melalui <strong>Social Network Analysis (SNA)</strong>.
+                Analisis penambangan teks dari ribuan data postingan TikTok (41,3 Juta interaksi) menggunakan <strong>Apify Scraper</strong>, <strong>TF-IDF & K-Means Clustering</strong>, serta pemetaan relasi melalui <strong>SNA</strong>.
               </p>
               
               <div class="space-y-2 text-xs">
                 <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
                   <i class="fa-solid fa-diagram-project text-teal-400 mt-0.5"></i>
-                  <span><strong>K-Means (k=8) & LDA Topic Modelling:</strong> Mengelompokkan spektrum wacana ke dalam 8 topik inti dan mengungkap dominasi konten akun media berita dibandingkan diskusi kesehatan murni.</span>
+                  <span><strong>K-Means (k=8) & LDA:</strong> Mengelompokkan spektrum wacana ke dalam 8 topik inti dan mengungkap dominasi konten akun berita.</span>
                 </div>
                 <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
                   <i class="fa-solid fa-circle-nodes text-sky-400 mt-0.5"></i>
-                  <span><strong>Social Network Analysis (356 Node, 958 Edge):</strong> Memetakan graf <em>co-occurrence hashtag</em> untuk mendeteksi komunitas topik dan sentralitas tagar #influenza & #kesehatan.</span>
+                  <span><strong>Social Network Analysis (SNA):</strong> Memetakan graf <em>co-occurrence hashtag</em> (958 edge) untuk mendeteksi komunitas dan sentralitas tagar kesehatan.</span>
                 </div>
               </div>
 
               <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Data Teks</span>
-                  <span class="text-teal-400 font-bold">261 Post</span>
+                  <span class="text-slate-400 block text-[10px]">Klaster</span>
+                  <span class="text-teal-400 font-bold">k = 8</span>
                 </div>
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Total Interaksi</span>
+                  <span class="text-slate-400 block text-[10px]">Interaksi</span>
                   <span class="text-indigo-400 font-bold">41.3M Likes</span>
                 </div>
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
@@ -398,13 +456,19 @@
                   <span class="text-cyan-400 font-bold">958 Relasi</span>
                 </div>
               </div>
+
+              <!-- Tombol GitHub SMA -->
+              <div class="mt-4 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JIMaulana13/SocialMediaMining" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-teal-600 border border-slate-700 hover:border-teal-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
+                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
+                </a>
+              </div>
             </div>
           </div>
           <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Apify Scraper</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means & LDA</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">NetworkX (SNA)</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">NetworkX</span>
           </div>
         </div>
 
@@ -412,7 +476,7 @@
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
           <div>
             <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="finhealth.jpeg" alt="FinHealth Expert System" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <img src="finhealth.jpeg" alt="FinHealth Expert System" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-cyan-600/90 text-white text-xs font-semibold">
                 Expert System & REST API (2025)
@@ -439,16 +503,23 @@
               <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <span class="text-slate-400 block text-[10px]">Backend</span>
-                  <span class="text-cyan-400 font-bold">Python Flask</span>
+                  <span class="text-cyan-400 font-bold">Flask API</span>
                 </div>
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Arsitektur</span>
-                  <span class="text-indigo-400 font-bold">REST API</span>
+                  <span class="text-slate-400 block text-[10px]">Model</span>
+                  <span class="text-indigo-400 font-bold">Rule-Based</span>
                 </div>
                 <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
                   <span class="text-slate-400 block text-[10px]">Domain</span>
                   <span class="text-emerald-400 font-bold">UMKM Finance</span>
                 </div>
+              </div>
+
+              <!-- Tombol GitHub FinHealth -->
+              <div class="mt-4 pt-4 border-t border-slate-800/80">
+                <a href="https://github.com/JIMaulana13/finhealth-expert-system" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-cyan-600 border border-slate-700 hover:border-cyan-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
+                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
+                </a>
               </div>
             </div>
           </div>
@@ -456,7 +527,6 @@
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Flask</span>
             <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Expert System</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Financial Analysis</span>
           </div>
         </div>
 
@@ -474,13 +544,13 @@
 
         <div class="glass-card rounded-3xl overflow-hidden group">
           <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="Mandala.jpeg" alt="Menteri Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src="Mandala.jpeg" alt="Menteri Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80'" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-bold">2026 – Sekarang</span>
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2026</p>
+            <p class="text-xs text-indigo-400 font-medium">BEM FTMM Universitas Airlangga</p>
             <p class="text-xs text-slate-300 leading-relaxed pt-1">
               Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.
             </p>
@@ -489,7 +559,7 @@
 
         <div class="glass-card rounded-3xl overflow-hidden group">
           <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="Peta.jpeg" alt="Dirjen Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <img src="Peta.jpeg" alt="Dirjen Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80'" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
             <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-amber-400 border border-amber-500/30 text-xs font-bold">Most Dedicated Staff 2025</span>
           </div>
@@ -497,7 +567,7 @@
             <h3 class="text-lg font-bold text-white">Dirjen Kesejahteraan Mahasiswa</h3>
             <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2025</p>
             <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Mengoordinasikan dan mengawal program kesejahteraan mahasiswa di bidang finansial, beasiswa dan layanan pendukung melalui program kerja Adkesma
+              Mengoordinasikan terkait finansial, Beasiswa, dan Aspek Kesejahteraan Mahasiswa lainnya kepada pihak fakultas.
             </p>
           </div>
         </div>
@@ -506,13 +576,13 @@
           <div class="h-48 overflow-hidden bg-slate-800 relative">
             <img src="sekbem.jpeg" alt="Sekolah BEM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-emerald-400 border border-emerald-500/30 text-xs font-bold">Staf Terbaik 2024</span>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-emerald-400 border border-emerald-500/30 text-xs font-bold">Sekbem Adkesma Terbaik 2024</span>
           </div>
           <div class="p-6 space-y-2">
             <h3 class="text-lg font-bold text-white">Sekolah BEM FTMM 2024</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2024</p>
+            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma</p>
             <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Aktif dalam praktik advokasi langsung dan terpilih sebagai staf terbaik Kementerian Adkesma pada Sekolah BEM FTMM.
+              Aktif dalam praktik advokasi langsung dan dinobatkan sebagai Staf Terbaik Kementerian Adkesma pada Sekolah BEM FTMM 2024.
             </p>
           </div>
         </div>
@@ -567,7 +637,7 @@
             <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
             <span class="text-[11px] text-slate-400 font-medium">Sept 2025</span>
           </div>
-          <h3 class="text-base font-bold text-white">ICATAM × i-PACT 2025</h3>
+          <h3 class="text-base font-bold text-white">ICATAM × I-PACT 2025</h3>
           <p class="text-xs text-indigo-400 font-medium">International Conference (Univ. Malaya & VIT)</p>
           <p class="text-xs text-slate-300 leading-relaxed">
             Operator sistem audio visual 2 hari penuh untuk kebutuhan presentasi narasumber internasional dan kelancaran multimedia konferensi.
@@ -577,7 +647,7 @@
         <!-- 3. SMART-INTECH (Operator) -->
         <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
           <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator multimedia</span>
+            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
             <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
           </div>
           <h3 class="text-base font-bold text-white">Seminar Nasional SMART-INTECH</h3>
@@ -616,7 +686,7 @@
         <!-- 6. COLAB FTMM 2025 (Korlap) -->
         <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
           <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Lapangan</span>
+            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Korlap</span>
             <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
           </div>
           <h3 class="text-base font-bold text-white">COLAB FTMM 2025</h3>
@@ -630,7 +700,7 @@
         <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="ketupat">
           <div class="flex justify-between items-start">
             <span class="px-2.5 py-1 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 text-[11px] font-semibold">Ketua Pelaksana</span>
-            <span class="text-[11px] text-slate-400 font-medium">Des 25 – Jan 26</span>
+            <span class="text-[11px] text-slate-400 font-medium">Juni 25 - Jan 26</span>
           </div>
           <h3 class="text-base font-bold text-white">Posko Finansial Mahasiswa</h3>
           <p class="text-xs text-emerald-400 font-medium">Kementerian Adkesma BEM FTMM</p>
@@ -668,23 +738,20 @@
       </div>
     </section>
 
-   <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL) -->
+    <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL) -->
     <section id="pelatihan" class="max-w-7xl mx-auto px-6">
       <div class="mb-10">
         <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Pengembangan Kepemimpinan</span>
-        <h2 class="text-3xl font-extrabold text-white">Jenjang Pelatihan Manajemen Mahasiswa (LKMM)</h2>
+        <h2 class="text-3xl font-extrabold text-white">Jenjang Pelatihan Manajerial Mahasiswa (LKMM)</h2>
         <p class="text-xs text-slate-400 mt-1">
-          Pelatihan terkait manajerial resmi tingkat perguruan tinggi yang ditempuh secara berjenjang dari tingkat dasar hingga lanjut.
+          Pengembangan dan pelatihan manajerial resmi tingkat perguruan tinggi yang ditempuh secara berjenjang dari tingkat dasar hingga lanjut.
         </p>
       </div>
 
-      <!-- Container Grid 3 Kolom -->
       <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- LKMM-TD -->
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-teal-500">
           <div>
-            <!-- Slot Gambar LKMM-TD (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
             <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
               <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -708,10 +775,8 @@
           </div>
         </div>
 
-        <!-- LKMM-TM -->
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-sky-500">
           <div>
-            <!-- Slot Gambar LKMM-TM (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
             <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
               <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -735,10 +800,8 @@
           </div>
         </div>
 
-        <!-- LKMM-TL -->
         <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-indigo-500">
           <div>
-            <!-- Slot Gambar LKMM-TL (Ganti src ke nama file foto sertifikat/kegiatanmu) -->
             <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
               <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
@@ -751,13 +814,13 @@
               <h3 class="text-lg font-bold text-white">LKMM-TL</h3>
               <p class="text-xs text-indigo-400 font-medium">Tingkat Lanjut</p>
               <p class="text-xs text-slate-300 leading-relaxed pt-1">
-                Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian–peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.
+                Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian&peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.
               </p>
             </div>
           </div>
           <div class="p-6 pt-0">
             <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
-              Fokus: Manajemen Wacana 
+              Fokus: Pembuatan Wacana
             </span>
           </div>
         </div>
@@ -791,13 +854,13 @@
           
           <div class="lg:col-span-5 grid grid-cols-2 gap-3">
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="pengmas1.JPG" alt="UMKM Dawarblandong" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+              <img src="pengmas1.JPG" alt="UMKM Dawarblandong 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80'" />
             </div>
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="pengmas2.JPG" alt="Panita Pengabdian Masyarakat" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+              <img src="pengmas2.JPG" alt="UMKM Dawarblandong 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80'" />
             </div>
             <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative col-span-2">
-              <img src="pengmas3.JPG" alt="Foto Keberangkatan" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              <img src="pengmas3.JPG" alt="Diskusi Tim Pengmas" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80'" />
             </div>
           </div>
         </div>
@@ -820,7 +883,7 @@
           </a>
         </div>
         <p class="text-[11px] text-slate-600 pt-8">
-          © 2026 Joeang Ikhsan Maulana • Dibuat dengan senyum dan ice caffee latte
+          © 2026 Joeang Ikhsan Maulana • Dibuat dengan senyum & Rum Regum Madani
         </p>
       </div>
     </footer>
