@@ -1,933 +1,1198 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joeang Ikhsan Maulana | Data Science & Leadership Portfolio</title>
-  
-  <!-- Teks ini yang ditambahkan untuk Favicon -->
+  <meta name="description" content="Portofolio Joeang Ikhsan Maulana — mahasiswa Teknologi Sains Data UNAIR: statistika terapan, machine learning, dan kepemimpinan advokasi mahasiswa." />
+  <meta name="theme-color" content="#06070d" />
+
   <link rel="icon" href="logo.jpg" type="image/png">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* ============ DESIGN TOKENS ============ */
+    :root {
+      --bg: #06070d;
+      --bg-2: #0b0d18;
+      --surface: rgba(255,255,255,.035);
+      --surface-2: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.08);
+      --line-2: rgba(255,255,255,.16);
+      --text: #eef0f7;
+      --muted: #9aa1b6;
+      --dim: #667089;
+
+      --indigo: #7c83ff;
+      --sky: #4cc9ff;
+      --teal: #2dd4bf;
+      --rose: #fb7185;
+      --amber: #fbbf24;
+      --emerald: #34d399;
+
+      --grad: linear-gradient(120deg, #8b8fff 0%, #4cc9ff 50%, #2dd4bf 100%);
+      --radius: 24px;
+      --radius-sm: 14px;
+      --ease: cubic-bezier(.22,1,.36,1);
+      --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
     }
-    .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.2);
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .nav-scrolled {
-      background: rgba(10, 15, 30, 0.9) !important;
-      border-bottom-color: rgba(99, 102, 241, 0.3) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    ::selection { background: var(--indigo); color: #fff; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #232744; border-radius: 10px; }
+
+    .container { width: min(1200px, 100% - 40px); margin-inline: auto; }
+    section { padding-block: clamp(70px, 10vw, 130px); position: relative; }
+
+    /* ============ BACKGROUND ============ */
+    .bg-aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+    .bg-aurora i {
+      position: absolute; border-radius: 50%; filter: blur(110px); opacity: .5;
+      animation: float 22s ease-in-out infinite alternate;
     }
-    .filter-btn.active {
-      background-color: rgb(79 70 229);
-      color: white;
-      border-color: transparent;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    .bg-aurora i:nth-child(1) { width: 520px; height: 520px; background: #4338ca; top: -10%; left: -8%; }
+    .bg-aurora i:nth-child(2) { width: 460px; height: 460px; background: #0891b2; top: 30%; right: -10%; animation-delay: -7s; opacity: .35; }
+    .bg-aurora i:nth-child(3) { width: 420px; height: 420px; background: #0f766e; bottom: -10%; left: 30%; animation-delay: -14s; opacity: .3; }
+    @keyframes float {
+      0% { transform: translate(0,0) scale(1); }
+      100% { transform: translate(60px,-50px) scale(1.15); }
     }
-    .tab-content {
-      animation: fadeIn 0.35s ease-in-out;
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 20%, transparent 75%);
+      opacity: .35;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    .cursor-glow {
+      position: fixed; width: 460px; height: 460px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,131,255,.14), transparent 65%);
+      pointer-events: none; z-index: -1; transform: translate(-50%,-50%);
+      left: 50%; top: 30%; transition: opacity .3s;
     }
+    #progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100;
+      background: var(--grad); box-shadow: 0 0 14px rgba(76,201,255,.7);
+    }
+
+    /* ============ NAVBAR ============ */
+    .nav-wrap { position: fixed; top: 16px; left: 0; right: 0; z-index: 90; display: flex; justify-content: center; padding-inline: 16px; }
+    .nav {
+      display: flex; align-items: center; gap: 8px; width: min(1100px, 100%);
+      padding: 8px 8px 8px 14px; border-radius: 999px;
+      background: rgba(10,12,24,.55); backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid var(--line); transition: all .4s var(--ease);
+    }
+    .nav.scrolled { background: rgba(8,10,20,.82); border-color: var(--line-2); box-shadow: 0 10px 40px rgba(0,0,0,.45); }
+    .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center;
+      font-family: var(--display); font-weight: 700; font-size: 14px; color: #fff;
+      background: linear-gradient(135deg, #4f46e5, #22d3ee);
+      box-shadow: 0 6px 20px rgba(79,70,229,.45); transition: transform .4s var(--ease);
+    }
+    .brand:hover .brand-mark { transform: rotate(-8deg) scale(1.08); }
+    .brand-text b { display: block; font-size: 14px; line-height: 1.2; font-weight: 700; }
+    .brand-text span { display: block; font-size: 11px; color: var(--muted); }
+    .nav-links { display: flex; gap: 2px; }
+    .nav-links a {
+      position: relative; padding: 8px 13px; border-radius: 999px;
+      font-size: 13px; font-weight: 500; color: var(--muted); transition: color .25s, background .25s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-links a.active { color: #fff; background: rgba(124,131,255,.18); box-shadow: inset 0 0 0 1px rgba(124,131,255,.35); }
+    .nav-cta {
+      padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      background: var(--text); color: #0a0c18; transition: transform .3s var(--ease), box-shadow .3s;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,.18); }
+    .burger { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); place-items: center; }
+    .burger span, .burger span::before, .burger span::after {
+      display: block; width: 16px; height: 2px; background: #fff; border-radius: 2px; position: relative; transition: .3s var(--ease);
+    }
+    .burger span::before, .burger span::after { content: ''; position: absolute; left: 0; }
+    .burger span::before { top: -5px; } .burger span::after { top: 5px; }
+    .burger.open span { background: transparent; }
+    .burger.open span::before { top: 0; transform: rotate(45deg); }
+    .burger.open span::after { top: 0; transform: rotate(-45deg); }
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 80; background: rgba(6,7,13,.96); backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;
+      opacity: 0; visibility: hidden; transition: .4s var(--ease);
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu a {
+      font-family: var(--display); font-size: 30px; font-weight: 600; padding: 8px 20px;
+      transform: translateY(20px); opacity: 0; transition: .5s var(--ease);
+    }
+    .mobile-menu.open a { transform: none; opacity: 1; }
+    .mobile-menu.open a:nth-child(2){transition-delay:.05s}.mobile-menu.open a:nth-child(3){transition-delay:.1s}
+    .mobile-menu.open a:nth-child(4){transition-delay:.15s}.mobile-menu.open a:nth-child(5){transition-delay:.2s}
+    .mobile-menu.open a:nth-child(6){transition-delay:.25s}.mobile-menu.open a:nth-child(7){transition-delay:.3s}
+    .mobile-menu.open a:nth-child(8){transition-delay:.35s}
+    @media (max-width: 1020px) { .nav-links, .nav-cta { display: none; } .burger { display: grid; } }
+
+    /* ============ SHARED ============ */
+    .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono);
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--sky); margin-bottom: 14px;
+    }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+    .section-head { margin-bottom: clamp(36px, 5vw, 60px); max-width: 780px; }
+    .section-head h2 {
+      font-family: var(--display); font-size: clamp(30px, 4.6vw, 52px);
+      line-height: 1.08; letter-spacing: -.025em; font-weight: 700;
+    }
+    .section-head p { color: var(--muted); margin-top: 14px; font-size: 15px; max-width: 620px; }
+    .split-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; max-width: none; }
+
+    .card {
+      position: relative; border-radius: var(--radius); background: var(--surface);
+      border: 1px solid var(--line); overflow: hidden;
+      transition: border-color .4s, transform .5s var(--ease), box-shadow .5s;
+    }
+    .card::before { /* spotlight */
+      content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+      background: radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(124,131,255,.16), transparent 45%);
+      transition: opacity .35s; z-index: 0;
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover { border-color: rgba(124,131,255,.4); }
+    .card > * { position: relative; z-index: 1; }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+      font-size: 12px; font-weight: 500; background: var(--surface-2); border: 1px solid var(--line);
+      color: #d6daea; transition: .3s var(--ease);
+    }
+    .chip:hover { transform: translateY(-3px); border-color: var(--indigo); color: #fff; }
+    .chip.green { background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.25); color: #86efc5; }
+    .chip.green:hover { border-color: var(--emerald); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px; border-radius: 14px; font-size: 14px; font-weight: 600;
+      border: 1px solid var(--line-2); background: var(--surface); transition: transform .3s var(--ease), box-shadow .3s, background .3s, border-color .3s;
+      will-change: transform;
+    }
+    .btn:hover { background: var(--surface-2); border-color: rgba(255,255,255,.3); }
+    .btn.primary {
+      border: 0; color: #fff; background: linear-gradient(120deg, #5b5ff5, #2f8cf0 60%, #14b8c6);
+      box-shadow: 0 10px 30px rgba(79,70,229,.4);
+    }
+    .btn.primary:hover { box-shadow: 0 14px 40px rgba(79,70,229,.6); }
+
+    /* reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ============ HERO ============ */
+    #about { min-height: 100svh; display: flex; align-items: center; padding-top: 140px; padding-bottom: 60px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(30px, 6vw, 80px); align-items: center; }
+    .status {
+      display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border-radius: 999px;
+      background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.25); color: #86efc5;
+      font-size: 12px; font-weight: 600; margin-bottom: 26px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); position: relative; }
+    .dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--emerald); animation: ping 1.8s infinite; }
+    @keyframes ping { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+    .hero h1 {
+      font-family: var(--display); font-size: clamp(38px, 6.4vw, 78px);
+      line-height: 1.02; letter-spacing: -.035em; font-weight: 700;
+    }
+    .hero h1 .line { display: block; overflow: hidden; }
+    .hero h1 .line span { display: inline-block; transform: translateY(110%); animation: rise 1s var(--ease) forwards; }
+    .hero h1 .line:nth-child(2) span { animation-delay: .12s; }
+    .hero h1 .line:nth-child(3) span { animation-delay: .24s; }
+    @keyframes rise { to { transform: none; } }
+    .typed-row { margin-top: 22px; font-family: var(--mono); font-size: clamp(13px, 1.6vw, 16px); color: var(--muted); min-height: 28px; }
+    .typed-row b { color: var(--sky); font-weight: 500; }
+    .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--sky); margin-left: 3px; vertical-align: -3px; animation: blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-desc { margin-top: 20px; color: #b8bfd3; font-size: clamp(15px, 1.5vw, 17px); max-width: 580px; }
+    .hero-desc strong { color: #fff; font-weight: 600; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 44px; border-top: 1px solid var(--line); padding-top: 26px; }
+    .stat { padding-right: 12px; }
+    .stat + .stat { padding-left: 18px; border-left: 1px solid var(--line); }
+    .stat .num { font-family: var(--display); font-size: clamp(24px, 3vw, 34px); font-weight: 700; line-height: 1; }
+    .stat .lbl { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+    .profile { position: relative; perspective: 1000px; }
+    .profile-card {
+      position: relative; border-radius: 32px; padding: 3px; transform-style: preserve-3d; transition: transform .25s ease-out;
+      background: conic-gradient(from var(--ang, 0deg), #6366f1, #22d3ee, #2dd4bf, #6366f1);
+      animation: spin 6s linear infinite;
+    }
+    @property --ang { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    @keyframes spin { to { --ang: 360deg; } }
+    .profile-inner { position: relative; border-radius: 29px; overflow: hidden; background: var(--bg-2); }
+    .profile-img { aspect-ratio: 4/5; width: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .profile-card:hover .profile-img { transform: scale(1.06); }
+    .profile-inner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,7,13,.95) 0%, rgba(6,7,13,.15) 48%, transparent 70%); }
+    .profile-meta { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2; }
+    .profile-meta .tag {
+      display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(79,70,229,.75);
+      backdrop-filter: blur(8px); font-size: 11px; font-weight: 600; margin-bottom: 8px;
+    }
+    .profile-meta h3 { font-family: var(--display); font-size: 22px; line-height: 1.2; }
+    .profile-meta p { font-size: 12px; color: #c4c9da; margin-top: 2px; }
+    .float-badge {
+      position: absolute; z-index: 5; padding: 10px 14px; border-radius: 16px; font-size: 12px; font-weight: 600;
+      background: rgba(12,14,28,.75); backdrop-filter: blur(14px); border: 1px solid var(--line-2);
+      display: flex; align-items: center; gap: 10px; box-shadow: 0 14px 40px rgba(0,0,0,.5);
+      animation: bob 5s ease-in-out infinite;
+    }
+    .float-badge i { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-size: 13px; }
+    .float-badge small { display: block; font-weight: 400; color: var(--muted); font-size: 10.5px; }
+    .fb-1 { top: 8%; left: -9%; } .fb-1 i { background: rgba(251,191,36,.15); color: var(--amber); }
+    .fb-2 { bottom: 26%; right: -7%; animation-delay: -2.5s; } .fb-2 i { background: rgba(52,211,153,.15); color: var(--emerald); }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .info-list { display: grid; gap: 8px; margin-top: 16px; }
+    .info-row {
+      display: flex; justify-content: space-between; gap: 14px; padding: 11px 14px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line); font-size: 12px;
+    }
+    .info-row span:first-child { color: var(--muted); white-space: nowrap; }
+    .info-row span:last-child { text-align: right; font-weight: 600; }
+    .scroll-hint { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+    .scroll-hint i { width: 1px; height: 38px; background: linear-gradient(var(--sky), transparent); animation: drip 2s ease-in-out infinite; transform-origin: top; }
+    @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .profile { max-width: 420px; margin: 20px auto 0; }
+      .fb-1 { left: -4%; } .fb-2 { right: -4%; }
+      .scroll-hint { display: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }
+      .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+    }
+
+    /* ============ MARQUEE ============ */
+    .marquee { padding-block: 26px; border-block: 1px solid var(--line); background: rgba(255,255,255,.015); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 38s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track span { font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--dim); white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+    .marquee-track span::after { content: '✦'; color: var(--indigo); font-size: 14px; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* ============ SKILLS ============ */
+    .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .skill-card { padding: 34px; }
+    .skill-icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 20px; margin-bottom: 22px; }
+    .skill-card h3 { font-family: var(--display); font-size: 22px; letter-spacing: -.01em; margin-bottom: 10px; }
+    .skill-card p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 800px) { .skill-grid { grid-template-columns: 1fr; } .skill-card { padding: 26px; } }
+
+    /* ============ HKI ============ */
+    .hki-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; align-items: start; }
+    .zoomable { cursor: zoom-in; }
+    .poster { padding: 14px; border-color: rgba(52,211,153,.22); }
+    .poster-frame { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+    .poster-frame img { width: 100%; height: auto; transition: transform .7s var(--ease); }
+    .poster:hover .poster-frame img { transform: scale(1.04); }
+    .poster-cap { display: flex; justify-content: space-between; gap: 10px; padding: 14px 6px 4px; font-size: 12px; }
+    .poster-cap b { color: var(--emerald); } .poster-cap span { color: var(--muted); }
+    .panel { padding: 28px; }
+    .panel + .panel, .panel + .cert { margin-top: 20px; }
+    .panel h3 { font-size: 17px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-family: var(--display); }
+    .panel h3 i { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; font-size: 14px; }
+    .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .kv { padding: 14px 16px; border-radius: 16px; background: rgba(0,0,0,.25); border: 1px solid var(--line); font-size: 13px; }
+    .kv.full { grid-column: 1 / -1; }
+    .kv small { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; letter-spacing: .03em; }
+    .kv b { font-weight: 600; line-height: 1.5; }
+    .kv p { color: var(--muted); font-size: 12.5px; }
+    .kv strong.t { display: block; color: var(--indigo); margin-bottom: 6px; font-size: 13px; }
+    .cert { display: flex; gap: 20px; align-items: center; padding: 18px; }
+    .cert-img { width: 82px; height: 104px; border-radius: 14px; overflow: hidden; flex-shrink: 0; border: 1px solid var(--line-2); }
+    .cert-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+    .cert:hover .cert-img img { transform: scale(1.1); }
+    .cert .badge { display: inline-block; padding: 3px 10px; border-radius: 6px; background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.3); color: var(--emerald); font-size: 10px; font-weight: 700; margin-bottom: 8px; }
+    .cert h4 { font-size: 15px; margin-bottom: 4px; }
+    .cert p { font-size: 12px; color: var(--muted); }
+    .cert p b { color: #d6daea; font-weight: 500; }
+    .stamp { padding: 9px 16px; border-radius: 12px; font-family: var(--mono); font-size: 12px; background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.28); color: #86efc5; display: flex; align-items: center; gap: 8px; }
+    @media (max-width: 900px) { .hki-grid { grid-template-columns: 1fr; } .kv-grid { grid-template-columns: 1fr; } }
+
+    /* ============ PROJECTS ============ */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .project { display: flex; flex-direction: column; transform-style: preserve-3d; }
+    .project-media { position: relative; height: 230px; overflow: hidden; background: #12152a; }
+    .project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), filter .5s; }
+    .project:hover .project-media img { transform: scale(1.1) rotate(.6deg); }
+    .project-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18 0%, rgba(11,13,24,.1) 60%); }
+    .p-tag { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 6px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #fff; backdrop-filter: blur(6px); }
+    .p-num { position: absolute; z-index: 2; top: 10px; right: 18px; font-family: var(--display); font-size: 54px; font-weight: 700; color: rgba(255,255,255,.09); line-height: 1; }
+    .project-body { padding: 26px 28px 8px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+    .project-body h3 { font-family: var(--display); font-size: 21px; line-height: 1.25; letter-spacing: -.015em; }
+    .project-body > p { font-size: 13px; color: #b2b9ce; }
+    .project-body > p strong { color: #fff; font-weight: 600; }
+    .code-box { padding: 14px 16px; border-radius: 14px; background: rgba(0,0,0,.4); border: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: #c9cee0; line-height: 1.7; overflow-x: auto; }
+    .code-box em { font-style: normal; color: var(--indigo); font-weight: 500; display: block; margin-bottom: 2px; }
+    .points { display: grid; gap: 8px; }
+    .point { display: flex; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--line); font-size: 12.5px; color: #c4cadc; }
+    .point i { margin-top: 3px; }
+    .point strong { color: #fff; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .metric { padding: 12px 8px; border-radius: 14px; text-align: center; background: rgba(0,0,0,.28); border: 1px solid var(--line); }
+    .metric small { display: block; font-size: 10px; color: var(--muted); margin-bottom: 4px; letter-spacing: .04em; }
+    .metric b { font-family: var(--display); font-size: 16px; }
+    .gh-btn {
+      margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px;
+      border-radius: 14px; border: 1px solid var(--line-2); font-size: 13px; font-weight: 600; background: rgba(255,255,255,.03);
+      transition: all .35s var(--ease); position: relative; overflow: hidden;
+    }
+    .gh-btn i.fa-arrow-right { transition: transform .35s var(--ease); font-size: 12px; }
+    .gh-btn:hover { background: var(--hc, var(--indigo)); border-color: transparent; transform: translateY(-2px); box-shadow: 0 10px 28px -6px var(--hc, var(--indigo)); }
+    .gh-btn:hover i.fa-arrow-right { transform: translateX(5px); }
+    .project-foot { padding: 14px 28px 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .project-foot span { padding: 4px 11px; border-radius: 8px; background: var(--surface-2); font-size: 11.5px; color: #c4cadc; font-family: var(--mono); }
+    @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; } }
+
+    /* ============ ORGANISASI ============ */
+    .org-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .org-media { position: relative; height: 210px; overflow: hidden; background: #12152a; }
+    .org-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .org:hover .org-media img { transform: scale(1.1); }
+    .org-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18, transparent 65%); }
+    .org-pill { position: absolute; z-index: 2; top: 16px; left: 16px; padding: 6px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 700; backdrop-filter: blur(8px); }
+    .org-body { padding: 24px 26px 28px; }
+    .org-body h3 { font-family: var(--display); font-size: 19px; line-height: 1.25; margin-bottom: 4px; }
+    .org-body .sub { font-size: 12.5px; color: var(--indigo); font-weight: 600; margin-bottom: 12px; }
+    .org-body p { font-size: 13px; color: #b2b9ce; }
+    @media (max-width: 960px) { .org-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 600px) and (max-width: 960px) { .org-grid { grid-template-columns: 1fr 1fr; } }
+
+    /* ============ KEPANITIAAN ============ */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .filter-btn {
+      padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--muted);
+      border: 1px solid var(--line); background: var(--surface); transition: all .3s var(--ease);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .filter-btn:hover { color: #fff; border-color: var(--line-2); transform: translateY(-2px); }
+    .filter-btn.active { color: #fff; background: linear-gradient(120deg, #5b5ff5, #2f8cf0); border-color: transparent; box-shadow: 0 8px 24px rgba(79,70,229,.45); }
+    .filter-btn .count { font-family: var(--mono); font-size: 11px; padding: 1px 7px; border-radius: 99px; background: rgba(255,255,255,.12); }
+    .comm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .comm-card { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .comm-card.show { animation: pop .55s var(--ease) both; animation-delay: calc(var(--i, 0) * 55ms); }
+    @keyframes pop { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
+    .comm-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .role { padding: 4px 11px; border-radius: 8px; font-size: 11px; font-weight: 600; border: 1px solid; }
+    .role.sky { background: rgba(14,165,233,.1); border-color: rgba(14,165,233,.3); color: #7dd3fc; }
+    .role.ind { background: rgba(99,102,241,.1); border-color: rgba(99,102,241,.3); color: #a5b4fc; }
+    .role.emr { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.3); color: #6ee7b7; }
+    .role.amb { background: rgba(245,158,11,.1); border-color: rgba(245,158,11,.3); color: #fcd34d; }
+    .date { font-family: var(--mono); font-size: 11px; color: var(--dim); white-space: nowrap; }
+    .comm-card h3 { font-family: var(--display); font-size: 18px; line-height: 1.25; margin-top: 4px; }
+    .comm-card .sub { font-size: 12.5px; color: var(--indigo); font-weight: 600; }
+    .comm-card .sub.g { color: var(--emerald); }
+    .comm-card p { font-size: 13px; color: #aab1c7; }
+    @media (max-width: 1000px) { .comm-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .comm-grid { grid-template-columns: 1fr; } }
+
+    /* ============ PELATIHAN ============ */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; }
+    .step { display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid var(--c); }
+    .step-media { position: relative; height: 190px; overflow: hidden; background: #12152a; }
+    .step-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .step:hover .step-media img { transform: scale(1.1); }
+    .step-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18, transparent 65%); }
+    .step-date { position: absolute; z-index: 2; top: 14px; left: 14px; padding: 5px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 600; background: rgba(8,10,20,.8); border: 1px solid var(--c); color: var(--c); backdrop-filter: blur(8px); }
+    .step-lvl { position: absolute; z-index: 2; right: 18px; bottom: 10px; font-family: var(--display); font-size: 60px; font-weight: 700; color: rgba(255,255,255,.08); line-height: 1; }
+    .step-body { padding: 24px 26px 14px; }
+    .step-body h3 { font-family: var(--display); font-size: 22px; }
+    .step-body .sub { font-size: 12.5px; font-weight: 600; color: var(--c); margin-bottom: 12px; }
+    .step-body p { font-size: 13px; color: #b2b9ce; }
+    .step-foot { margin: 0 26px 24px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    .step-foot b { color: var(--c); font-weight: 600; }
+    @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
+
+    /* ============ PENGABDIAN ============ */
+    .pengmas { padding: clamp(24px, 4vw, 44px); }
+    .pengmas-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 4vw, 50px); align-items: center; }
+    .loc { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; font-size: 12px; font-weight: 600; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.3); color: #fcd34d; margin-bottom: 18px; }
+    .pengmas h3 { font-family: var(--display); font-size: clamp(24px, 3vw, 34px); line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; }
+    .pengmas p { color: #b2b9ce; font-size: 14px; margin-bottom: 22px; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .gallery figure { border-radius: 18px; overflow: hidden; height: 160px; background: #12152a; border: 1px solid var(--line); }
+    .gallery figure:nth-child(3) { grid-column: 1 / -1; height: 190px; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+    .gallery figure:hover img { transform: scale(1.12); }
+    @media (max-width: 900px) { .pengmas-grid { grid-template-columns: 1fr; } }
+
+    /* ============ FOOTER / CTA ============ */
+    footer { padding: 40px 0 36px; }
+    .cta { text-align: center; padding: clamp(44px, 8vw, 90px) 24px; border-radius: 36px; position: relative; overflow: hidden; background: linear-gradient(160deg, rgba(79,70,229,.2), rgba(8,145,178,.08) 60%, rgba(255,255,255,.02)); border: 1px solid var(--line-2); }
+    .cta::before { content: ''; position: absolute; width: 520px; height: 520px; top: -260px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(124,131,255,.35), transparent 65%); pointer-events: none; }
+    .cta > * { position: relative; }
+    .cta h2 { font-family: var(--display); font-size: clamp(32px, 6vw, 68px); line-height: 1.05; letter-spacing: -.035em; max-width: 800px; margin: 0 auto 18px; }
+    .cta p { color: var(--muted); max-width: 480px; margin: 0 auto 32px; font-size: 15px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .copyright { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--dim); }
+    .to-top { position: fixed; right: 22px; bottom: 22px; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: rgba(12,14,28,.85); border: 1px solid var(--line-2); backdrop-filter: blur(10px); z-index: 70; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .4s var(--ease); }
+    .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+    .to-top:hover { background: var(--indigo); transform: translateY(-4px); }
+
+    /* ============ LIGHTBOX ============ */
+    .lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; background: rgba(4,5,10,.9); backdrop-filter: blur(14px); opacity: 0; visibility: hidden; transition: .35s var(--ease); cursor: zoom-out; }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img { max-height: 88vh; max-width: min(1000px, 94vw); border-radius: 18px; transform: scale(.9); transition: transform .45s var(--ease); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    .lightbox.open img { transform: scale(1); }
+    .lightbox button { position: absolute; top: 22px; right: 22px; width: 44px; height: 44px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--line-2); }
+
+    /* ============ ACCESSIBILITY ============ */
+    :focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; border-radius: 8px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+      .hero h1 .line span { transform: none; }
+    }
+    @media (hover: none) { .cursor-glow { display: none; } }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white relative">
+<body>
 
-  <!-- Scroll Progress Bar -->
-  <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-indigo-500 via-sky-400 to-teal-400 z-[60] w-0 transition-all duration-75"></div>
+  <div class="bg-aurora"><i></i><i></i><i></i></div>
+  <div class="bg-grid"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div id="progress"></div>
 
-  <!-- Dynamic Glass Navbar -->
-  <header id="main-nav" class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-slate-800/80 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition">
-          JM
-        </div>
-        <div>
-          <span class="text-base font-bold tracking-tight block">Joeang Ikhsan M.</span>
-          <span class="text-xs text-slate-400 block font-normal">Teknologi Sains Data • UNAIR</span>
+  <!-- ============ NAVBAR ============ -->
+  <div class="nav-wrap">
+    <header class="nav" id="nav">
+      <a href="#about" class="brand" aria-label="Beranda">
+        <div class="brand-mark">JM</div>
+        <div class="brand-text">
+          <b>Joeang Ikhsan M.</b>
+          <span>Teknologi Sains Data • UNAIR</span>
         </div>
       </a>
-      
-      <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-300">
-        <a href="#about" class="nav-link hover:text-indigo-400 transition py-1">Tentang</a>
-        <a href="#skills" class="nav-link hover:text-indigo-400 transition py-1">Keahlian</a>
-        <a href="#hki" class="nav-link hover:text-indigo-400 transition py-1">HKI</a>
-        <a href="#projects" class="nav-link hover:text-indigo-400 transition py-1">Project</a>
-        <a href="#organisasi" class="nav-link hover:text-indigo-400 transition py-1">Organisasi</a>
-        <a href="#kepanitiaan" class="nav-link hover:text-indigo-400 transition py-1">Kepanitiaan</a>
-        <a href="#pelatihan" class="nav-link hover:text-indigo-400 transition py-1">Pelatihan</a>
-        <a href="#pengmas" class="nav-link hover:text-indigo-400 transition py-1">Pengabdian</a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        <a href="#about">Tentang</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#hki">HKI</a>
+        <a href="#projects">Project</a>
+        <a href="#organisasi">Organisasi</a>
+        <a href="#kepanitiaan">Kepanitiaan</a>
+        <a href="#pelatihan">Pelatihan</a>
+        <a href="#pengmas">Pengabdian</a>
       </nav>
-    </div>
-  </header>
+      <a href="#contact" class="nav-cta">Hubungi Saya</a>
+      <button class="burger" id="burger" aria-label="Buka menu"><span></span></button>
+    </header>
+  </div>
 
-  <main class="pt-24 space-y-32">
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">Tentang</a>
+    <a href="#skills">Keahlian</a>
+    <a href="#hki">HKI</a>
+    <a href="#projects">Project</a>
+    <a href="#organisasi">Organisasi</a>
+    <a href="#kepanitiaan">Kepanitiaan</a>
+    <a href="#pelatihan">Pelatihan</a>
+    <a href="#pengmas">Pengabdian</a>
+  </div>
 
-    <!-- HERO & INTRO SECTION -->
-    <section id="about" class="max-w-7xl mx-auto px-6 pt-12 md:pt-20">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Siap untuk Kolaborasi Analisis Data & Organisasi
-          </div>
-          
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-            Eksplorasi <span class="bg-gradient-to-r from-indigo-400 via-sky-400 to-teal-300 bg-clip-text text-transparent">Sains Data</span>, Solusi Nyata, & Kepemimpinan.
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section id="about" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="status"><span class="dot"></span> Siap untuk Kolaborasi Analisis Data & Organisasi</div>
+
+          <h1>
+            <span class="line"><span>Eksplorasi</span></span>
+            <span class="line"><span class="grad-text">Sains Data,</span></span>
+            <span class="line"><span>Solusi Nyata.</span></span>
           </h1>
-          
-          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
+
+          <div class="typed-row" aria-live="polite">
+            <b>&gt;</b> <span id="typed"></span><span class="caret"></span>
+          </div>
+
+          <p class="hero-desc">
             Halo! Saya <strong>Joeang Ikhsan Maulana</strong>, mahasiswa Teknologi Sains Data Universitas Airlangga yang berfokus pada statistika terapan, pemodelan data (Python & R), rekayasa machine learning, serta kepemimpinan bidang advokasi mahasiswa.
           </p>
 
-          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800">
-            <div>
-              <div class="text-2xl font-extrabold text-indigo-400">1 Resmi</div>
-              <div class="text-xs text-slate-400 mt-1">Hak Cipta Kemenkum RI</div>
-            </div>
-            <div>
-              <div class="text-2xl font-extrabold text-indigo-400">4 Proyek</div>
-              <div class="text-xs text-slate-400 mt-1">Data Science & Rekayasa Meachine Learning</div>
-            </div>
-            <div>
-              <div class="text-2xl font-extrabold text-indigo-400">Menteri</div>
-              <div class="text-xs text-slate-400 mt-1">Adkesma BEM FTMM 2026</div>
-            </div>
+          <div class="hero-cta">
+            <a href="CV_Joeang Ikhsan Maulana.pdf" download class="btn primary magnetic"><i class="fa-solid fa-download"></i> Unduh CV (PDF)</a>
+            <a href="#projects" class="btn magnetic"><i class="fa-solid fa-diagram-project"></i> Lihat 4 Proyek Data</a>
+            <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" rel="noopener" class="btn magnetic"><i class="fa-brands fa-linkedin" style="color:var(--sky)"></i> LinkedIn</a>
           </div>
 
-          <div class="flex flex-wrap gap-4 pt-2">
-            <!-- Tautan File CV Lokal (Pastikan ada file CV_Joeang_Ikhsan_Maulana.pdf di GitHub root) -->
-            <a href="CV_Joeang Ikhsan Maulana.pdf" download class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition flex items-center gap-2 shadow-lg shadow-indigo-600/30">
-              <i class="fa-solid fa-download"></i> Unduh CV (PDF)
-            </a>
-            <a href="#projects" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium text-sm transition flex items-center gap-2">
-              <i class="fa-solid fa-diagram-project"></i> Lihat 4 Proyek Data
-            </a>
-            <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium text-sm transition flex items-center gap-2">
-              <i class="fa-brands fa-linkedin text-sky-400"></i> LinkedIn
-            </a>
+          <div class="stats">
+            <div class="stat">
+              <div class="num grad-text"><span data-count="1">1</span> Resmi</div>
+              <div class="lbl">Hak Cipta Kemenkum RI</div>
+            </div>
+            <div class="stat">
+              <div class="num grad-text"><span data-count="4">4</span> Proyek</div>
+              <div class="lbl">Data Science & Rekayasa Machine Learning</div>
+            </div>
+            <div class="stat">
+              <div class="num grad-text"><span data-count="9">9</span>+ Event</div>
+              <div class="lbl">Pengalaman Kepanitiaan</div>
+            </div>
+            <div class="stat">
+              <div class="num grad-text">Menteri</div>
+              <div class="lbl">Adkesma BEM FTMM 2026</div>
+            </div>
           </div>
         </div>
 
         <!-- Profile Card -->
-        <div class="lg:col-span-5">
-          <div class="glass-card p-6 rounded-3xl relative overflow-hidden group">
-            <div class="aspect-square w-full rounded-2xl overflow-hidden bg-slate-800 relative mb-6">
-              <img src="photo.jpeg" alt="Joeang Ikhsan Maulana" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-              <div class="absolute bottom-4 left-4 right-4">
-                <span class="px-3 py-1 bg-indigo-600/80 backdrop-blur-md rounded-full text-xs font-semibold text-white">Mahasiswa Teknologi Sains Data</span>
-                <p class="text-lg font-bold text-white mt-1">Joeang Ikhsan Maulana</p>
-                <p class="text-xs text-slate-300">Surabaya • Nganjuk, Jawa Timur</p>
+        <div class="profile reveal" style="--d:.2s">
+          <div class="float-badge fb-1"><i class="fa-solid fa-trophy"></i><div>Most Dedicated Staff<small>BEM FTMM 2025</small></div></div>
+          <div class="float-badge fb-2"><i class="fa-solid fa-stamp"></i><div>HKI Terdaftar<small>Kemenkum RI 2026</small></div></div>
+
+          <div class="profile-card" id="tilt">
+            <div class="profile-inner">
+              <img class="profile-img" src="photo.jpeg" alt="Joeang Ikhsan Maulana" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" />
+              <div class="profile-meta">
+                <span class="tag">Mahasiswa Teknologi Sains Data</span>
+                <h3>Joeang Ikhsan Maulana</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Surabaya • Nganjuk, Jawa Timur</p>
               </div>
             </div>
-            
-            <div class="space-y-3 text-xs text-slate-300">
-              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span class="text-slate-400">Pendidikan</span>
-                <span class="font-medium text-white">S1 Teknologi Sains Data, UNAIR (2024–now)</span>
-              </div>
-              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span class="text-slate-400">Jalur Prestasi</span>
-                <span class="font-medium text-white">Akselerasi MAN 4 Jombang (Nilai 91,37)</span>
-              </div>
-              <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                <span class="text-slate-400">Apresiasi</span>
-                <span class="font-medium text-amber-300">Most Dedicated Staff 2025</span>
-              </div>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row"><span>Pendidikan</span><span>S1 Teknologi Sains Data, UNAIR (2024–now)</span></div>
+            <div class="info-row"><span>Jalur Prestasi</span><span>Akselerasi MAN 4 Jombang (Nilai 91,37)</span></div>
+            <div class="info-row"><span>Apresiasi</span><span style="color:var(--amber)">Most Dedicated Staff 2025</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint"><span>Scroll</span><i></i></div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>Transformers</span><span>Scikit-Learn</span><span>Optuna</span><span>Flask REST API</span><span>Data Visualization</span><span>Statistika Nonparametrik</span><span>NLP</span>
+        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>Transformers</span><span>Scikit-Learn</span><span>Optuna</span><span>Flask REST API</span><span>Data Visualization</span><span>Statistika Nonparametrik</span><span>NLP</span>
+      </div>
+    </div>
+
+    <!-- ============ KEAHLIAN ============ -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">01 — Tech Stack & Kompetensi</span>
+          <h2>Keahlian <span class="grad-text">Profesional</span></h2>
+        </div>
+
+        <div class="skill-grid">
+          <div class="card skill-card reveal">
+            <div class="skill-icon" style="background:rgba(124,131,255,.14);color:var(--indigo)"><i class="fa-solid fa-code"></i></div>
+            <h3>Data Science & Web Development</h3>
+            <p>Pengalaman dalam membangun model Machine Learning, statistika inferensial, serta arsitektur backend expert system.</p>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">R & RStudio</span><span class="chip">Flask REST API</span>
+              <span class="chip">PyTorch / Transformers</span><span class="chip">Scikit-Learn</span><span class="chip">Optuna</span>
+              <span class="chip">Data Visualization</span><span class="chip">HTML/CSS/JS</span>
+            </div>
+          </div>
+
+          <div class="card skill-card reveal" style="--d:.12s">
+            <div class="skill-icon" style="background:rgba(52,211,153,.14);color:var(--emerald)"><i class="fa-solid fa-users"></i></div>
+            <h3>Leadership & Manajemen</h3>
+            <p>Terlatih dalam memimpin tim lintas divisi, negosiasi tingkat fakultas, penyelesaian masalah, dan manajemen acara skala besar.</p>
+            <div class="chips">
+              <span class="chip green">Team Leadership</span><span class="chip green">Project Management</span><span class="chip green">Public Speaking</span>
+              <span class="chip green">Problem Solving</span><span class="chip green">Cross-functional Collaboration</span><span class="chip green">Crisis Management</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION KEAHLIAN / TECH STACK -->
-    <section id="skills" class="max-w-7xl mx-auto px-6">
-      <div class="mb-8">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Tech Stack & Kompetensi</span>
-        <h2 class="text-3xl font-extrabold text-white">Keahlian Profesional</h2>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        
-        <!-- Hard Skills -->
-        <div class="glass-card p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-code text-indigo-400"></i> Data Science & Web Development
-          </h3>
-          <p class="text-sm text-slate-400 mb-5 leading-relaxed">Pengalaman dalam membangun model Machine Learning, statistika inferensial, serta arsitektur backend sistem pakar.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Python</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">R & RStudio</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Flask REST API</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">PyTorch / Transformers</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Scikit-Learn</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Optuna</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">Data Visualization</span>
-            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700 text-slate-200 rounded-lg text-xs font-medium">HTML/CSS/JS</span>
-          </div>
-        </div>
-
-        <!-- Soft Skills -->
-        <div class="glass-card p-8 rounded-3xl">
-          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-users text-emerald-400"></i> Leadership & Manajemen
-          </h3>
-          <p class="text-sm text-slate-400 mb-5 leading-relaxed">Terlatih dalam memimpin tim lintas divisi, negosiasi tingkat fakultas, penyelesaian masalah, dan manajemen acara skala besar.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Team Leadership</span>
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Project Management</span>
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Public Speaking</span>
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Problem Solving</span>
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Cross-functional Collaboration</span>
-            <span class="px-3 py-1.5 bg-emerald-950/40 border border-emerald-800/50 text-emerald-300 rounded-lg text-xs font-medium">Crisis Management</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION HKI & RISET NONPARAMETRIK -->
-    <section id="hki" class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-        <div>
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Kekayaan Intelektual Resmi</span>
-          <h2 class="text-3xl font-extrabold text-white">Hak Cipta Kemenkum RI & Poster Riset</h2>
-        </div>
-        <div class="px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2">
-          <i class="fa-solid fa-stamp"></i> No. Pencatatan: 001213309 (2026)
-        </div>
-      </div>
-
-      <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5">
-          <div class="glass-card p-4 rounded-3xl border border-emerald-500/20">
-            <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 relative group">
-              <img src="posterHKI.jpeg" alt="Poster Uji Nonparametrik Ketersediaan Layanan" class="w-full h-auto object-cover group-hover:scale-102 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80'" />
-              <div class="p-3 bg-slate-900/90 border-t border-slate-800 flex justify-between items-center text-xs">
-                <span class="text-emerald-400 font-bold">Poster Riset Fasilitas Kesehatan</span>
-                <span class="text-slate-400">Jenis: Poster Ilmiah</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 space-y-6">
-          <div class="glass-card p-6 rounded-3xl space-y-4">
-            <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-file-contract text-emerald-400"></i> Informasi Hak Cipta Terdaftar
-            </h3>
-            <div class="grid sm:grid-cols-2 gap-4 text-xs">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                <span class="text-slate-400 block mb-1">Pemegang Hak Cipta</span>
-                <span class="font-semibold text-slate-200">Universitas Airlangga</span>
-              </div>
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                <span class="text-slate-400 block mb-1">Status Legalitas</span>
-                <span class="font-semibold text-emerald-400">Resmi Terbit (Kementerian Hukum RI)</span>
-              </div>
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 sm:col-span-2">
-                <span class="text-slate-400 block mb-1">Tim Pencipta</span>
-                <span class="font-semibold text-slate-200 leading-relaxed">
-                  Dwi Rantini, Aditya Naufal Jay Putra, <strong>Joeang Ikhsan Maulana</strong>, Timothy Andreas, Kevin Ario Jeremiah
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass-card p-6 rounded-3xl space-y-4">
-            <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-chart-pie text-cyan-400"></i> Metodologi Statistik Nonparametrik
-            </h3>
-            <div class="grid sm:grid-cols-2 gap-3 text-xs">
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                <strong class="text-indigo-400 block mb-1">Uji Kruskal-Wallis & Dunn</strong>
-                <p class="text-slate-400">Mendeteksi perbedaan signifikan persentase rawat jalan di 8 jenis faskes (Puskesmas & Dokter Praktik berbeda signifikan dari fasilitas lain).</p>
-              </div>
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                <strong class="text-indigo-400 block mb-1">Uji Friedman & Wilcoxon</strong>
-                <p class="text-slate-400">Menguji tren median nakes 2015–2017; lonjakan signifikan terbukti muncul kuat pada perbandingan periode 2017.</p>
-              </div>
-              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 sm:col-span-2">
-                <strong class="text-indigo-400 block mb-1">Korelasi Spearman</strong>
-                <p class="text-slate-400">Menunjukkan relasi asosiatif positif antar ketersediaan faskes (RS, RS Bersalin, Poliklinik, Puskesmas, Pustu, dan Apotek) secara komprehensif.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass-card p-5 rounded-2xl border border-slate-800 flex items-center gap-5">
-            <div class="w-20 h-24 rounded-xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/60 shadow-md">
-              <img src="HKI.png" alt="Sertifikat DJKI" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&q=80'">
-            </div>
-            <div class="text-xs space-y-1">
-              <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 font-semibold text-[10px] inline-block mb-1">
-                Dokumen Resmi DJKI
-              </span>
-              <h4 class="font-bold text-white text-sm">Surat Pencatatan Ciptaan DJKI</h4>
-              <p class="text-slate-400">Nomor Permohonan: <span class="text-slate-300">EC002026056074 (28 April 2026)</span></p>
-              <p class="text-emerald-400 font-medium">Masa Lindung: Berlaku 50 Tahun sejak diumumkan</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION PROYEK UTAMA (4 PROYEK DENGAN GITHUB LINKS) -->
-    <section id="projects" class="max-w-7xl mx-auto px-6">
-      <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Portofolio Unggulan</span>
-        <h2 class="text-3xl font-extrabold text-white">4 Proyek Analisis Data & Machine Learning</h2>
-        <p class="text-xs text-slate-400 mt-1">Eksplorasi ekonometrika, NLP deep learning, social media mining, hingga perancangan sistem pakar.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        
-        <!-- PROYEK 1: IKG INDONESIA 2023 -->
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+    <!-- ============ HKI ============ -->
+    <section id="hki">
+      <div class="container">
+        <div class="section-head split-head reveal">
           <div>
-            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="Rshiny.png" alt="Analisis IKG 2023" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold">
-                RShiny Dashboard (2025)
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Pemodelan ekonometrika dengan <strong>Regresi Linear Berganda OLS</strong> dan segmentasi wilayah 34 provinsi menggunakan <strong>K-Means Clustering</strong> untuk merumuskan kebijakan berbasis data (Data BPS & KemenPPPA 2023).
-              </p>
-              
-              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 font-mono text-[11px] text-slate-300">
-                <span class="text-indigo-400 font-bold block mb-1">// Persamaan Model OLS:</span>
-                IKG = 0.3812 + 0.5361(MTF) + 0.6278(MHPK20) - 0.3866(R_Leg) - 0.2895(R_TPAK)
-              </div>
-
-              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">R² Score</span>
-                  <span class="text-emerald-400 font-bold">88.52%</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">F-Stat</span>
-                  <span class="text-indigo-400 font-bold">44.70</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Klaster</span>
-                  <span class="text-cyan-400 font-bold">k = 3</span>
-                </div>
-              </div>
-
-              <!-- Tombol GitHub IKG -->
-              <div class="mt-4 pt-4 border-t border-slate-800/80">
-                <a href="https://github.com/JIMaulana13/analisis-ikg-2023" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-indigo-600 border border-slate-700 hover:border-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
-                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
-                </a>
-              </div>
-            </div>
+            <span class="eyebrow" style="color:var(--emerald)">02 — Kekayaan Intelektual Resmi</span>
+            <h2>Hak Cipta Kemenkum RI <span class="grad-text">& Poster Riset</span></h2>
           </div>
-          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">R</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">RShiny</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">OLS Regression</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means</span>
-          </div>
+          <div class="stamp"><i class="fa-solid fa-stamp"></i> No. Pencatatan: 001213309 (2026)</div>
         </div>
 
-        <!-- PROYEK 2: ASPECT & EMOTION NLP BENCANA -->
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div class="hki-grid">
+          <div class="card poster reveal">
+            <div class="poster-frame zoomable">
+              <img src="posterHKI.png" alt="Poster Uji Nonparametrik Ketersediaan Layanan" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80'" />
+            </div>
+            <div class="poster-cap">
+              <b>Poster Riset Fasilitas Kesehatan</b>
+              <span>Jenis: Poster Ilmiah</span>
+            </div>
+          </div>
+
           <div>
-            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="NLP.png" alt="Aspect and Emotion Analysis Disaster Response" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-rose-600/90 text-white text-xs font-semibold">
-                Deep Learning & NLP (2026)
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Pemodelan bahasa alami untuk mengklasifikasikan <strong>9 Aspek</strong> dan <strong>6 Kategori Emosi</strong> opini publik terhadap penanganan bencana Gempa M7.7 NTT & Karhutla Kalimantan (2.890 korpus teks X & TikTok).
-              </p>
-              
-              <div class="space-y-2 text-xs">
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-microchip text-rose-400 mt-0.5"></i>
-                  <span><strong>Komparasi 5 Model & Optuna:</strong> Menguji SVM, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan IndoBERT. IndoBERT unggul (Macro-F1 0,359 Aspek & 0,384 Emosi).</span>
-                </div>
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-chart-pie text-amber-400 mt-0.5"></i>
-                  <span><strong>Inferensi Populasi:</strong> Isu gempa didominasi emosi <em>Sadness</em> atas korban (A1), sedangkan isu karhutla didominasi <em>Anger</em> atas penegakan hukum (A7).</span>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Model Utama</span>
-                  <span class="text-indigo-400 font-bold">IndoBERT</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Akurasi Emosi</span>
-                  <span class="text-emerald-400 font-bold">73.53%</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Tuning</span>
-                  <span class="text-rose-400 font-bold">Optuna TPE</span>
-                </div>
-              </div>
-
-              <!-- Tombol GitHub NLP -->
-              <div class="mt-4 pt-4 border-t border-slate-800/80">
-                <a href="https://github.com/JIMaulana13/nlp-analisisemosi" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-rose-600 border border-slate-700 hover:border-rose-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
-                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
-                </a>
+            <div class="card panel reveal">
+              <h3><i style="background:rgba(52,211,153,.14);color:var(--emerald)" class="fa-solid fa-file-contract"></i> Informasi Hak Cipta Terdaftar</h3>
+              <div class="kv-grid">
+                <div class="kv"><small>Pemegang Hak Cipta</small><b>Universitas Airlangga</b></div>
+                <div class="kv"><small>Status Legalitas</small><b style="color:var(--emerald)">Resmi Terbit (Kementerian Hukum RI)</b></div>
+                <div class="kv full"><small>Tim Pencipta</small><b>Dwi Rantini, Aditya Naufal Jay Putra, <span class="grad-text">Joeang Ikhsan Maulana</span>, Timothy Andreas, Kevin Ario Jeremiah</b></div>
               </div>
             </div>
-          </div>
-          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">PyTorch</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">IndoBERT</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Optuna</span>
-          </div>
-        </div>
 
-        <!-- PROYEK 3: SOCIAL MEDIA CLUSTERING (TIKTOK) -->
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
-          <div>
-            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="wordcloud.png" alt="TikTok Social Media Mining Flu A" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-teal-600/90 text-white text-xs font-semibold">
-                Social Media Mining & SNA (2026)
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">Social Media Mining & Clustering: Tren Isu Flu A di TikTok</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Analisis penambangan teks dari ribuan data postingan TikTok (41,3 Juta interaksi) menggunakan <strong>Apify Scraper</strong>, <strong>TF-IDF & K-Means Clustering</strong>, serta pemetaan relasi melalui <strong>SNA</strong>.
-              </p>
-              
-              <div class="space-y-2 text-xs">
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-diagram-project text-teal-400 mt-0.5"></i>
-                  <span><strong>K-Means (k=8) & LDA:</strong> Mengelompokkan spektrum wacana ke dalam 8 topik inti dan mengungkap dominasi konten akun berita.</span>
-                </div>
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-circle-nodes text-sky-400 mt-0.5"></i>
-                  <span><strong>Social Network Analysis (SNA):</strong> Memetakan graf <em>co-occurrence hashtag</em> (958 edge) untuk mendeteksi komunitas dan sentralitas tagar kesehatan.</span>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Cluster</span>
-                  <span class="text-teal-400 font-bold">k = 8</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Interaksi</span>
-                  <span class="text-indigo-400 font-bold">41.3M Likes</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Struktur Graf</span>
-                  <span class="text-cyan-400 font-bold">958 Relasi</span>
-                </div>
-              </div>
-
-              <!-- Tombol GitHub SMA -->
-              <div class="mt-4 pt-4 border-t border-slate-800/80">
-                <a href="https://github.com/JIMaulana13/SocialMediaMining" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-teal-600 border border-slate-700 hover:border-teal-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
-                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
-                </a>
+            <div class="card panel reveal" style="--d:.08s">
+              <h3><i style="background:rgba(76,201,255,.14);color:var(--sky)" class="fa-solid fa-chart-pie"></i> Metodologi Statistik Nonparametrik</h3>
+              <div class="kv-grid">
+                <div class="kv"><strong class="t">Uji Kruskal-Wallis & Dunn</strong><p>Mendeteksi perbedaan signifikan persentase rawat jalan di 8 jenis faskes (Puskesmas & Dokter Praktik berbeda signifikan dari fasilitas lain).</p></div>
+                <div class="kv"><strong class="t">Uji Friedman & Wilcoxon</strong><p>Menguji tren median nakes 2015–2017; lonjakan signifikan terbukti muncul kuat pada perbandingan periode 2017.</p></div>
+                <div class="kv full"><strong class="t">Korelasi Spearman</strong><p>Menunjukkan relasi asosiatif positif antar ketersediaan faskes (RS, RS Bersalin, Poliklinik, Puskesmas, Pustu, dan Apotek) secara komprehensif.</p></div>
               </div>
             </div>
-          </div>
-          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">K-Means & LDA</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">NetworkX</span>
-          </div>
-        </div>
 
-        <!-- PROYEK 4: FINHEALTH UMKM -->
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group">
-          <div>
-            <div class="h-52 w-full bg-slate-800 relative overflow-hidden">
-              <img src="finhealth.jpeg" alt="FinHealth Expert System" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-cyan-600/90 text-white text-xs font-semibold">
-                Expert System & REST API (2025)
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-4">
-              <h3 class="text-xl font-bold text-white">FinHealth: Expert System Kesehatan Finansial UMKM</h3>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Aplikasi web sistem pakar yang menganalisis rasio keuangan, arus kas, dan performa omzet penjualan secara otomatis serta menghasilkan saran perbaikan operasional bagi pelaku UMKM.
-              </p>
-              
-              <div class="space-y-2 text-xs">
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-server text-cyan-400 mt-0.5"></i>
-                  <span>Backend REST API berbasis <strong>Python (Flask)</strong> yang menghubungkan mesin inferensi pakar ke antarmuka pengguna.</span>
-                </div>
-                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2">
-                  <i class="fa-solid fa-check-double text-emerald-400 mt-0.5"></i>
-                  <span>Solusi manajemen keuangan yang sederhana, praktis, dan ramah pengguna non-akuntan.</span>
-                </div>
+            <div class="card cert reveal" style="--d:.16s">
+              <div class="cert-img zoomable">
+                <img src="HKI.png" alt="Sertifikat DJKI" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&q=80'">
               </div>
-
-              <div class="grid grid-cols-3 gap-2 text-center text-xs pt-1">
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Backend</span>
-                  <span class="text-cyan-400 font-bold">Flask API</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Model</span>
-                  <span class="text-indigo-400 font-bold">Rule-Based</span>
-                </div>
-                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-                  <span class="text-slate-400 block text-[10px]">Domain</span>
-                  <span class="text-emerald-400 font-bold">UMKM Finance</span>
-                </div>
+              <div>
+                <span class="badge">Dokumen Resmi DJKI</span>
+                <h4>Surat Pencatatan Ciptaan DJKI</h4>
+                <p>Nomor Permohonan: <b>EC002026056074 (28 April 2026)</b></p>
+                <p style="color:var(--emerald);font-weight:500">Masa Lindung: Berlaku 50 Tahun sejak diumumkan</p>
               </div>
-
-              <!-- Tombol GitHub FinHealth -->
-              <div class="mt-4 pt-4 border-t border-slate-800/80">
-                <a href="https://github.com/JIMaulana13/finhealth-expert-system" target="_blank" class="w-full justify-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-cyan-600 border border-slate-700 hover:border-cyan-500 text-white text-xs font-semibold flex items-center gap-2 transition duration-300">
-                  <i class="fa-brands fa-github text-base"></i> Lihat Repositori Kode
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="p-6 pt-0 flex flex-wrap gap-2 text-xs">
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Python</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Flask</span>
-            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded">Expert System</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION ORGANISASI BERFOTO -->
-    <section id="organisasi" class="max-w-7xl mx-auto px-6">
-      <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Kepemimpinan</span>
-        <h2 class="text-3xl font-extrabold text-white">Pengalaman Organisasi BEM FTMM</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="glass-card rounded-3xl overflow-hidden group">
-          <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="Mandala.jpeg" alt="Menteri Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80'" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-bold">2026 – Sekarang</span>
-          </div>
-          <div class="p-6 space-y-2">
-            <h3 class="text-lg font-bold text-white">Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2026</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.
-            </p>
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl overflow-hidden group">
-          <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="Peta.jpeg" alt="Dirjen Adkesma" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80'" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-amber-400 border border-amber-500/30 text-xs font-bold">Most Dedicated Staff 2025</span>
-          </div>
-          <div class="p-6 space-y-2">
-            <h3 class="text-lg font-bold text-white">Dirjen Kesejahteraan Mahasiswa</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2025</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Mengoordinasikan terkait finansial, Beasiswa, dan Aspek Kesejahteraan Mahasiswa lainnya kepada pihak fakultas.
-            </p>
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl overflow-hidden group">
-          <div class="h-48 overflow-hidden bg-slate-800 relative">
-            <img src="sekbem.jpeg" alt="Sekolah BEM" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-800/90 text-emerald-400 border border-emerald-500/30 text-xs font-bold">Sekbem Adkesma Terbaik 2024</span>
-          </div>
-          <div class="p-6 space-y-2">
-            <h3 class="text-lg font-bold text-white">Sekolah BEM FTMM 2024</h3>
-            <p class="text-xs text-indigo-400 font-medium">Kementerian Adkesma BEM FTMM 2024</p>
-            <p class="text-xs text-slate-300 leading-relaxed pt-1">
-              Aktif dalam praktik advokasi langsung dan dinobatkan sebagai Staf Terbaik Kementerian Adkesma pada Sekolah BEM FTMM 2024.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION KEPANITIAAN BERDASARKAN KELOMPOK PERAN (INTERACTIVE FILTER) -->
-    <section id="kepanitiaan" class="max-w-7xl mx-auto px-6">
-      <div class="mb-8">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Manajemen Acara & Event</span>
-        <h2 class="text-3xl font-extrabold text-white">Alur Pengalaman Kepanitiaan</h2>
-        <p class="text-xs text-slate-400 mt-1">Pilih kategori peran di bawah ini untuk melihat detail tugas dan tanggung jawabnya:</p>
-      </div>
-
-      <div class="flex flex-wrap gap-2.5 mb-10 pb-2 border-b border-slate-800">
-        <button onclick="filterCommittee('all')" class="filter-btn active px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
-          <i class="fa-solid fa-list mr-1"></i> Semua Pengalaman (9)
-        </button>
-        <button onclick="filterCommittee('operator')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
-          <i class="fa-solid fa-headset mr-1"></i> Operator & Multimedia
-        </button>
-        <button onclick="filterCommittee('korlap')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
-          <i class="fa-solid fa-bullhorn mr-1"></i> Koordinasi Lapangan (Korlap)
-        </button>
-        <button onclick="filterCommittee('ketupat')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
-          <i class="fa-solid fa-user-tie mr-1"></i> Ketua Pelaksana
-        </button>
-        <button onclick="filterCommittee('perlengkapan')" class="filter-btn px-4 py-2 rounded-xl border border-slate-700 text-xs font-semibold text-slate-300 transition">
-          <i class="fa-solid fa-boxes-stacked mr-1"></i> Acara & Perlengkapan
-        </button>
-      </div>
-
-      <div id="committee-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 tab-content">
-
-        <!-- 1. EXCEED x NEWTON (Operator) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator & Multimedia</span>
-            <span class="text-[11px] text-slate-400 font-medium">Sept 2026</span>
-          </div>
-          <h3 class="text-base font-bold text-white">EXCEED × NEWTON 2026</h3>
-          <p class="text-xs text-indigo-400 font-medium">Student Inbound Malaysia & Thailand</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Mendukung pelaksanaan inbound 7 universitas mancanegara di FTMM & FST UNAIR, mengoperasikan perangkat audio visual serta menangani kendala teknis secara langsung.
-          </p>
-        </div>
-
-        <!-- 2. ICATAM x I-PACT (Operator) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
-            <span class="text-[11px] text-slate-400 font-medium">Sept 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">ICATAM × I-PACT 2025</h3>
-          <p class="text-xs text-indigo-400 font-medium">International Conference (Univ. Malaya & VIT)</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Operator sistem audio visual 2 hari penuh untuk kebutuhan presentasi narasumber internasional dan kelancaran multimedia konferensi.
-          </p>
-        </div>
-
-        <!-- 3. SMART-INTECH (Operator) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="operator">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-sky-950 border border-sky-800 text-sky-300 text-[11px] font-semibold">Operator Multimedia</span>
-            <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">Seminar Nasional SMART-INTECH</h3>
-          <p class="text-xs text-indigo-400 font-medium">Fakultas Teknologi Maju dan Multidisiplin</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Mengendalikan perangkat presentasi, audio, dan sistem live event untuk mendukung pemaparan narasumber tingkat nasional.
-          </p>
-        </div>
-
-        <!-- 4. KARSA 2026 (Korlap) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Koordinator Divisi</span>
-            <span class="text-[11px] text-slate-400 font-medium">Jun – Ags 2026</span>
-          </div>
-          <h3 class="text-base font-bold text-white">KARSA FTMM 2026</h3>
-          <p class="text-xs text-indigo-400 font-medium">Koordinator Divisi Koordinasi Lapangan</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Memimpin divisi korlap dalam mengatur mobilisasi ratusan maba, alur teknis harian orientasi, serta mitigasi cepat risiko insidental di lapangan.
-          </p>
-        </div>
-
-        <!-- 5. KARSA 2025 (Korlap) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Korlap</span>
-            <span class="text-[11px] text-slate-400 font-medium">Jun – Ags 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">KARSA FTMM 2025</h3>
-          <p class="text-xs text-indigo-400 font-medium">Staff Koordinasi Lapangan</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Mengatur ketertiban 502 mahasiswa baru dari lima program studi FTMM selama orientasi 3 hari dan menjadi jembatan informasi panitia inti.
-          </p>
-        </div>
-
-        <!-- 6. COLAB FTMM 2025 (Korlap) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="korlap">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-indigo-950 border border-indigo-800 text-indigo-300 text-[11px] font-semibold">Staff Korlap</span>
-            <span class="text-[11px] text-slate-400 font-medium">Okt 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">COLAB FTMM 2025</h3>
-          <p class="text-xs text-indigo-400 font-medium">Staff Koordinasi Lapangan</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Mengarahkan alur kegiatan peserta, menjaga ketepatan waktu susunan rundown acara, dan menangani kendala teknis lapangan.
-          </p>
-        </div>
-
-        <!-- 7. Posko Finansial Mahasiswa (Ketua Pelaksana) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="ketupat">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 text-[11px] font-semibold">Ketua Pelaksana</span>
-            <span class="text-[11px] text-slate-400 font-medium">Juni 25 - Jan 26</span>
-          </div>
-          <h3 class="text-base font-bold text-white">Posko Finansial Mahasiswa</h3>
-          <p class="text-xs text-emerald-400 font-medium">Kementerian Adkesma BEM FTMM</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Memimpin perancangan dan operasionalisasi posko advokasi keringanan UKT serta pendampingan beasiswa finansial bagi mahasiswa selama 2 termin penuh.
-          </p>
-        </div>
-
-        <!-- 8. Scholprep x Inspiration (Acara) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="perlengkapan">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-amber-950 border border-amber-800 text-amber-300 text-[11px] font-semibold">Koordinator Acara</span>
-            <span class="text-[11px] text-slate-400 font-medium">Nov 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">Scholprep × Inspiration</h3>
-          <p class="text-xs text-indigo-400 font-medium">Koordinator Divisi Acara</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Menyusun konsep, rundown seminar & pelatihan beasiswa, koordinasi dengan pembicara, serta memandu jalannya acara secara on-time.
-          </p>
-        </div>
-
-        <!-- 9. Synreach & Logistik (Perlengkapan) -->
-        <div class="comm-card glass-card p-6 rounded-2xl space-y-3" data-cat="perlengkapan">
-          <div class="flex justify-between items-start">
-            <span class="px-2.5 py-1 rounded bg-amber-950 border border-amber-800 text-amber-300 text-[11px] font-semibold">Koordinator Perlengkapan</span>
-            <span class="text-[11px] text-slate-400 font-medium">2024 – 2025</span>
-          </div>
-          <h3 class="text-base font-bold text-white">Synreach FTMM, Diskusi Bulanan & BBTM</h3>
-          <p class="text-xs text-indigo-400 font-medium">Koordinator Sub-Divisi Perlengkapan</p>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Bertanggung jawab penuh atas pengadaan, distribusi, dan inventarisasi peralatan Dekan Cup Synreach (7 bulan), 5 sesi Diskusi Bulanan, dan Bring Back The Memory 2024.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION PELATIHAN & PENGEMBANGAN KEPEMIMPINAN (LKMM TD, TM, TL) -->
-    <section id="pelatihan" class="max-w-7xl mx-auto px-6">
-      <div class="mb-10">
-        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Pengembangan Kepemimpinan</span>
-        <h2 class="text-3xl font-extrabold text-white">Jenjang Pelatihan Manajerial Mahasiswa (LKMM)</h2>
-        <p class="text-xs text-slate-400 mt-1">
-          Pengembangan dan pelatihan manajerial resmi tingkat perguruan tinggi yang ditempuh secara berjenjang dari tingkat dasar hingga lanjut.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-teal-500">
-          <div>
-            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
-              <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-teal-950/90 border border-teal-800 text-teal-300 font-semibold">
-                November 2025
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-white">LKMM-TD</h3>
-              <p class="text-xs text-teal-400 font-medium">Tingkat Dasar</p>
-              <p class="text-xs text-slate-300 leading-relaxed pt-1">
-                Mempelajari fondasi kepemimpinan personal, komunikasi interpersonal efektif, dinamika kerja tim, serta pengambilan keputusan dalam organisasi.
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
-              Fokus: Komunikasi & Manajemen Tim
-            </span>
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-sky-500">
-          <div>
-            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
-              <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-sky-950/90 border border-sky-800 text-sky-300 font-semibold">
-                Juni 2026
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-white">LKMM-TM</h3>
-              <p class="text-xs text-sky-400 font-medium">Tingkat Menengah</p>
-              <p class="text-xs text-slate-300 leading-relaxed pt-1">
-                Manajemen organisasi strategis, analisis SWOT, perancangan RPO (Rencana Pengembangan Organisasi), serta studi lapangan solusi bisnis UMKM.
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
-              Fokus: Strategi Organisasi & Riset Lapangan
-            </span>
-          </div>
-        </div>
-
-        <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group border-t-2 border-indigo-500">
-          <div>
-            <div class="h-44 w-full bg-slate-800 relative overflow-hidden">
-              <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              <span class="absolute top-3 left-3 text-[11px] px-2.5 py-0.5 rounded-full bg-indigo-950/90 border border-indigo-800 text-indigo-300 font-semibold">
-                Juli 2026
-              </span>
-            </div>
-            
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-white">LKMM-TL</h3>
-              <p class="text-xs text-indigo-400 font-medium">Tingkat Lanjut</p>
-              <p class="text-xs text-slate-300 leading-relaxed pt-1">
-                Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian&peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.
-              </p>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <span class="text-[11px] text-slate-400 block border-t border-slate-800/80 pt-3">
-              Fokus: Pembuatan Wacana
-            </span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION PENGABDIAN MASYARAKAT & DOKUMENTASI -->
-    <section id="pengmas" class="max-w-7xl mx-auto px-6">
-      <div class="mb-10">
-        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">Dampak Sosial</span>
-        <h2 class="text-3xl font-extrabold text-white">Dokumentasi Pengabdian Masyarakat</h2>
-      </div>
-
-      <div class="glass-card p-8 rounded-3xl space-y-8">
-        <div class="grid lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-7 space-y-4">
-            <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
-              Mojokerto • 2025 – Sekarang
-            </span>
-            <h3 class="text-2xl font-bold text-white">Digitalisasi & Website Promosi UMKM Dawarblandong</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Program pendampingan dan digital branding bagi pelaku UMKM di Kecamatan Dawarblandong, Kabupaten Mojokerto. Meliputi perancangan etalase website promosi terpadu, pembuatan materi katalog digital, dan pelatihan penggunaan platform daring secara berkesinambungan.
-            </p>
-            <div class="flex flex-wrap gap-2 text-xs">
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Pemberdayaan Masyarakat</span>
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Web Development</span>
-              <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Literasi Digital UMKM</span>
-            </div>
-          </div>
-          
-          <div class="lg:col-span-5 grid grid-cols-2 gap-3">
-            <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="pengmas1.JPG" alt="UMKM Dawarblandong 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80'" />
-            </div>
-            <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative">
-              <img src="pengmas2.JPG" alt="UMKM Dawarblandong 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80'" />
-            </div>
-            <div class="rounded-xl overflow-hidden h-36 bg-slate-800 group relative col-span-2">
-              <img src="pengmas3.JPG" alt="Diskusi Tim Pengmas" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80'" />
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER / KONTAK -->
-    <footer id="contact" class="border-t border-slate-800/80 bg-slate-950 py-16">
-      <div class="max-w-7xl mx-auto px-6 text-center space-y-6">
-        <h2 class="text-2xl font-bold text-white">Mari Berdiskusi & Berkolaborasi</h2>
-        <p class="text-xs text-slate-400 max-w-md mx-auto">
-          Terbuka untuk riset pemodelan sains data, inisiasi program kemahasiswaan, maupun proyek pengembangan web lainnya.
-        </p>
-        <div class="flex justify-center items-center gap-4 pt-2">
-          <a href="mailto:joeang.ikhsan.maulana-2024@ftmm.unair.ac.id" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 transition shadow-lg shadow-indigo-600/30">
-            <i class="fa-solid fa-envelope"></i> Kirim Pesan Email
-          </a>
-          <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-semibold flex items-center gap-2 transition">
-            <i class="fa-brands fa-linkedin text-sky-400"></i> Hubungkan di LinkedIn
-          </a>
+    <!-- ============ PROYEK ============ -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">03 — Portofolio Unggulan</span>
+          <h2>4 Proyek Analisis Data <span class="grad-text">& Machine Learning</span></h2>
+          <p>Eksplorasi ekonometrika, NLP deep learning, social media mining, hingga perancangan expert system.</p>
         </div>
-        <p class="text-[11px] text-slate-600 pt-8">
-          © 2026 Joeang Ikhsan Maulana • Dibuat dengan senyum & Rum Regal Madani
-        </p>
+
+        <div class="project-grid">
+
+          <!-- PROYEK 1 -->
+          <article class="card project tilt-soft reveal">
+            <div class="project-media">
+              <img src="Rshiny.png" alt="Analisis IKG 2023" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'">
+              <span class="p-tag" style="background:rgba(79,70,229,.9)">RShiny Dashboard (2025)</span>
+              <span class="p-num">01</span>
+            </div>
+            <div class="project-body">
+              <h3>Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023</h3>
+              <p>Pemodelan ekonometrika dengan <strong>Regresi Linear Berganda OLS</strong> dan segmentasi wilayah 34 provinsi menggunakan <strong>K-Means Clustering</strong> untuk merumuskan kebijakan berbasis data (Data BPS & KemenPPPA 2023).</p>
+              <div class="code-box"><em>// Persamaan Model OLS:</em>IKG = 0.3812 + 0.5361(MTF) + 0.6278(MHPK20) - 0.3866(R_Leg) - 0.2895(R_TPAK)</div>
+              <div class="metrics">
+                <div class="metric"><small>R² Score</small><b style="color:var(--emerald)">88.52%</b></div>
+                <div class="metric"><small>F-Stat</small><b style="color:var(--indigo)">44.70</b></div>
+                <div class="metric"><small>Klaster</small><b style="color:var(--sky)">k = 3</b></div>
+              </div>
+              <a href="https://github.com/JIMaulana13/analisis-ikg-2023" target="_blank" rel="noopener" class="gh-btn" style="--hc:#4f46e5"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="project-foot"><span>R</span><span>RShiny</span><span>OLS Regression</span><span>K-Means</span></div>
+          </article>
+
+          <!-- PROYEK 2 -->
+          <article class="card project tilt-soft reveal" style="--d:.1s">
+            <div class="project-media">
+              <img src="NLP.png" alt="Aspect and Emotion Analysis Disaster Response" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'">
+              <span class="p-tag" style="background:rgba(225,29,72,.9)">Deep Learning & NLP (2026)</span>
+              <span class="p-num">02</span>
+            </div>
+            <div class="project-body">
+              <h3>Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)</h3>
+              <p>Pemodelan bahasa alami untuk mengklasifikasikan <strong>9 Aspek</strong> dan <strong>6 Kategori Emosi</strong> opini publik terhadap penanganan bencana Gempa M7.7 NTT & Karhutla Kalimantan (2.890 korpus teks X & TikTok).</p>
+              <div class="points">
+                <div class="point"><i class="fa-solid fa-microchip" style="color:var(--rose)"></i><span><strong>Komparasi 5 Model & Optuna:</strong> Menguji SVM, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan IndoBERT. IndoBERT unggul (Macro-F1 0,359 Aspek & 0,384 Emosi).</span></div>
+                <div class="point"><i class="fa-solid fa-chart-pie" style="color:var(--amber)"></i><span><strong>Inferensi Populasi:</strong> Isu gempa didominasi emosi <em>Sadness</em> atas korban (A1), sedangkan isu karhutla didominasi <em>Anger</em> atas penegakan hukum (A7).</span></div>
+              </div>
+              <div class="metrics">
+                <div class="metric"><small>Model Utama</small><b style="color:var(--indigo)">IndoBERT</b></div>
+                <div class="metric"><small>Akurasi Emosi</small><b style="color:var(--emerald)">73.53%</b></div>
+                <div class="metric"><small>Tuning</small><b style="color:var(--rose)">Optuna TPE</b></div>
+              </div>
+              <a href="https://github.com/JIMaulana13/nlp-analisisemosi" target="_blank" rel="noopener" class="gh-btn" style="--hc:#e11d48"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="project-foot"><span>PyTorch</span><span>IndoBERT</span><span>Optuna</span></div>
+          </article>
+
+          <!-- PROYEK 3 -->
+          <article class="card project tilt-soft reveal">
+            <div class="project-media">
+              <img src="wordcloud.png" alt="TikTok Social Media Mining Flu A" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
+              <span class="p-tag" style="background:rgba(13,148,136,.9)">Social Media Mining & SNA (2026)</span>
+              <span class="p-num">03</span>
+            </div>
+            <div class="project-body">
+              <h3>Social Media Mining & Clustering: Tren Isu Flu A di TikTok</h3>
+              <p>Analisis penambangan teks dari ribuan data postingan TikTok (41,3 Juta interaksi) menggunakan <strong>Apify Scraper</strong>, <strong>TF-IDF & K-Means Clustering</strong>, serta pemetaan relasi melalui <strong>SNA</strong>.</p>
+              <div class="points">
+                <div class="point"><i class="fa-solid fa-diagram-project" style="color:var(--teal)"></i><span><strong>K-Means (k=8) & LDA:</strong> Mengelompokkan spektrum wacana ke dalam 8 topik inti dan mengungkap dominasi konten akun berita.</span></div>
+                <div class="point"><i class="fa-solid fa-circle-nodes" style="color:var(--sky)"></i><span><strong>Social Network Analysis (SNA):</strong> Memetakan graf <em>co-occurrence hashtag</em> (958 edge) untuk mendeteksi komunitas dan sentralitas tagar kesehatan.</span></div>
+              </div>
+              <div class="metrics">
+                <div class="metric"><small>Klaster</small><b style="color:var(--teal)">k = 8</b></div>
+                <div class="metric"><small>Interaksi</small><b style="color:var(--indigo)">41.3M Likes</b></div>
+                <div class="metric"><small>Struktur Graf</small><b style="color:var(--sky)">958 Relasi</b></div>
+              </div>
+              <a href="https://github.com/JIMaulana13/SocialMediaMining" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0d9488"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="project-foot"><span>Python</span><span>K-Means & LDA</span><span>NetworkX</span></div>
+          </article>
+
+          <!-- PROYEK 4 -->
+          <article class="card project tilt-soft reveal" style="--d:.1s">
+            <div class="project-media">
+              <img src="finhealth.jpeg" alt="FinHealth Expert System" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'">
+              <span class="p-tag" style="background:rgba(8,145,178,.9)">Expert System & REST API (2025)</span>
+              <span class="p-num">04</span>
+            </div>
+            <div class="project-body">
+              <h3>FinHealth: Expert System Kesehatan Finansial UMKM</h3>
+              <p>Aplikasi web expert system yang menganalisis rasio keuangan, arus kas, dan performa omzet penjualan secara otomatis serta menghasilkan saran perbaikan operasional bagi pelaku UMKM.</p>
+              <div class="points">
+                <div class="point"><i class="fa-solid fa-server" style="color:var(--sky)"></i><span>Backend REST API berbasis <strong>Python (Flask)</strong> yang menghubungkan mesin inferensi pakar ke antarmuka pengguna.</span></div>
+                <div class="point"><i class="fa-solid fa-check-double" style="color:var(--emerald)"></i><span>Solusi manajemen keuangan yang sederhana, praktis, dan ramah pengguna non-akuntan.</span></div>
+              </div>
+              <div class="metrics">
+                <div class="metric"><small>Backend</small><b style="color:var(--sky)">Flask API</b></div>
+                <div class="metric"><small>Model</small><b style="color:var(--indigo)">Rule-Based</b></div>
+                <div class="metric"><small>Domain</small><b style="color:var(--emerald)">UMKM Finance</b></div>
+              </div>
+              <a href="https://github.com/JIMaulana13/finhealth-expert-system" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0891b2"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="project-foot"><span>Python</span><span>Flask</span><span>Expert System</span></div>
+          </article>
+
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- ============ ORGANISASI ============ -->
+    <section id="organisasi">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">04 — Kepemimpinan</span>
+          <h2>Pengalaman Organisasi <span class="grad-text">BEM FTMM</span></h2>
+        </div>
+
+        <div class="org-grid">
+          <article class="card org reveal">
+            <div class="org-media">
+              <img src="Mandala.jpeg" alt="Menteri Adkesma" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80'" />
+              <span class="org-pill" style="background:#4f46e5;color:#fff">2026 – Sekarang</span>
+            </div>
+            <div class="org-body">
+              <h3>Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
+              <div class="sub">Kementerian Adkesma BEM FTMM 2026 </div>
+              <p>Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.</p>
+            </div>
+          </article>
+
+          <article class="card org reveal" style="--d:.1s">
+            <div class="org-media">
+              <img src="Peta.jpeg" alt="Dirjen Adkesma" onerror="this.src='https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80'" />
+              <span class="org-pill" style="background:rgba(10,12,24,.85);color:var(--amber);border:1px solid rgba(251,191,36,.35)"><i class="fa-solid fa-trophy"></i> Most Dedicated Staff 2025</span>
+            </div>
+            <div class="org-body">
+              <h3>Dirjen Kesejahteraan Mahasiswa</h3>
+              <div class="sub">Kementerian Adkesma BEM FTMM 2025</div>
+              <p>Mengoordinasikan terkait finansial, beasiswa, dan aspek kesejahteraan mahasiswa lainnya kepada pihak fakultas.</p>
+            </div>
+          </article>
+
+          <article class="card org reveal" style="--d:.2s">
+            <div class="org-media">
+              <img src="sekbem.jpeg" alt="Sekolah BEM" />
+              <span class="org-pill" style="background:rgba(10,12,24,.85);color:var(--emerald);border:1px solid rgba(52,211,153,.35)"><i class="fa-solid fa-award"></i> Sekbem Adkesma Terbaik 2024</span>
+            </div>
+            <div class="org-body">
+              <h3>Sekolah BEM FTMM 2024</h3>
+              <div class="sub">Kementerian Adkesma BEM FTMM 2024</div>
+              <p>Aktif dalam praktik advokasi langsung dan menjadi Staf Terbaik Kementerian Adkesma pada Sekolah BEM FTMM 2024.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KEPANITIAAN ============ -->
+    <section id="kepanitiaan">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">05 — Manajemen Acara & Event</span>
+          <h2>Alur Pengalaman <span class="grad-text">Kepanitiaan</span></h2>
+          <p>Pilih kategori peran di bawah ini untuk melihat detail tugas dan tanggung jawabnya.</p>
+        </div>
+
+        <div class="filters reveal" role="tablist">
+          <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-list"></i> Semua Pengalaman <span class="count">9</span></button>
+          <button class="filter-btn" data-filter="operator"><i class="fa-solid fa-headset"></i> Operator & Multimedia <span class="count">3</span></button>
+          <button class="filter-btn" data-filter="korlap"><i class="fa-solid fa-bullhorn"></i> Koordinasi Lapangan <span class="count">3</span></button>
+          <button class="filter-btn" data-filter="ketupat"><i class="fa-solid fa-user-tie"></i> Ketua Pelaksana <span class="count">1</span></button>
+          <button class="filter-btn" data-filter="perlengkapan"><i class="fa-solid fa-boxes-stacked"></i> Acara & Perlengkapan <span class="count">2</span></button>
+        </div>
+
+        <div class="comm-grid" id="commGrid">
+
+          <article class="card comm-card show" data-cat="operator">
+            <div class="comm-top"><span class="role sky">Operator & Multimedia</span><span class="date">Sept 2026</span></div>
+            <h3>EXCEED × NEWTON 2026</h3>
+            <div class="sub">Student Inbound Malaysia & Thailand</div>
+            <p>Mendukung pelaksanaan inbound 7 universitas mancanegara di FTMM & FST UNAIR, mengoperasikan perangkat audio visual serta menangani kendala teknis secara langsung.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="operator">
+            <div class="comm-top"><span class="role sky">Operator Multimedia</span><span class="date">Sept 2025</span></div>
+            <h3>ICATAM × I-PACT 2025</h3>
+            <div class="sub">International Conference (Univ. Malaya & VIT)</div>
+            <p>Operator sistem audio visual 2 hari penuh untuk kebutuhan presentasi narasumber internasional dan kelancaran multimedia konferensi.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="operator">
+            <div class="comm-top"><span class="role sky">Operator Multimedia</span><span class="date">Okt 2025</span></div>
+            <h3>Seminar Nasional SMART-INTECH</h3>
+            <div class="sub">Fakultas Teknologi Maju dan Multidisiplin</div>
+            <p>Mengendalikan perangkat presentasi, audio, dan sistem live event untuk mendukung pemaparan narasumber tingkat nasional.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="korlap">
+            <div class="comm-top"><span class="role ind">Koordinator Divisi</span><span class="date">Jun – Ags 2026</span></div>
+            <h3>KARSA FTMM 2026</h3>
+            <div class="sub">Koordinator Divisi Koordinasi Lapangan</div>
+            <p>Memimpin divisi korlap dalam mengatur mobilisasi ratusan maba, alur teknis harian orientasi, serta mitigasi cepat risiko insidental di lapangan.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="korlap">
+            <div class="comm-top"><span class="role ind">Staff Korlap</span><span class="date">Jun – Ags 2025</span></div>
+            <h3>KARSA FTMM 2025</h3>
+            <div class="sub">Staff Koordinasi Lapangan</div>
+            <p>Mengatur ketertiban 502 mahasiswa baru dari lima program studi FTMM selama orientasi 3 hari dan menjadi jembatan informasi panitia inti.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="korlap">
+            <div class="comm-top"><span class="role ind">Staff Korlap</span><span class="date">Okt 2025</span></div>
+            <h3>COLAB FTMM 2025</h3>
+            <div class="sub">Staff Koordinasi Lapangan</div>
+            <p>Mengarahkan alur kegiatan peserta, menjaga ketepatan waktu susunan rundown acara, dan menangani kendala teknis lapangan.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="ketupat">
+            <div class="comm-top"><span class="role emr">Ketua Pelaksana</span><span class="date">Juni 25 - Jan 26</span></div>
+            <h3>Posko Finansial Mahasiswa</h3>
+            <div class="sub g">Kementerian Adkesma BEM FTMM</div>
+            <p>Memimpin perancangan dan operasionalisasi posko advokasi keringanan UKT serta pendampingan beasiswa finansial bagi mahasiswa selama 2 termin penuh.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="perlengkapan">
+            <div class="comm-top"><span class="role amb">Koordinator Acara</span><span class="date">Nov 2025</span></div>
+            <h3>Scholprep × Inspiration</h3>
+            <div class="sub">Koordinator Divisi Acara</div>
+            <p>Menyusun konsep, rundown seminar & pelatihan beasiswa, koordinasi dengan pembicara, serta memandu jalannya acara secara on-time.</p>
+          </article>
+
+          <article class="card comm-card show" data-cat="perlengkapan">
+            <div class="comm-top"><span class="role amb">Koordinator Perlengkapan</span><span class="date">2024 – 2025</span></div>
+            <h3>Synreach FTMM, Diskusi Bulanan & BBTM</h3>
+            <div class="sub">Koordinator Sub-Divisi Perlengkapan</div>
+            <p>Bertanggung jawab penuh atas pengadaan, distribusi, dan inventarisasi peralatan Dekan Cup Synreach (7 bulan), 5 sesi Diskusi Bulanan, dan Bring Back The Memory 2024.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PELATIHAN ============ -->
+    <section id="pelatihan">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">06 — Pengembangan Kepemimpinan</span>
+          <h2>Jenjang Pelatihan Manajerial <span class="grad-text">Mahasiswa (LKMM)</span></h2>
+          <p>Pengembangan dan pelatihan manajerial resmi tingkat perguruan tinggi yang ditempuh secara berjenjang dari tingkat dasar hingga lanjut.</p>
+        </div>
+
+        <div class="steps">
+          <article class="card step reveal" style="--c:#2dd4bf">
+            <div>
+              <div class="step-media">
+                <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar">
+                <span class="step-date">November 2025</span>
+                <span class="step-lvl">TD</span>
+              </div>
+              <div class="step-body">
+                <h3>LKMM-TD</h3>
+                <div class="sub">Tingkat Dasar</div>
+                <p>Mempelajari fondasi kepemimpinan personal, komunikasi interpersonal efektif, dinamika kerja tim, serta pengambilan keputusan dalam organisasi.</p>
+              </div>
+            </div>
+            <div class="step-foot">Fokus: <b>Komunikasi & Manajemen Tim</b></div>
+          </article>
+
+          <article class="card step reveal" style="--c:#4cc9ff;--d:.1s">
+            <div>
+              <div class="step-media">
+                <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah">
+                <span class="step-date">Juni 2026</span>
+                <span class="step-lvl">TM</span>
+              </div>
+              <div class="step-body">
+                <h3>LKMM-TM</h3>
+                <div class="sub">Tingkat Menengah</div>
+                <p>Manajemen organisasi strategis, analisis SWOT, perancangan RPO (Rencana Pengembangan Organisasi), serta studi lapangan solusi bisnis UMKM.</p>
+              </div>
+            </div>
+            <div class="step-foot">Fokus: <b>Strategi Organisasi & Riset Lapangan</b></div>
+          </article>
+
+          <article class="card step reveal" style="--c:#8b8fff;--d:.2s">
+            <div>
+              <div class="step-media">
+                <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut">
+                <span class="step-date">Juli 2026</span>
+                <span class="step-lvl">TL</span>
+              </div>
+              <div class="step-body">
+                <h3>LKMM-TL</h3>
+                <div class="sub">Tingkat Lanjut</div>
+                <p>Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian&peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.</p>
+              </div>
+            </div>
+            <div class="step-foot">Fokus: <b>Pembuatan Wacana</b></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PENGABDIAN ============ -->
+    <section id="pengmas">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow" style="color:var(--amber)">07 — Dampak Sosial</span>
+          <h2>Dokumentasi <span class="grad-text">Pengabdian Masyarakat</span></h2>
+        </div>
+
+        <div class="card pengmas reveal">
+          <div class="pengmas-grid">
+            <div>
+              <span class="loc"><i class="fa-solid fa-location-dot"></i> Mojokerto • 2025 – Sekarang</span>
+              <h3>Digitalisasi & Website Promosi UMKM Dawarblandong</h3>
+              <p>Program pendampingan dan digital branding bagi pelaku UMKM di Kecamatan Dawarblandong, Kabupaten Mojokerto. Meliputi perancangan etalase website promosi terpadu, pembuatan materi katalog digital, dan pelatihan penggunaan platform daring secara berkesinambungan.</p>
+              <div class="chips">
+                <span class="chip">Pemberdayaan Masyarakat</span><span class="chip">Web Development</span><span class="chip">Literasi Digital UMKM</span>
+              </div>
+            </div>
+            <div class="gallery">
+              <figure class="zoomable"><img src="pengmas1.JPG" alt="UMKM Dawarblandong 1" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80'" /></figure>
+              <figure class="zoomable"><img src="pengmas2.JPG" alt="UMKM Dawarblandong 2" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80'" /></figure>
+              <figure class="zoomable"><img src="pengmas3.JPG" alt="Diskusi Tim Pengmas" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80'" /></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- SCRIPT DINAMIS -->
+  <!-- ============ FOOTER ============ -->
+  <footer id="contact">
+    <div class="container">
+      <div class="cta reveal">
+        <h2>Mari Berdiskusi & <span class="grad-text">Berkolaborasi</span></h2>
+        <p>Terbuka untuk riset pemodelan sains data, inisiasi program kemahasiswaan, maupun proyek pengembangan web lainnya.</p>
+        <div class="cta-row">
+          <a href="mailto:joeang.ikhsan.maulana-2024@ftmm.unair.ac.id" class="btn primary magnetic"><i class="fa-solid fa-envelope"></i> Kirim Pesan Email</a>
+          <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" rel="noopener" class="btn magnetic"><i class="fa-brands fa-linkedin" style="color:var(--sky)"></i> Hubungkan di LinkedIn</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Joeang Ikhsan Maulana</span>
+        <span>Dibuat dengan senyum & Rum Regal Madani</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Kembali ke atas"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau gambar">
+    <button aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    <img alt="" />
+  </div>
+
   <script>
-    // 1. Reading Progress Bar & Dynamic Header Effect on Scroll
-    window.addEventListener('scroll', () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+    (() => {
+      const $ = (s, c = document) => c.querySelector(s);
+      const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-      const nav = document.getElementById('main-nav');
-      if (winScroll > 40) {
-        nav.classList.add('nav-scrolled');
-      } else {
-        nav.classList.remove('nav-scrolled');
-      }
-    });
+      /* 1. Scroll progress, navbar state, back-to-top */
+      const progress = $('#progress'), nav = $('#nav'), toTop = $('#toTop');
+      const onScroll = () => {
+        const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+        progress.style.width = (y / h * 100) + '%';
+        nav.classList.toggle('scrolled', y > 40);
+        toTop.classList.toggle('show', y > 700);
+      };
+      addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // 2. Filter Interaktif Kelompok Kepanitiaan
-    function filterCommittee(category) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      /* 2. Mobile menu */
+      const burger = $('#burger'), menu = $('#mobileMenu');
+      const toggleMenu = (open) => {
+        burger.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      burger.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
+      $$('a', menu).forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 
-      const cards = document.querySelectorAll('.comm-card');
-      const container = document.getElementById('committee-grid');
-      
-      container.classList.remove('tab-content');
-      void container.offsetWidth;
-      container.classList.add('tab-content');
+      /* 3. Scroll-spy */
+      const links = $$('.nav-links a');
+      const spy = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      $$('main section[id]').forEach(s => spy.observe(s));
 
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-cat') === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+      /* 4. Reveal on scroll */
+      const rev = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } });
+      }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+      $$('.reveal').forEach(el => rev.observe(el));
+
+      /* 5. Count-up */
+      const cnt = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const el = e.target, to = +el.dataset.count; let t0;
+          const step = (t) => {
+            t0 ??= t; const p = Math.min((t - t0) / 1200, 1);
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          };
+          if (!reduce) { el.textContent = '0'; requestAnimationFrame(step); }
+          cnt.unobserve(el);
+        });
       });
-    }
+      $$('[data-count]').forEach(el => cnt.observe(el));
+
+      /* 6. Typewriter */
+      const roles = ['Data Scientist in the making', 'Machine Learning & NLP Enthusiast', 'Statistician — R & Python', 'Menteri Advokasi Mahasiswa FTMM', 'Web Developer untuk UMKM'];
+      const out = $('#typed');
+      if (reduce) { out.textContent = roles[0]; }
+      else {
+        let r = 0, c = 0, del = false;
+        const tick = () => {
+          const w = roles[r];
+          out.textContent = w.slice(0, c);
+          if (!del && c === w.length) { del = true; return setTimeout(tick, 1600); }
+          if (del && c === 0) { del = false; r = (r + 1) % roles.length; }
+          c += del ? -1 : 1;
+          setTimeout(tick, del ? 28 : 65);
+        };
+        tick();
+      }
+
+      /* 7. Cursor glow, card spotlight, tilt, magnetic buttons */
+      if (fine) {
+        const glow = $('#cursorGlow');
+        addEventListener('pointermove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
+
+        document.addEventListener('pointermove', e => {
+          const card = e.target.closest?.('.card');
+          if (!card) return;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        }, { passive: true });
+
+        const attachTilt = (el, max) => {
+          el.addEventListener('pointermove', e => {
+            const r = el.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+            el.style.transform = `perspective(900px) rotateY(${x * max}deg) rotateX(${-y * max}deg) translateY(-4px)`;
+          });
+          el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+        };
+        attachTilt($('#tilt'), 10);
+        $$('.tilt-soft').forEach(el => attachTilt(el, 3));
+
+        $$('.magnetic').forEach(b => {
+          b.addEventListener('pointermove', e => {
+            const r = b.getBoundingClientRect();
+            b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .22}px, ${(e.clientY - r.top - r.height / 2) * .3}px)`;
+          });
+          b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+        });
+      }
+
+      /* 8. Committee filter */
+      const fbtns = $$('.filter-btn'), cards = $$('.comm-card');
+      fbtns.forEach(btn => btn.addEventListener('click', () => {
+        fbtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter; let i = 0;
+        cards.forEach(card => {
+          const match = f === 'all' || card.dataset.cat === f;
+          card.hidden = !match;
+          card.classList.remove('show');
+          if (match) {
+            card.style.setProperty('--i', i++);
+            void card.offsetWidth;
+            card.classList.add('show');
+          }
+        });
+      }));
+
+      /* 9. Lightbox */
+      const lb = $('#lightbox'), lbImg = $('img', lb);
+      $$('.zoomable').forEach(z => z.addEventListener('click', () => {
+        const img = $('img', z); if (!img) return;
+        lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt;
+        lb.classList.add('open'); document.body.style.overflow = 'hidden';
+      }));
+      const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+      lb.addEventListener('click', closeLb);
+      addEventListener('keydown', e => { if (e.key === 'Escape') { closeLb(); toggleMenu(false); } });
+    })();
   </script>
 </body>
 </html>
