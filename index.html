@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joeang Ikhsan Maulana | Data Science & Leadership Portfolio</title>
   <meta name="description" content="Portofolio Joeang Ikhsan Maulana — mahasiswa Teknologi Sains Data UNAIR: statistika terapan, machine learning, dan kepemimpinan advokasi mahasiswa." />
-  <meta name="theme-color" content="#06070d" />
+  <meta name="theme-color" content="#05060b" />
 
   <link rel="icon" href="logo.jpg" type="image/png">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ============ DESIGN TOKENS ============ */
     :root {
-      --bg: #06070d;
-      --bg-2: #0b0d18;
-      --surface: rgba(255,255,255,.035);
-      --surface-2: rgba(255,255,255,.06);
-      --line: rgba(255,255,255,.08);
+      --bg: #05060b;
+      --bg-2: #0a0c16;
+      --surface: rgba(255,255,255,.032);
+      --surface-2: rgba(255,255,255,.065);
+      --line: rgba(255,255,255,.075);
       --line-2: rgba(255,255,255,.16);
-      --text: #eef0f7;
-      --muted: #9aa1b6;
-      --dim: #667089;
+      --text: #f1f3f9;
+      --muted: #9aa2b8;
+      --dim: #646e87;
 
       --indigo: #7c83ff;
       --sky: #4cc9ff;
@@ -34,7 +34,8 @@
       --amber: #fbbf24;
       --emerald: #34d399;
 
-      --grad: linear-gradient(120deg, #8b8fff 0%, #4cc9ff 50%, #2dd4bf 100%);
+      --grad: linear-gradient(120deg, #8b8fff 0%, #4cc9ff 48%, #2dd4bf 100%);
+      --grad-hot: linear-gradient(120deg, #a78bfa 0%, #38bdf8 50%, #34d399 100%);
       --radius: 24px;
       --radius-sm: 14px;
       --ease: cubic-bezier(.22,1,.36,1);
@@ -57,57 +58,82 @@
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
     ::selection { background: var(--indigo); color: #fff; }
-    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar { width: 9px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: #232744; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #222742; border-radius: 10px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--indigo); }
 
-    .container { width: min(1200px, 100% - 40px); margin-inline: auto; }
-    section { padding-block: clamp(70px, 10vw, 130px); position: relative; }
+    .container { width: min(1220px, 100% - 40px); margin-inline: auto; }
+    section { padding-block: clamp(74px, 10vw, 134px); position: relative; }
 
-    /* ============ BACKGROUND ============ */
-    .bg-aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+    /* ============ CINEMATIC INTRO LOADER ============ */
+    .preloader {
+      position: fixed; inset: 0; z-index: 999; background: #04050a;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      transition: opacity .65s var(--ease), visibility .65s var(--ease), transform .65s var(--ease);
+    }
+    .preloader.done { opacity: 0; visibility: hidden; transform: scale(1.04); pointer-events: none; }
+    .pre-logo {
+      width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center;
+      font-family: var(--display); font-weight: 700; font-size: 22px; color: #fff;
+      background: linear-gradient(135deg, #4f46e5, #22d3ee);
+      box-shadow: 0 0 40px rgba(79,70,229,.6);
+      animation: pulseLogo 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes pulseLogo { to { transform: scale(1.08) rotate(-4deg); box-shadow: 0 0 60px rgba(34,211,238,.7); } }
+    .pre-bar { width: 160px; height: 3px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .pre-bar i { display: block; height: 100%; width: 0; background: var(--grad); animation: loadBar .7s var(--ease) forwards; }
+    @keyframes loadBar { to { width: 100%; } }
+    .pre-txt { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+    /* ============ BACKGROUND & NEURAL CANVAS ============ */
+    #neuralCanvas {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: -1; pointer-events: none; opacity: .55;
+    }
+    .bg-aurora { position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none; }
     .bg-aurora i {
-      position: absolute; border-radius: 50%; filter: blur(110px); opacity: .5;
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: .45;
       animation: float 22s ease-in-out infinite alternate;
     }
-    .bg-aurora i:nth-child(1) { width: 520px; height: 520px; background: #4338ca; top: -10%; left: -8%; }
-    .bg-aurora i:nth-child(2) { width: 460px; height: 460px; background: #0891b2; top: 30%; right: -10%; animation-delay: -7s; opacity: .35; }
-    .bg-aurora i:nth-child(3) { width: 420px; height: 420px; background: #0f766e; bottom: -10%; left: 30%; animation-delay: -14s; opacity: .3; }
+    .bg-aurora i:nth-child(1) { width: 560px; height: 560px; background: #4338ca; top: -12%; left: -8%; }
+    .bg-aurora i:nth-child(2) { width: 480px; height: 480px; background: #0891b2; top: 28%; right: -10%; animation-delay: -7s; opacity: .32; }
+    .bg-aurora i:nth-child(3) { width: 440px; height: 440px; background: #0f766e; bottom: -12%; left: 28%; animation-delay: -14s; opacity: .28; }
     @keyframes float {
       0% { transform: translate(0,0) scale(1); }
       100% { transform: translate(60px,-50px) scale(1.15); }
     }
     .bg-grid {
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
       background-image:
         linear-gradient(var(--line) 1px, transparent 1px),
         linear-gradient(90deg, var(--line) 1px, transparent 1px);
       background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 20%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, #000 20%, transparent 75%);
-      opacity: .35;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 15%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 15%, transparent 75%);
+      opacity: .32;
     }
     .cursor-glow {
-      position: fixed; width: 460px; height: 460px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,131,255,.14), transparent 65%);
+      position: fixed; width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,131,255,.15), rgba(76,201,255,.05) 40%, transparent 68%);
       pointer-events: none; z-index: -1; transform: translate(-50%,-50%);
       left: 50%; top: 30%; transition: opacity .3s;
     }
     #progress {
-      position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 100;
-      background: var(--grad); box-shadow: 0 0 14px rgba(76,201,255,.7);
+      position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 120;
+      background: var(--grad); box-shadow: 0 0 16px rgba(76,201,255,.85);
     }
 
     /* ============ NAVBAR ============ */
     .nav-wrap { position: fixed; top: 16px; left: 0; right: 0; z-index: 90; display: flex; justify-content: center; padding-inline: 16px; }
     .nav {
-      display: flex; align-items: center; gap: 8px; width: min(1100px, 100%);
-      padding: 8px 8px 8px 14px; border-radius: 999px;
-      background: rgba(10,12,24,.55); backdrop-filter: blur(18px) saturate(1.4);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      display: flex; align-items: center; gap: 6px; width: min(1160px, 100%);
+      padding: 8px 10px 8px 14px; border-radius: 999px;
+      background: rgba(10,12,24,.58); backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
       border: 1px solid var(--line); transition: all .4s var(--ease);
     }
-    .nav.scrolled { background: rgba(8,10,20,.82); border-color: var(--line-2); box-shadow: 0 10px 40px rgba(0,0,0,.45); }
+    .nav.scrolled { background: rgba(7,9,19,.86); border-color: var(--line-2); box-shadow: 0 14px 44px rgba(0,0,0,.55); }
     .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
     .brand-mark {
       width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center;
@@ -120,16 +146,27 @@
     .brand-text span { display: block; font-size: 11px; color: var(--muted); }
     .nav-links { display: flex; gap: 2px; }
     .nav-links a {
-      position: relative; padding: 8px 13px; border-radius: 999px;
-      font-size: 13px; font-weight: 500; color: var(--muted); transition: color .25s, background .25s;
+      position: relative; padding: 8px 12px; border-radius: 999px;
+      font-size: 12.5px; font-weight: 500; color: var(--muted); transition: color .25s, background .25s;
     }
     .nav-links a:hover { color: var(--text); background: var(--surface-2); }
-    .nav-links a.active { color: #fff; background: rgba(124,131,255,.18); box-shadow: inset 0 0 0 1px rgba(124,131,255,.35); }
+    .nav-links a.active {
+      color: #fff;
+      background: linear-gradient(120deg, rgba(124,131,255,.22), rgba(76,201,255,.15));
+      box-shadow: inset 0 0 0 1px rgba(124,131,255,.45), 0 4px 16px rgba(124,131,255,.18);
+    }
+    .cmd-trigger {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px;
+      background: var(--surface-2); border: 1px solid var(--line-2); font-family: var(--mono);
+      font-size: 11.5px; color: var(--muted); transition: .25s var(--ease); margin-left: 4px;
+    }
+    .cmd-trigger:hover { color: #fff; border-color: var(--sky); transform: translateY(-1px); }
+    .cmd-trigger kbd { font-family: inherit; background: rgba(255,255,255,.08); padding: 1px 5px; border-radius: 5px; font-size: 10.5px; color: #fff; }
     .nav-cta {
-      padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      padding: 9px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
       background: var(--text); color: #0a0c18; transition: transform .3s var(--ease), box-shadow .3s;
     }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,.18); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,.22); }
     .burger { display: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); place-items: center; }
     .burger span, .burger span::before, .burger span::after {
       display: block; width: 16px; height: 2px; background: #fff; border-radius: 2px; position: relative; transition: .3s var(--ease);
@@ -140,13 +177,13 @@
     .burger.open span::before { top: 0; transform: rotate(45deg); }
     .burger.open span::after { top: 0; transform: rotate(-45deg); }
     .mobile-menu {
-      position: fixed; inset: 0; z-index: 80; background: rgba(6,7,13,.96); backdrop-filter: blur(20px);
+      position: fixed; inset: 0; z-index: 80; background: rgba(5,6,11,.96); backdrop-filter: blur(22px);
       display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px;
       opacity: 0; visibility: hidden; transition: .4s var(--ease);
     }
     .mobile-menu.open { opacity: 1; visibility: visible; }
     .mobile-menu a {
-      font-family: var(--display); font-size: 30px; font-weight: 600; padding: 8px 20px;
+      font-family: var(--display); font-size: 28px; font-weight: 600; padding: 8px 20px;
       transform: translateY(20px); opacity: 0; transition: .5s var(--ease);
     }
     .mobile-menu.open a { transform: none; opacity: 1; }
@@ -154,15 +191,15 @@
     .mobile-menu.open a:nth-child(4){transition-delay:.15s}.mobile-menu.open a:nth-child(5){transition-delay:.2s}
     .mobile-menu.open a:nth-child(6){transition-delay:.25s}.mobile-menu.open a:nth-child(7){transition-delay:.3s}
     .mobile-menu.open a:nth-child(8){transition-delay:.35s}
-    @media (max-width: 1020px) { .nav-links, .nav-cta { display: none; } .burger { display: grid; } }
+    @media (max-width: 1080px) { .nav-links, .nav-cta { display: none; } .burger { display: grid; } }
 
-    /* ============ SHARED ============ */
+    /* ============ SHARED & HOLOGRAPHIC CARDS ============ */
     .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono);
-      font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--sky); margin-bottom: 14px;
+      font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--sky); margin-bottom: 14px;
     }
-    .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; box-shadow: 0 0 8px currentColor; }
     .section-head { margin-bottom: clamp(36px, 5vw, 60px); max-width: 780px; }
     .section-head h2 {
       font-family: var(--display); font-size: clamp(30px, 4.6vw, 52px);
@@ -175,150 +212,188 @@
       position: relative; border-radius: var(--radius); background: var(--surface);
       border: 1px solid var(--line); overflow: hidden;
       transition: border-color .4s, transform .5s var(--ease), box-shadow .5s;
+      backdrop-filter: blur(12px);
     }
-    .card::before { /* spotlight */
+    /* Inner glow spotlight */
+    .card::before {
       content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
-      background: radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(124,131,255,.16), transparent 45%);
+      background: radial-gradient(480px circle at var(--mx,50%) var(--my,50%), rgba(124,131,255,.15), transparent 45%);
       transition: opacity .35s; z-index: 0;
     }
-    .card:hover::before { opacity: 1; }
-    .card:hover { border-color: rgba(124,131,255,.4); }
+    /* Glowing border beam following mouse */
+    .card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; opacity: 0;
+      background: radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(76,201,255,.65), rgba(124,131,255,.25) 45%, transparent 70%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      transition: opacity .35s; z-index: 2;
+    }
+    .card:hover::before, .card:hover::after { opacity: 1; }
+    .card:hover { border-color: rgba(124,131,255,.32); box-shadow: 0 20px 50px -20px rgba(8,12,32,.85); }
     .card > * { position: relative; z-index: 1; }
 
     .chip {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px;
       font-size: 12px; font-weight: 500; background: var(--surface-2); border: 1px solid var(--line);
       color: #d6daea; transition: .3s var(--ease);
     }
-    .chip:hover { transform: translateY(-3px); border-color: var(--indigo); color: #fff; }
+    .chip i { font-size: 11px; opacity: .85; }
+    .chip:hover { transform: translateY(-3px); border-color: var(--indigo); color: #fff; box-shadow: 0 6px 18px rgba(124,131,255,.2); }
     .chip.green { background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.25); color: #86efc5; }
-    .chip.green:hover { border-color: var(--emerald); }
+    .chip.green:hover { border-color: var(--emerald); box-shadow: 0 6px 18px rgba(52,211,153,.2); }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      padding: 14px 24px; border-radius: 14px; font-size: 14px; font-weight: 600;
+      padding: 14px 22px; border-radius: 14px; font-size: 13.5px; font-weight: 600;
       border: 1px solid var(--line-2); background: var(--surface); transition: transform .3s var(--ease), box-shadow .3s, background .3s, border-color .3s;
       will-change: transform;
     }
-    .btn:hover { background: var(--surface-2); border-color: rgba(255,255,255,.3); }
+    .btn:hover { background: var(--surface-2); border-color: rgba(255,255,255,.32); }
     .btn.primary {
-      border: 0; color: #fff; background: linear-gradient(120deg, #5b5ff5, #2f8cf0 60%, #14b8c6);
-      box-shadow: 0 10px 30px rgba(79,70,229,.4);
+      border: 0; color: #fff; background: linear-gradient(120deg, #5b5ff5, #2f8cf0 55%, #14b8c6);
+      box-shadow: 0 10px 30px rgba(79,70,229,.42); position: relative; overflow: hidden;
     }
-    .btn.primary:hover { box-shadow: 0 14px 40px rgba(79,70,229,.6); }
+    .btn.primary::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: skewX(-20deg); transition: left .65s var(--ease);
+    }
+    .btn.primary:hover::after { left: 130%; }
+    .btn.primary:hover { box-shadow: 0 14px 40px rgba(79,70,229,.65); }
 
-    /* reveal on scroll */
     .reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
     .reveal.in { opacity: 1; transform: none; }
 
     /* ============ HERO ============ */
-    #about { min-height: 100svh; display: flex; align-items: center; padding-top: 140px; padding-bottom: 60px; }
-    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(30px, 6vw, 80px); align-items: center; }
+    #about { min-height: 100svh; display: flex; align-items: center; padding-top: 136px; padding-bottom: 60px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(30px, 6vw, 76px); align-items: center; }
     .status {
-      display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 10px; border-radius: 999px;
-      background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.25); color: #86efc5;
-      font-size: 12px; font-weight: 600; margin-bottom: 26px;
+      display: inline-flex; align-items: center; gap: 10px; padding: 7px 15px 7px 11px; border-radius: 999px;
+      background: rgba(52,211,153,.09); border: 1px solid rgba(52,211,153,.28); color: #86efc5;
+      font-size: 12px; font-weight: 600; margin-bottom: 24px; box-shadow: 0 0 24px rgba(52,211,153,.12);
     }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); position: relative; }
     .dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--emerald); animation: ping 1.8s infinite; }
-    @keyframes ping { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+    @keyframes ping { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
     .hero h1 {
-      font-family: var(--display); font-size: clamp(38px, 6.4vw, 78px);
+      font-family: var(--display); font-size: clamp(38px, 6.2vw, 76px);
       line-height: 1.02; letter-spacing: -.035em; font-weight: 700;
     }
-    .hero h1 .line { display: block; overflow: hidden; }
+    .hero h1 .line { display: block; overflow: hidden; padding-bottom: 4px; }
     .hero h1 .line span { display: inline-block; transform: translateY(110%); animation: rise 1s var(--ease) forwards; }
     .hero h1 .line:nth-child(2) span { animation-delay: .12s; }
     .hero h1 .line:nth-child(3) span { animation-delay: .24s; }
     @keyframes rise { to { transform: none; } }
-    .typed-row { margin-top: 22px; font-family: var(--mono); font-size: clamp(13px, 1.6vw, 16px); color: var(--muted); min-height: 28px; }
-    .typed-row b { color: var(--sky); font-weight: 500; }
-    .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--sky); margin-left: 3px; vertical-align: -3px; animation: blink 1s steps(2) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero-desc { margin-top: 20px; color: #b8bfd3; font-size: clamp(15px, 1.5vw, 17px); max-width: 580px; }
-    .hero-desc strong { color: #fff; font-weight: 600; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 44px; border-top: 1px solid var(--line); padding-top: 26px; }
+    .typed-row {
+      margin-top: 20px; font-family: var(--mono); font-size: clamp(13px, 1.5vw, 15.5px);
+      color: var(--muted); min-height: 30px; display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid var(--line);
+    }
+    .typed-row b { color: var(--sky); font-weight: 600; }
+    .caret { display: inline-block; width: 2px; height: 1.1em; background: var(--sky); animation: blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-desc { margin-top: 20px; color: #b8bfd3; font-size: clamp(15px, 1.45vw, 16.5px); max-width: 590px; }
+    .hero-desc strong { color: #fff; font-weight: 600; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 42px; border-top: 1px solid var(--line); padding-top: 26px; }
     .stat { padding-right: 12px; }
     .stat + .stat { padding-left: 18px; border-left: 1px solid var(--line); }
-    .stat .num { font-family: var(--display); font-size: clamp(24px, 3vw, 34px); font-weight: 700; line-height: 1; }
+    .stat .num { font-family: var(--display); font-size: clamp(24px, 2.8vw, 32px); font-weight: 700; line-height: 1; }
     .stat .lbl { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
 
-    .profile { position: relative; perspective: 1000px; }
+    .profile { position: relative; perspective: 1100px; }
     .profile-card {
       position: relative; border-radius: 32px; padding: 3px; transform-style: preserve-3d; transition: transform .25s ease-out;
-      background: conic-gradient(from var(--ang, 0deg), #6366f1, #22d3ee, #2dd4bf, #6366f1);
-      animation: spin 6s linear infinite;
+      background: conic-gradient(from var(--ang, 0deg), #6366f1, #22d3ee, #2dd4bf, #f43f5e, #6366f1);
+      animation: spin 7s linear infinite;
+      box-shadow: 0 25px 70px -20px rgba(79,70,229,.45);
     }
     @property --ang { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
     @keyframes spin { to { --ang: 360deg; } }
     .profile-inner { position: relative; border-radius: 29px; overflow: hidden; background: var(--bg-2); }
     .profile-img { aspect-ratio: 4/5; width: 100%; object-fit: cover; transition: transform .8s var(--ease); }
     .profile-card:hover .profile-img { transform: scale(1.06); }
-    .profile-inner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,7,13,.95) 0%, rgba(6,7,13,.15) 48%, transparent 70%); }
+    .profile-inner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,6,11,.96) 0%, rgba(5,6,11,.18) 48%, transparent 72%); }
     .profile-meta { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2; }
     .profile-meta .tag {
-      display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(79,70,229,.75);
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: rgba(79,70,229,.82);
       backdrop-filter: blur(8px); font-size: 11px; font-weight: 600; margin-bottom: 8px;
     }
-    .profile-meta h3 { font-family: var(--display); font-size: 22px; line-height: 1.2; }
-    .profile-meta p { font-size: 12px; color: #c4c9da; margin-top: 2px; }
+    .profile-meta h3 { font-family: var(--display); font-size: 23px; line-height: 1.2; }
+    .profile-meta p { font-size: 12px; color: #c4c9da; margin-top: 3px; }
     .float-badge {
       position: absolute; z-index: 5; padding: 10px 14px; border-radius: 16px; font-size: 12px; font-weight: 600;
-      background: rgba(12,14,28,.75); backdrop-filter: blur(14px); border: 1px solid var(--line-2);
-      display: flex; align-items: center; gap: 10px; box-shadow: 0 14px 40px rgba(0,0,0,.5);
+      background: rgba(12,14,28,.82); backdrop-filter: blur(16px); border: 1px solid var(--line-2);
+      display: flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,0,0,.55);
       animation: bob 5s ease-in-out infinite;
     }
-    .float-badge i { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; font-size: 13px; }
+    .float-badge i { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 13px; }
     .float-badge small { display: block; font-weight: 400; color: var(--muted); font-size: 10.5px; }
-    .fb-1 { top: 8%; left: -9%; } .fb-1 i { background: rgba(251,191,36,.15); color: var(--amber); }
-    .fb-2 { bottom: 26%; right: -7%; animation-delay: -2.5s; } .fb-2 i { background: rgba(52,211,153,.15); color: var(--emerald); }
+    .fb-1 { top: 7%; left: -9%; } .fb-1 i { background: rgba(251,191,36,.16); color: var(--amber); }
+    .fb-2 { bottom: 27%; right: -7%; animation-delay: -2.5s; } .fb-2 i { background: rgba(52,211,153,.16); color: var(--emerald); }
     @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
     .info-list { display: grid; gap: 8px; margin-top: 16px; }
     .info-row {
-      display: flex; justify-content: space-between; gap: 14px; padding: 11px 14px; border-radius: 14px;
-      background: var(--surface); border: 1px solid var(--line); font-size: 12px;
+      display: flex; justify-content: space-between; gap: 14px; padding: 11px 15px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line); font-size: 12px; transition: border-color .3s;
     }
+    .info-row:hover { border-color: var(--line-2); }
     .info-row span:first-child { color: var(--muted); white-space: nowrap; }
     .info-row span:last-child { text-align: right; font-weight: 600; }
-    .scroll-hint { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+    .scroll-hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
     .scroll-hint i { width: 1px; height: 38px; background: linear-gradient(var(--sky), transparent); animation: drip 2s ease-in-out infinite; transform-origin: top; }
     @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .profile { max-width: 420px; margin: 20px auto 0; }
-      .fb-1 { left: -4%; } .fb-2 { right: -4%; }
+      .fb-1 { left: -3%; } .fb-2 { right: -3%; }
       .scroll-hint { display: none; }
       .stats { grid-template-columns: repeat(2, 1fr); row-gap: 22px; }
       .stat:nth-child(3) { padding-left: 0; border-left: 0; }
     }
 
     /* ============ MARQUEE ============ */
-    .marquee { padding-block: 26px; border-block: 1px solid var(--line); background: rgba(255,255,255,.015); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 38s linear infinite; }
+    .marquee { padding-block: 24px; border-block: 1px solid var(--line); background: rgba(255,255,255,.015); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 36s linear infinite; }
     .marquee:hover .marquee-track { animation-play-state: paused; }
-    .marquee-track span { font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--dim); white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+    .marquee-track span { font-family: var(--display); font-size: 21px; font-weight: 600; color: var(--dim); white-space: nowrap; display: flex; align-items: center; gap: 48px; transition: color .3s; }
+    .marquee-track span:hover { color: var(--text); }
     .marquee-track span::after { content: '✦'; color: var(--indigo); font-size: 14px; }
     @keyframes scroll { to { transform: translateX(-50%); } }
 
     /* ============ SKILLS ============ */
-    .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
     .skill-card { padding: 34px; }
-    .skill-icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 20px; margin-bottom: 22px; }
+    .skill-icon { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; font-size: 20px; margin-bottom: 20px; }
     .skill-card h3 { font-family: var(--display); font-size: 22px; letter-spacing: -.01em; margin-bottom: 10px; }
-    .skill-card p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .skill-card p { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .bars { display: grid; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .bar-top { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; font-weight: 600; }
+    .bar-top span:last-child { font-family: var(--mono); color: var(--sky); }
+    .bar-track { height: 6px; border-radius: 99px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 99px; background: var(--grad); width: var(--w, 85%); transform-origin: left; transform: scaleX(0); transition: transform 1.2s var(--ease); }
+    .reveal.in .bar-fill { transform: scaleX(1); }
     @media (max-width: 800px) { .skill-grid { grid-template-columns: 1fr; } .skill-card { padding: 26px; } }
 
     /* ============ HKI ============ */
     .hki-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; align-items: start; }
-    .zoomable { cursor: zoom-in; }
+    .zoomable { cursor: zoom-in; position: relative; }
     .poster { padding: 14px; border-color: rgba(52,211,153,.22); }
-    .poster-frame { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+    .poster-frame { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); position: relative; }
     .poster-frame img { width: 100%; height: auto; transition: transform .7s var(--ease); }
-    .poster:hover .poster-frame img { transform: scale(1.04); }
+    .poster:hover .poster-frame img { transform: scale(1.035); }
+    .zoom-badge {
+      position: absolute; bottom: 12px; right: 12px; z-index: 3; padding: 6px 11px; border-radius: 99px;
+      background: rgba(6,7,13,.82); backdrop-filter: blur(8px); border: 1px solid var(--line-2);
+      font-size: 11px; font-weight: 600; color: #fff; display: inline-flex; align-items: center; gap: 6px;
+      opacity: 0; transform: translateY(6px); transition: .3s var(--ease); pointer-events: none;
+    }
+    .zoomable:hover .zoom-badge { opacity: 1; transform: none; }
     .poster-cap { display: flex; justify-content: space-between; gap: 10px; padding: 14px 6px 4px; font-size: 12px; }
     .poster-cap b { color: var(--emerald); } .poster-cap span { color: var(--muted); }
     .panel { padding: 28px; }
@@ -326,7 +401,7 @@
     .panel h3 { font-size: 17px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-family: var(--display); }
     .panel h3 i { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; font-size: 14px; }
     .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .kv { padding: 14px 16px; border-radius: 16px; background: rgba(0,0,0,.25); border: 1px solid var(--line); font-size: 13px; }
+    .kv { padding: 14px 16px; border-radius: 16px; background: rgba(0,0,0,.28); border: 1px solid var(--line); font-size: 13px; }
     .kv.full { grid-column: 1 / -1; }
     .kv small { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; letter-spacing: .03em; }
     .kv b { font-weight: 600; line-height: 1.5; }
@@ -346,44 +421,51 @@
     /* ============ PROJECTS ============ */
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .project { display: flex; flex-direction: column; transform-style: preserve-3d; }
-    .project-media { position: relative; height: 230px; overflow: hidden; background: #12152a; }
+    .project-media { position: relative; height: 235px; overflow: hidden; background: #12152a; }
     .project-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease), filter .5s; }
-    .project:hover .project-media img { transform: scale(1.1) rotate(.6deg); }
-    .project-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18 0%, rgba(11,13,24,.1) 60%); }
-    .p-tag { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 6px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #fff; backdrop-filter: blur(6px); }
-    .p-num { position: absolute; z-index: 2; top: 10px; right: 18px; font-family: var(--display); font-size: 54px; font-weight: 700; color: rgba(255,255,255,.09); line-height: 1; }
+    .project:hover .project-media img { transform: scale(1.08) rotate(.4deg); }
+    .project-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0a0c16 0%, rgba(10,12,22,.12) 60%); }
+    .p-tag { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 6px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: #fff; backdrop-filter: blur(8px); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .p-num { position: absolute; z-index: 2; top: 10px; right: 18px; font-family: var(--display); font-size: 54px; font-weight: 700; color: rgba(255,255,255,.1); line-height: 1; }
     .project-body { padding: 26px 28px 8px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
     .project-body h3 { font-family: var(--display); font-size: 21px; line-height: 1.25; letter-spacing: -.015em; }
     .project-body > p { font-size: 13px; color: #b2b9ce; }
     .project-body > p strong { color: #fff; font-weight: 600; }
-    .code-box { padding: 14px 16px; border-radius: 14px; background: rgba(0,0,0,.4); border: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: #c9cee0; line-height: 1.7; overflow-x: auto; }
+    .code-box { padding: 14px 16px; border-radius: 14px; background: rgba(0,0,0,.42); border: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: #c9cee0; line-height: 1.7; overflow-x: auto; }
     .code-box em { font-style: normal; color: var(--indigo); font-weight: 500; display: block; margin-bottom: 2px; }
     .points { display: grid; gap: 8px; }
     .point { display: flex; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--line); font-size: 12.5px; color: #c4cadc; }
     .point i { margin-top: 3px; }
     .point strong { color: #fff; }
     .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .metric { padding: 12px 8px; border-radius: 14px; text-align: center; background: rgba(0,0,0,.28); border: 1px solid var(--line); }
+    .metric { padding: 12px 8px; border-radius: 14px; text-align: center; background: rgba(0,0,0,.3); border: 1px solid var(--line); }
     .metric small { display: block; font-size: 10px; color: var(--muted); margin-bottom: 4px; letter-spacing: .04em; }
     .metric b { font-family: var(--display); font-size: 16px; }
+    .proj-actions { display: grid; grid-template-columns: 1fr 1.25fr; gap: 10px; margin-top: auto; padding-top: 6px; }
+    .detail-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px;
+      border-radius: 14px; border: 1px solid var(--line-2); font-size: 12.5px; font-weight: 600;
+      background: rgba(255,255,255,.04); color: #e2e6f3; transition: all .3s var(--ease);
+    }
+    .detail-btn:hover { background: rgba(255,255,255,.1); border-color: var(--sky); color: #fff; transform: translateY(-2px); }
     .gh-btn {
-      margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px;
-      border-radius: 14px; border: 1px solid var(--line-2); font-size: 13px; font-weight: 600; background: rgba(255,255,255,.03);
+      display: flex; align-items: center; justify-content: center; gap: 9px; padding: 12px;
+      border-radius: 14px; border: 1px solid var(--line-2); font-size: 12.5px; font-weight: 600; background: rgba(255,255,255,.03);
       transition: all .35s var(--ease); position: relative; overflow: hidden;
     }
-    .gh-btn i.fa-arrow-right { transition: transform .35s var(--ease); font-size: 12px; }
-    .gh-btn:hover { background: var(--hc, var(--indigo)); border-color: transparent; transform: translateY(-2px); box-shadow: 0 10px 28px -6px var(--hc, var(--indigo)); }
-    .gh-btn:hover i.fa-arrow-right { transform: translateX(5px); }
+    .gh-btn i.fa-arrow-right { transition: transform .35s var(--ease); font-size: 11px; }
+    .gh-btn:hover { background: var(--hc, var(--indigo)); border-color: transparent; transform: translateY(-2px); box-shadow: 0 10px 28px -6px var(--hc, var(--indigo)); color: #fff; }
+    .gh-btn:hover i.fa-arrow-right { transform: translateX(4px); }
     .project-foot { padding: 14px 28px 26px; display: flex; flex-wrap: wrap; gap: 8px; }
     .project-foot span { padding: 4px 11px; border-radius: 8px; background: var(--surface-2); font-size: 11.5px; color: #c4cadc; font-family: var(--mono); }
-    @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .project-grid { grid-template-columns: 1fr; } .proj-actions { grid-template-columns: 1fr; } }
 
     /* ============ ORGANISASI ============ */
     .org-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .org-media { position: relative; height: 210px; overflow: hidden; background: #12152a; }
+    .org-media { position: relative; height: 215px; overflow: hidden; background: #12152a; }
     .org-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-    .org:hover .org-media img { transform: scale(1.1); }
-    .org-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18, transparent 65%); }
+    .org:hover .org-media img { transform: scale(1.09); }
+    .org-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0a0c16, transparent 65%); }
     .org-pill { position: absolute; z-index: 2; top: 16px; left: 16px; padding: 6px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 700; backdrop-filter: blur(8px); }
     .org-body { padding: 24px 26px 28px; }
     .org-body h3 { font-family: var(--display); font-size: 19px; line-height: 1.25; margin-bottom: 4px; }
@@ -401,7 +483,7 @@
     }
     .filter-btn:hover { color: #fff; border-color: var(--line-2); transform: translateY(-2px); }
     .filter-btn.active { color: #fff; background: linear-gradient(120deg, #5b5ff5, #2f8cf0); border-color: transparent; box-shadow: 0 8px 24px rgba(79,70,229,.45); }
-    .filter-btn .count { font-family: var(--mono); font-size: 11px; padding: 1px 7px; border-radius: 99px; background: rgba(255,255,255,.12); }
+    .filter-btn .count { font-family: var(--mono); font-size: 11px; padding: 1px 7px; border-radius: 99px; background: rgba(255,255,255,.14); }
     .comm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .comm-card { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
     .comm-card.show { animation: pop .55s var(--ease) both; animation-delay: calc(var(--i, 0) * 55ms); }
@@ -423,12 +505,12 @@
     /* ============ PELATIHAN ============ */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; }
     .step { display: flex; flex-direction: column; justify-content: space-between; border-top: 3px solid var(--c); }
-    .step-media { position: relative; height: 190px; overflow: hidden; background: #12152a; }
+    .step-media { position: relative; height: 195px; overflow: hidden; background: #12152a; }
     .step-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-    .step:hover .step-media img { transform: scale(1.1); }
-    .step-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0b0d18, transparent 65%); }
-    .step-date { position: absolute; z-index: 2; top: 14px; left: 14px; padding: 5px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 600; background: rgba(8,10,20,.8); border: 1px solid var(--c); color: var(--c); backdrop-filter: blur(8px); }
-    .step-lvl { position: absolute; z-index: 2; right: 18px; bottom: 10px; font-family: var(--display); font-size: 60px; font-weight: 700; color: rgba(255,255,255,.08); line-height: 1; }
+    .step:hover .step-media img { transform: scale(1.09); }
+    .step-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #0a0c16, transparent 65%); }
+    .step-date { position: absolute; z-index: 2; top: 14px; left: 14px; padding: 5px 13px; border-radius: 999px; font-size: 11.5px; font-weight: 600; background: rgba(8,10,20,.82); border: 1px solid var(--c); color: var(--c); backdrop-filter: blur(8px); }
+    .step-lvl { position: absolute; z-index: 2; right: 18px; bottom: 10px; font-family: var(--display); font-size: 60px; font-weight: 700; color: rgba(255,255,255,.1); line-height: 1; }
     .step-body { padding: 24px 26px 14px; }
     .step-body h3 { font-family: var(--display); font-size: 22px; }
     .step-body .sub { font-size: 12.5px; font-weight: 600; color: var(--c); margin-bottom: 12px; }
@@ -445,29 +527,89 @@
     .pengmas p { color: #b2b9ce; font-size: 14px; margin-bottom: 22px; }
     .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .gallery figure { border-radius: 18px; overflow: hidden; height: 160px; background: #12152a; border: 1px solid var(--line); }
-    .gallery figure:nth-child(3) { grid-column: 1 / -1; height: 190px; }
+    .gallery figure:nth-child(3) { grid-column: 1 / -1; height: 195px; }
     .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
-    .gallery figure:hover img { transform: scale(1.12); }
+    .gallery figure:hover img { transform: scale(1.1); }
     @media (max-width: 900px) { .pengmas-grid { grid-template-columns: 1fr; } }
 
     /* ============ FOOTER / CTA ============ */
-    footer { padding: 40px 0 36px; }
-    .cta { text-align: center; padding: clamp(44px, 8vw, 90px) 24px; border-radius: 36px; position: relative; overflow: hidden; background: linear-gradient(160deg, rgba(79,70,229,.2), rgba(8,145,178,.08) 60%, rgba(255,255,255,.02)); border: 1px solid var(--line-2); }
-    .cta::before { content: ''; position: absolute; width: 520px; height: 520px; top: -260px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(124,131,255,.35), transparent 65%); pointer-events: none; }
+    footer { padding: 40px 0 38px; }
+    .cta { text-align: center; padding: clamp(44px, 8vw, 88px) 24px; border-radius: 36px; position: relative; overflow: hidden; background: linear-gradient(160deg, rgba(79,70,229,.22), rgba(8,145,178,.09) 60%, rgba(255,255,255,.02)); border: 1px solid var(--line-2); }
+    .cta::before { content: ''; position: absolute; width: 540px; height: 540px; top: -270px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(124,131,255,.38), transparent 65%); pointer-events: none; }
     .cta > * { position: relative; }
-    .cta h2 { font-family: var(--display); font-size: clamp(32px, 6vw, 68px); line-height: 1.05; letter-spacing: -.035em; max-width: 800px; margin: 0 auto 18px; }
-    .cta p { color: var(--muted); max-width: 480px; margin: 0 auto 32px; font-size: 15px; }
+    .cta h2 { font-family: var(--display); font-size: clamp(32px, 5.8vw, 64px); line-height: 1.05; letter-spacing: -.035em; max-width: 800px; margin: 0 auto 18px; }
+    .cta p { color: var(--muted); max-width: 500px; margin: 0 auto 32px; font-size: 15px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-    .copyright { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--dim); }
+    .copyright { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; color: var(--dim); }
+    .live-clock { font-family: var(--mono); color: var(--muted); display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); }
     .to-top { position: fixed; right: 22px; bottom: 22px; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: rgba(12,14,28,.85); border: 1px solid var(--line-2); backdrop-filter: blur(10px); z-index: 70; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .4s var(--ease); }
     .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
     .to-top:hover { background: var(--indigo); transform: translateY(-4px); }
 
+    /* ============ PROJECT CASE STUDY MODAL ============ */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 210; background: rgba(4,5,10,.86); backdrop-filter: blur(16px);
+      display: grid; place-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: .35s var(--ease);
+    }
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
+    .modal-box {
+      width: min(760px, 100%); max-height: 88vh; overflow-y: auto; border-radius: 28px;
+      background: #0b0e1b; border: 1px solid var(--line-2); padding: clamp(22px, 4vw, 36px);
+      transform: translateY(24px) scale(.96); transition: .4s var(--ease); box-shadow: 0 30px 90px rgba(0,0,0,.75);
+    }
+    .modal-backdrop.open .modal-box { transform: none; }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+    .modal-head span { font-family: var(--mono); font-size: 11.5px; color: var(--sky); text-transform: uppercase; letter-spacing: .1em; }
+    .modal-head h3 { font-family: var(--display); font-size: clamp(22px, 3vw, 28px); margin-top: 4px; }
+    .modal-close { width: 38px; height: 38px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--line-2); display: grid; place-items: center; flex-shrink: 0; }
+    .modal-close:hover { background: var(--rose); color: #fff; border-color: transparent; }
+    .modal-sec { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .modal-sec h4 { font-family: var(--display); font-size: 14px; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .modal-sec p, .modal-sec li { font-size: 13.5px; color: #b6bdd2; line-height: 1.65; }
+    .modal-sec ul { padding-left: 18px; display: grid; gap: 6px; }
+
+    /* ============ COMMAND PALETTE (Ctrl+K) ============ */
+    .cmd-backdrop {
+      position: fixed; inset: 0; z-index: 220; background: rgba(4,5,10,.82); backdrop-filter: blur(14px);
+      display: flex; align-items: flex-start; justify-content: center; padding: 12vh 16px 20px;
+      opacity: 0; visibility: hidden; transition: .25s var(--ease);
+    }
+    .cmd-backdrop.open { opacity: 1; visibility: visible; }
+    .cmd-box {
+      width: min(560px, 100%); border-radius: 22px; background: #0c0f1d; border: 1px solid var(--line-2);
+      overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.75); transform: scale(.96); transition: .25s var(--ease);
+    }
+    .cmd-backdrop.open .cmd-box { transform: scale(1); }
+    .cmd-input-wrap { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+    .cmd-input-wrap i { color: var(--sky); }
+    .cmd-input { width: 100%; background: none; border: 0; color: #fff; font: inherit; font-size: 14.5px; outline: none; }
+    .cmd-list { max-height: 340px; overflow-y: auto; padding: 10px; display: grid; gap: 4px; }
+    .cmd-item {
+      display: flex; align-items: center; justify-content: space-between; padding: 11px 14px;
+      border-radius: 12px; font-size: 13px; color: #d5d9ea; transition: .15s; text-align: left; width: 100%;
+    }
+    .cmd-item:hover, .cmd-item.active { background: rgba(124,131,255,.18); color: #fff; }
+    .cmd-item span { display: inline-flex; align-items: center; gap: 10px; }
+    .cmd-item i { width: 20px; text-align: center; color: var(--indigo); }
+    .cmd-item small { font-family: var(--mono); font-size: 11px; color: var(--dim); }
+
+    /* ============ TOAST NOTIFICATION ============ */
+    .toast {
+      position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(30px);
+      z-index: 250; padding: 12px 20px; border-radius: 999px; background: #101426;
+      border: 1px solid var(--emerald); color: #fff; font-size: 13px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,0,0,.6);
+      opacity: 0; visibility: hidden; transition: .35s var(--ease);
+    }
+    .toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .toast i { color: var(--emerald); }
+
     /* ============ LIGHTBOX ============ */
-    .lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px; background: rgba(4,5,10,.9); backdrop-filter: blur(14px); opacity: 0; visibility: hidden; transition: .35s var(--ease); cursor: zoom-out; }
+    .lightbox { position: fixed; inset: 0; z-index: 230; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; background: rgba(4,5,10,.92); backdrop-filter: blur(16px); opacity: 0; visibility: hidden; transition: .35s var(--ease); cursor: zoom-out; }
     .lightbox.open { opacity: 1; visibility: visible; }
-    .lightbox img { max-height: 88vh; max-width: min(1000px, 94vw); border-radius: 18px; transform: scale(.9); transition: transform .45s var(--ease); box-shadow: 0 30px 80px rgba(0,0,0,.7); }
+    .lightbox img { max-height: 82vh; max-width: min(1020px, 94vw); border-radius: 18px; transform: scale(.92); transition: transform .45s var(--ease); box-shadow: 0 30px 80px rgba(0,0,0,.75); border: 1px solid var(--line-2); }
     .lightbox.open img { transform: scale(1); }
+    .lightbox-cap { font-size: 13px; color: var(--muted); font-family: var(--mono); }
     .lightbox button { position: absolute; top: 22px; right: 22px; width: 44px; height: 44px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--line-2); }
 
     /* ============ ACCESSIBILITY ============ */
@@ -476,14 +618,24 @@
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1; transform: none; }
       .hero h1 .line span { transform: none; }
+      .preloader { display: none; }
     }
     @media (hover: none) { .cursor-glow { display: none; } }
   </style>
 </head>
 <body>
 
+  <!-- Cinematic Fast Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre-logo">JM</div>
+    <div class="pre-bar"><i></i></div>
+    <div class="pre-txt">Joeang Ikhsan Maulana • Portfolio</div>
+  </div>
+
+  <!-- Interactive Background Layers -->
   <div class="bg-aurora"><i></i><i></i><i></i></div>
   <div class="bg-grid"></div>
+  <canvas id="neuralCanvas" aria-hidden="true"></canvas>
   <div class="cursor-glow" id="cursorGlow"></div>
   <div id="progress"></div>
 
@@ -507,6 +659,9 @@
         <a href="#pelatihan">Pelatihan</a>
         <a href="#pengmas">Pengabdian</a>
       </nav>
+      <button class="cmd-trigger" id="openCmd" title="Buka Navigasi Cepat (Ctrl+K)">
+        <i class="fa-solid fa-magnifying-glass"></i> Aksi <kbd>⌘K</kbd>
+      </button>
       <a href="#contact" class="nav-cta">Hubungi Saya</a>
       <button class="burger" id="burger" aria-label="Buka menu"><span></span></button>
     </header>
@@ -538,7 +693,7 @@
           </h1>
 
           <div class="typed-row" aria-live="polite">
-            <b>&gt;</b> <span id="typed"></span><span class="caret"></span>
+            <b>&gt;_</b> <span id="typed"></span><span class="caret"></span>
           </div>
 
           <p class="hero-desc">
@@ -548,6 +703,7 @@
           <div class="hero-cta">
             <a href="CV_Joeang Ikhsan Maulana.pdf" download class="btn primary magnetic"><i class="fa-solid fa-download"></i> Unduh CV (PDF)</a>
             <a href="#projects" class="btn magnetic"><i class="fa-solid fa-diagram-project"></i> Lihat 4 Proyek Data</a>
+            <button type="button" class="btn magnetic" id="copyEmailHero"><i class="fa-regular fa-copy" style="color:var(--emerald)"></i> Salin Email</button>
             <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" rel="noopener" class="btn magnetic"><i class="fa-brands fa-linkedin" style="color:var(--sky)"></i> LinkedIn</a>
           </div>
 
@@ -577,10 +733,10 @@
           <div class="float-badge fb-2"><i class="fa-solid fa-stamp"></i><div>HKI Terdaftar<small>Kemenkum RI 2026</small></div></div>
 
           <div class="profile-card" id="tilt">
-            <div class="profile-inner">
-              <img class="profile-img" src="photo.jpeg" alt="Joeang Ikhsan Maulana" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" />
+            <div class="profile-inner zoomable">
+              <img class="profile-img" src="photo.jpeg" alt="Joeang Ikhsan Maulana — Teknologi Sains Data UNAIR" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'" />
               <div class="profile-meta">
-                <span class="tag">Mahasiswa Teknologi Sains Data</span>
+                <span class="tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Mahasiswa Teknologi Sains Data</span>
                 <h3>Joeang Ikhsan Maulana</h3>
                 <p><i class="fa-solid fa-location-dot"></i> Surabaya • Nganjuk, Jawa Timur</p>
               </div>
@@ -600,8 +756,8 @@
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>Transformers</span><span>Scikit-Learn</span><span>Optuna</span><span>Flask REST API</span><span>Data Visualization</span><span>Statistika Nonparametrik</span><span>NLP</span>
-        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>Transformers</span><span>Scikit-Learn</span><span>Optuna</span><span>Flask REST API</span><span>Data Visualization</span><span>Statistika Nonparametrik</span><span>NLP</span>
+        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>IndoBERT Transformers</span><span>Scikit-Learn</span><span>Optuna TPE</span><span>Flask REST API</span><span>NetworkX SNA</span><span>Statistika Nonparametrik</span><span>RShiny Dashboard</span>
+        <span>Python</span><span>R & RStudio</span><span>PyTorch</span><span>IndoBERT Transformers</span><span>Scikit-Learn</span><span>Optuna TPE</span><span>Flask REST API</span><span>NetworkX SNA</span><span>Statistika Nonparametrik</span><span>RShiny Dashboard</span>
       </div>
     </div>
 
@@ -619,9 +775,28 @@
             <h3>Data Science & Web Development</h3>
             <p>Pengalaman dalam membangun model Machine Learning, statistika inferensial, serta arsitektur backend expert system.</p>
             <div class="chips">
-              <span class="chip">Python</span><span class="chip">R & RStudio</span><span class="chip">Flask REST API</span>
-              <span class="chip">PyTorch / Transformers</span><span class="chip">Scikit-Learn</span><span class="chip">Optuna</span>
-              <span class="chip">Data Visualization</span><span class="chip">HTML/CSS/JS</span>
+              <span class="chip"><i class="fa-brands fa-python"></i> Python</span>
+              <span class="chip"><i class="fa-solid fa-chart-line"></i> R & RStudio</span>
+              <span class="chip"><i class="fa-solid fa-server"></i> Flask REST API</span>
+              <span class="chip"><i class="fa-solid fa-brain"></i> PyTorch / Transformers</span>
+              <span class="chip"><i class="fa-solid fa-gears"></i> Scikit-Learn</span>
+              <span class="chip"><i class="fa-solid fa-sliders"></i> Optuna</span>
+              <span class="chip"><i class="fa-solid fa-chart-Simple"></i> Data Visualization</span>
+              <span class="chip"><i class="fa-solid fa-laptop-code"></i> HTML/CSS/JS</span>
+            </div>
+            <div class="bars">
+              <div>
+                <div class="bar-top"><span>Statistical Modeling & Econometrics (R / Python)</span><span>92%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:92%"></div></div>
+              </div>
+              <div>
+                <div class="bar-top"><span>NLP, Text Mining & Social Network Analysis</span><span>88%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:88%"></div></div>
+              </div>
+              <div>
+                <div class="bar-top"><span>Backend REST API & Web Deployment</span><span>85%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
+              </div>
             </div>
           </div>
 
@@ -630,8 +805,26 @@
             <h3>Leadership & Manajemen</h3>
             <p>Terlatih dalam memimpin tim lintas divisi, negosiasi tingkat fakultas, penyelesaian masalah, dan manajemen acara skala besar.</p>
             <div class="chips">
-              <span class="chip green">Team Leadership</span><span class="chip green">Project Management</span><span class="chip green">Public Speaking</span>
-              <span class="chip green">Problem Solving</span><span class="chip green">Cross-functional Collaboration</span><span class="chip green">Crisis Management</span>
+              <span class="chip green"><i class="fa-solid fa-crown"></i> Team Leadership</span>
+              <span class="chip green"><i class="fa-solid fa-list-check"></i> Project Management</span>
+              <span class="chip green"><i class="fa-solid fa-microphone-lines"></i> Public Speaking</span>
+              <span class="chip green"><i class="fa-solid fa-lightbulb"></i> Problem Solving</span>
+              <span class="chip green"><i class="fa-solid fa-handshake"></i> Cross-functional Collaboration</span>
+              <span class="chip green"><i class="fa-solid fa-shield-halved"></i> Crisis Management</span>
+            </div>
+            <div class="bars">
+              <div>
+                <div class="bar-top"><span>Advokasi Kebijakan & Negosiasi Strategis</span><span>95%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:95%"></div></div>
+              </div>
+              <div>
+                <div class="bar-top"><span>Koordinasi Lapangan & Manajemen Krisis Event</span><span>94%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:94%"></div></div>
+              </div>
+              <div>
+                <div class="bar-top"><span>Perencanaan Organisasi (RPO, SWOT & Monev SMART)</span><span>90%</span></div>
+                <div class="bar-track"><div class="bar-fill" style="--w:90%"></div></div>
+              </div>
             </div>
           </div>
         </div>
@@ -652,7 +845,8 @@
         <div class="hki-grid">
           <div class="card poster reveal">
             <div class="poster-frame zoomable">
-              <img src="posterHKI.png" alt="Poster Uji Nonparametrik Ketersediaan Layanan" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80'" />
+              <img src="posterHKI.png" alt="Poster Uji Nonparametrik Ketersediaan Layanan Kesehatan 38 Provinsi" onerror="if(!this.dataset.altTried){this.dataset.altTried=1;this.src='posterHKI.jpeg';}else{this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80';}" />
+              <span class="zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i> Klik untuk perbesar</span>
             </div>
             <div class="poster-cap">
               <b>Poster Riset Fasilitas Kesehatan</b>
@@ -681,7 +875,7 @@
 
             <div class="card cert reveal" style="--d:.16s">
               <div class="cert-img zoomable">
-                <img src="HKI.png" alt="Sertifikat DJKI" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&q=80'">
+                <img src="HKI.png" alt="Surat Pencatatan Ciptaan DJKI — 001213309" onerror="this.src='https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=300&q=80'">
               </div>
               <div>
                 <span class="badge">Dokumen Resmi DJKI</span>
@@ -701,17 +895,18 @@
         <div class="section-head reveal">
           <span class="eyebrow">03 — Portofolio Unggulan</span>
           <h2>4 Proyek Analisis Data <span class="grad-text">& Machine Learning</span></h2>
-          <p>Eksplorasi ekonometrika, NLP deep learning, social media mining, hingga perancangan expert system.</p>
+          <p>Eksplorasi ekonometrika, NLP deep learning, social media mining, hingga perancangan expert system. Klik <strong>Bedah Riset</strong> untuk melihat arsitektur detailnya.</p>
         </div>
 
         <div class="project-grid">
 
           <!-- PROYEK 1 -->
           <article class="card project tilt-soft reveal">
-            <div class="project-media">
-              <img src="Rshiny.png" alt="Analisis IKG 2023" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'">
+            <div class="project-media zoomable">
+              <img src="Rshiny.png" alt="Dashboard RShiny Analisis Indeks Ketimpangan Gender (IKG) 2023" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'">
               <span class="p-tag" style="background:rgba(79,70,229,.9)">RShiny Dashboard (2025)</span>
               <span class="p-num">01</span>
+              <span class="zoom-badge"><i class="fa-solid fa-expand"></i> Perbesar Visual</span>
             </div>
             <div class="project-body">
               <h3>Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023</h3>
@@ -722,17 +917,21 @@
                 <div class="metric"><small>F-Stat</small><b style="color:var(--indigo)">44.70</b></div>
                 <div class="metric"><small>Klaster</small><b style="color:var(--sky)">k = 3</b></div>
               </div>
-              <a href="https://github.com/JIMaulana13/analisis-ikg-2023" target="_blank" rel="noopener" class="gh-btn" style="--hc:#4f46e5"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="proj-actions">
+                <button type="button" class="detail-btn" data-project="ikg"><i class="fa-solid fa-layer-group" style="color:var(--indigo)"></i> Bedah Riset</button>
+                <a href="https://github.com/JIMaulana13/analisis-ikg-2023" target="_blank" rel="noopener" class="gh-btn" style="--hc:#4f46e5"><i class="fa-brands fa-github" style="font-size:15px"></i> Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
             <div class="project-foot"><span>R</span><span>RShiny</span><span>OLS Regression</span><span>K-Means</span></div>
           </article>
 
           <!-- PROYEK 2 -->
           <article class="card project tilt-soft reveal" style="--d:.1s">
-            <div class="project-media">
-              <img src="NLP.png" alt="Aspect and Emotion Analysis Disaster Response" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'">
+            <div class="project-media zoomable">
+              <img src="NLP.png" alt="Confusion Matrix & Evaluasi IndoBERT Klasifikasi Aspek dan Emosi Bencana" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'">
               <span class="p-tag" style="background:rgba(225,29,72,.9)">Deep Learning & NLP (2026)</span>
               <span class="p-num">02</span>
+              <span class="zoom-badge"><i class="fa-solid fa-expand"></i> Perbesar Visual</span>
             </div>
             <div class="project-body">
               <h3>Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)</h3>
@@ -746,17 +945,21 @@
                 <div class="metric"><small>Akurasi Emosi</small><b style="color:var(--emerald)">73.53%</b></div>
                 <div class="metric"><small>Tuning</small><b style="color:var(--rose)">Optuna TPE</b></div>
               </div>
-              <a href="https://github.com/JIMaulana13/nlp-analisisemosi" target="_blank" rel="noopener" class="gh-btn" style="--hc:#e11d48"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="proj-actions">
+                <button type="button" class="detail-btn" data-project="nlp"><i class="fa-solid fa-layer-group" style="color:var(--rose)"></i> Bedah Riset</button>
+                <a href="https://github.com/JIMaulana13/nlp-analisisemosi" target="_blank" rel="noopener" class="gh-btn" style="--hc:#e11d48"><i class="fa-brands fa-github" style="font-size:15px"></i> Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
             <div class="project-foot"><span>PyTorch</span><span>IndoBERT</span><span>Optuna</span></div>
           </article>
 
           <!-- PROYEK 3 -->
           <article class="card project tilt-soft reveal">
-            <div class="project-media">
-              <img src="wordcloud.png" alt="TikTok Social Media Mining Flu A" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
+            <div class="project-media zoomable">
+              <img src="wordcloud.png" alt="Visualisasi Wordcloud & Social Network Analysis Tren Isu Flu A TikTok" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80'">
               <span class="p-tag" style="background:rgba(13,148,136,.9)">Social Media Mining & SNA (2026)</span>
               <span class="p-num">03</span>
+              <span class="zoom-badge"><i class="fa-solid fa-expand"></i> Perbesar Visual</span>
             </div>
             <div class="project-body">
               <h3>Social Media Mining & Clustering: Tren Isu Flu A di TikTok</h3>
@@ -770,17 +973,21 @@
                 <div class="metric"><small>Interaksi</small><b style="color:var(--indigo)">41.3M Likes</b></div>
                 <div class="metric"><small>Struktur Graf</small><b style="color:var(--sky)">958 Relasi</b></div>
               </div>
-              <a href="https://github.com/JIMaulana13/SocialMediaMining" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0d9488"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="proj-actions">
+                <button type="button" class="detail-btn" data-project="sna"><i class="fa-solid fa-layer-group" style="color:var(--teal)"></i> Bedah Riset</button>
+                <a href="https://github.com/JIMaulana13/SocialMediaMining" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0d9488"><i class="fa-brands fa-github" style="font-size:15px"></i> Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
             <div class="project-foot"><span>Python</span><span>K-Means & LDA</span><span>NetworkX</span></div>
           </article>
 
           <!-- PROYEK 4 -->
           <article class="card project tilt-soft reveal" style="--d:.1s">
-            <div class="project-media">
-              <img src="finhealth.jpeg" alt="FinHealth Expert System" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'">
+            <div class="project-media zoomable">
+              <img src="finhealth.jpeg" alt="Antarmuka Webapp FinHealth Expert System Kesehatan Finansial UMKM" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80'">
               <span class="p-tag" style="background:rgba(8,145,178,.9)">Expert System & REST API (2025)</span>
               <span class="p-num">04</span>
+              <span class="zoom-badge"><i class="fa-solid fa-expand"></i> Perbesar Visual</span>
             </div>
             <div class="project-body">
               <h3>FinHealth: Expert System Kesehatan Finansial UMKM</h3>
@@ -794,7 +1001,10 @@
                 <div class="metric"><small>Model</small><b style="color:var(--indigo)">Rule-Based</b></div>
                 <div class="metric"><small>Domain</small><b style="color:var(--emerald)">UMKM Finance</b></div>
               </div>
-              <a href="https://github.com/JIMaulana13/finhealth-expert-system" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0891b2"><i class="fa-brands fa-github" style="font-size:16px"></i> Lihat Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="proj-actions">
+                <button type="button" class="detail-btn" data-project="finhealth"><i class="fa-solid fa-layer-group" style="color:var(--sky)"></i> Bedah Riset</button>
+                <a href="https://github.com/JIMaulana13/finhealth-expert-system" target="_blank" rel="noopener" class="gh-btn" style="--hc:#0891b2"><i class="fa-brands fa-github" style="font-size:15px"></i> Repositori Kode <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
             <div class="project-foot"><span>Python</span><span>Flask</span><span>Expert System</span></div>
           </article>
@@ -813,20 +1023,20 @@
 
         <div class="org-grid">
           <article class="card org reveal">
-            <div class="org-media">
-              <img src="Mandala.jpeg" alt="Menteri Adkesma" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80'" />
+            <div class="org-media zoomable">
+              <img src="Mandala.jpeg" alt="Menteri Advokasi & Kesejahteraan Mahasiswa BEM FTMM 2026" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80'" />
               <span class="org-pill" style="background:#4f46e5;color:#fff">2026 – Sekarang</span>
             </div>
             <div class="org-body">
               <h3>Menteri Advokasi & Kesejahteraan Mahasiswa</h3>
-              <div class="sub">Kementerian Adkesma BEM FTMM 2026 </div>
+              <div class="sub">Kementerian Adkesma BEM FTMM 2026</div>
               <p>Memimpin advokasi, pengawalan beasiswa, dan pelayanan kesejahteraan untuk mahasiswa dari 5 prodi FTMM serta jembatan aspirasi utama ke fakultas.</p>
             </div>
           </article>
 
           <article class="card org reveal" style="--d:.1s">
-            <div class="org-media">
-              <img src="Peta.jpeg" alt="Dirjen Adkesma" onerror="this.src='https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80'" />
+            <div class="org-media zoomable">
+              <img src="Peta.jpeg" alt="Dirjen Kesejahteraan Mahasiswa BEM FTMM 2025" onerror="this.src='https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80'" />
               <span class="org-pill" style="background:rgba(10,12,24,.85);color:var(--amber);border:1px solid rgba(251,191,36,.35)"><i class="fa-solid fa-trophy"></i> Most Dedicated Staff 2025</span>
             </div>
             <div class="org-body">
@@ -837,8 +1047,8 @@
           </article>
 
           <article class="card org reveal" style="--d:.2s">
-            <div class="org-media">
-              <img src="sekbem.jpeg" alt="Sekolah BEM" />
+            <div class="org-media zoomable">
+              <img src="sekbem.jpeg" alt="Sekolah BEM FTMM 2024 — Staf Terbaik Kementerian Adkesma" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80'" />
               <span class="org-pill" style="background:rgba(10,12,24,.85);color:var(--emerald);border:1px solid rgba(52,211,153,.35)"><i class="fa-solid fa-award"></i> Sekbem Adkesma Terbaik 2024</span>
             </div>
             <div class="org-body">
@@ -949,8 +1159,8 @@
         <div class="steps">
           <article class="card step reveal" style="--c:#2dd4bf">
             <div>
-              <div class="step-media">
-                <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar">
+              <div class="step-media zoomable">
+                <img src="LKMMTD.jpeg" alt="LKMM Tingkat Dasar (November 2025)" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80'">
                 <span class="step-date">November 2025</span>
                 <span class="step-lvl">TD</span>
               </div>
@@ -965,8 +1175,8 @@
 
           <article class="card step reveal" style="--c:#4cc9ff;--d:.1s">
             <div>
-              <div class="step-media">
-                <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah">
+              <div class="step-media zoomable">
+                <img src="LKMMTM.jpeg" alt="LKMM Tingkat Menengah (Juni 2026)" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80'">
                 <span class="step-date">Juni 2026</span>
                 <span class="step-lvl">TM</span>
               </div>
@@ -981,18 +1191,18 @@
 
           <article class="card step reveal" style="--c:#8b8fff;--d:.2s">
             <div>
-              <div class="step-media">
-                <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut">
+              <div class="step-media zoomable">
+                <img src="LKMMTL.jpg" alt="LKMM Tingkat Lanjut (Juli 2026)" onerror="if(!this.dataset.altTried){this.dataset.altTried=1;this.src='LKMMTL.jpeg';}else{this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80';}">
                 <span class="step-date">Juli 2026</span>
                 <span class="step-lvl">TL</span>
               </div>
               <div class="step-body">
                 <h3>LKMM-TL</h3>
                 <div class="sub">Tingkat Lanjut</div>
-                <p>Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian&peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.</p>
+                <p>Analisis periskop terhadap potensi komoditas lokal Dusun Jaraan, serta merancang rencana strategis hilirisasi pertanian & peternakan berbasis kelembagaan BUMDes dan matriks Monev SMART untuk meningkatkan nilai ekonomi masyarakat.</p>
               </div>
             </div>
-            <div class="step-foot">Fokus: <b>Pembuatan Wacana</b></div>
+            <div class="step-foot">Fokus: <b>Pembuatan Wacana & Kebijakan</b></div>
           </article>
         </div>
       </div>
@@ -1017,9 +1227,9 @@
               </div>
             </div>
             <div class="gallery">
-              <figure class="zoomable"><img src="pengmas1.JPG" alt="UMKM Dawarblandong 1" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80'" /></figure>
-              <figure class="zoomable"><img src="pengmas2.JPG" alt="UMKM Dawarblandong 2" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80'" /></figure>
-              <figure class="zoomable"><img src="pengmas3.JPG" alt="Diskusi Tim Pengmas" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80'" /></figure>
+              <figure class="zoomable"><img src="pengmas1.JPG" alt="Pendampingan UMKM Dawarblandong 1" onerror="this.src='https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=400&q=80'" /></figure>
+              <figure class="zoomable"><img src="pengmas2.JPG" alt="Pendampingan UMKM Dawarblandong 2" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80'" /></figure>
+              <figure class="zoomable"><img src="pengmas3.JPG" alt="Diskusi Tim Pengabdian Masyarakat di Mojokerto" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80'" /></figure>
             </div>
           </div>
         </div>
@@ -1036,11 +1246,13 @@
         <p>Terbuka untuk riset pemodelan sains data, inisiasi program kemahasiswaan, maupun proyek pengembangan web lainnya.</p>
         <div class="cta-row">
           <a href="mailto:joeang.ikhsan.maulana-2024@ftmm.unair.ac.id" class="btn primary magnetic"><i class="fa-solid fa-envelope"></i> Kirim Pesan Email</a>
+          <button type="button" class="btn magnetic" id="copyEmailFooter"><i class="fa-regular fa-copy" style="color:var(--emerald)"></i> Salin Alamat Email</button>
           <a href="https://www.linkedin.com/in/joeangikhsan" target="_blank" rel="noopener" class="btn magnetic"><i class="fa-brands fa-linkedin" style="color:var(--sky)"></i> Hubungkan di LinkedIn</a>
         </div>
       </div>
       <div class="copyright">
         <span>© 2026 Joeang Ikhsan Maulana</span>
+        <span class="live-clock"><span class="dot"></span> Surabaya, ID • <span id="sbyClock">--:--:-- WIB</span></span>
         <span>Dibuat dengan senyum & Rum Regal Madani</span>
       </div>
     </div>
@@ -1048,9 +1260,51 @@
 
   <button class="to-top" id="toTop" aria-label="Kembali ke atas"><i class="fa-solid fa-arrow-up"></i></button>
 
+  <!-- ============ PROJECT DEEP-DIVE MODAL ============ -->
+  <div class="modal-backdrop" id="projModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <span id="modalTag">Deep-Dive Architecture</span>
+          <h3 id="modalTitle">Judul Proyek</h3>
+        </div>
+        <button class="modal-close" id="closeModal" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ COMMAND PALETTE (Ctrl+K) ============ -->
+  <div class="cmd-backdrop" id="cmdModal" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="cmd-box">
+      <div class="cmd-input-wrap">
+        <i class="fa-solid fa-terminal"></i>
+        <input type="text" class="cmd-input" id="cmdInput" placeholder="Ketik perintah atau bagian (misal: CV, NLP, HKI, Email)..." autocomplete="off" />
+      </div>
+      <div class="cmd-list" id="cmdList">
+        <button class="cmd-item" data-action="scroll" data-target="#projects"><span><i class="fa-solid fa-diagram-project"></i> Jelajahi 4 Proyek Data Science</span><small>Bagian</small></button>
+        <button class="cmd-item" data-action="scroll" data-target="#hki"><span><i class="fa-solid fa-stamp"></i> Lihat Sertifikat & Poster HKI Kemenkum RI</span><small>Bagian</small></button>
+        <button class="cmd-item" data-action="scroll" data-target="#organisasi"><span><i class="fa-solid fa-users"></i> Pengalaman Kepemimpinan BEM FTMM</span><small>Bagian</small></button>
+        <button class="cmd-item" data-action="scroll" data-target="#kepanitiaan"><span><i class="fa-solid fa-calendar-check"></i> Eksplorasi 9+ Riwayat Kepanitiaan</span><small>Bagian</small></button>
+        <button class="cmd-item" data-action="scroll" data-target="#pelatihan"><span><i class="fa-solid fa-graduation-cap"></i> Jenjang Pelatihan LKMM (TD, TM, TL)</span><small>Bagian</small></button>
+        <button class="cmd-item" data-action="cv"><span><i class="fa-solid fa-file-arrow-down"></i> Unduh CV Joeang Ikhsan Maulana (PDF)</span><small>Dokumen</small></button>
+        <button class="cmd-item" data-action="copy-email"><span><i class="fa-regular fa-copy"></i> Salin Email Resmi UNAIR</span><small>Kontak</small></button>
+        <button class="cmd-item" data-action="link" data-url="https://github.com/JIMaulana13"><span><i class="fa-brands fa-github"></i> Buka Profil GitHub (@JIMaulana13)</span><small>Eksternal</small></button>
+        <button class="cmd-item" data-action="link" data-url="https://www.linkedin.com/in/joeangikhsan"><span><i class="fa-brands fa-linkedin"></i> Buka Profil LinkedIn</span><small>Eksternal</small></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Tersalin ke clipboard!</span>
+  </div>
+
+  <!-- ============ LIGHTBOX ============ -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau gambar">
     <button aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
     <img alt="" />
+    <div class="lightbox-cap" id="lightboxCap"></div>
   </div>
 
   <script>
@@ -1060,7 +1314,70 @@
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-      /* 1. Scroll progress, navbar state, back-to-top */
+      /* 0. Fast Preloader */
+      const pre = $('#preloader');
+      const hidePre = () => pre?.classList.add('done');
+      addEventListener('load', () => setTimeout(hidePre, 420));
+      setTimeout(hidePre, 1100);
+
+      /* 1. Interactive Neural / SNA Constellation Canvas */
+      const canvas = $('#neuralCanvas');
+      if (canvas && !reduce) {
+        const ctx = canvas.getContext('2d');
+        let w, h, nodes = [];
+        const mouse = { x: -999, y: -999 };
+        const resize = () => {
+          w = canvas.width = innerWidth;
+          h = canvas.height = innerHeight;
+          const count = Math.min(55, Math.floor((w * h) / 26000));
+          nodes = Array.from({ length: count }, () => ({
+            x: Math.random() * w, y: Math.random() * h,
+            vx: (Math.random() - .5) * .45, vy: (Math.random() - .5) * .45,
+            r: Math.random() * 1.6 + 1
+          }));
+        };
+        resize();
+        addEventListener('resize', resize, { passive: true });
+        addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+
+        const draw = () => {
+          ctx.clearRect(0, 0, w, h);
+          for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
+            a.x += a.vx; a.y += a.vy;
+            if (a.x < 0 || a.x > w) a.vx *= -1;
+            if (a.y < 0 || a.y > h) a.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(124,131,255,0.55)';
+            ctx.fill();
+
+            for (let j = i + 1; j < nodes.length; j++) {
+              const b = nodes[j];
+              const dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+              if (d < 135) {
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = `rgba(76,201,255,${(1 - d / 135) * 0.18})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+            const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+            if (md < 170) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y);
+              ctx.strokeStyle = `rgba(45,212,191,${(1 - md / 170) * 0.35})`;
+              ctx.stroke();
+            }
+          }
+          requestAnimationFrame(draw);
+        };
+        draw();
+      }
+
+      /* 2. Scroll progress, navbar state, back-to-top */
       const progress = $('#progress'), nav = $('#nav'), toTop = $('#toTop');
       const onScroll = () => {
         const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
@@ -1071,50 +1388,20 @@
       addEventListener('scroll', onScroll, { passive: true }); onScroll();
       toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 
-      /* 2. Mobile menu */
-      const burger = $('#burger'), menu = $('#mobileMenu');
-      const toggleMenu = (open) => {
-        burger.classList.toggle('open', open);
-        menu.classList.toggle('open', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-      };
-      burger.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
-      $$('a', menu).forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+      /* 3. Mobile menu */
+      const burger = $('#burger'), menu = $('#mobileMenu'); const toggleMenu = (open) => { burger.classList.toggle('open', open); menu.classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; }; burger.addEventListener('click', () => toggleMenu(!menu.classList.contains('open'))); $$('a', menu).forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 
-      /* 3. Scroll-spy */
-      const links = $$('.nav-links a');
-      const spy = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
-          }
-        });
-      }, { rootMargin: '-45% 0px -50% 0px' });
-      $$('main section[id]').forEach(s => spy.observe(s));
+      /* 4. Scroll-spy */
+      const links = $$('.nav-links a'); const spy = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); } }); }, { rootMargin: '-45\% 0px -50\% 0px' }); $$('main section[id]').forEach(s => spy.observe(s));
 
-      /* 4. Reveal on scroll */
+      /* 5. Reveal on scroll */
       const rev = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } });
       }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-      $$('.reveal').forEach(el => rev.observe(el));
+      $$('.reveal').forEach(el => rev.observe(el));        /* 6. Count-up */ const cnt = new IntersectionObserver(entries => { entries.forEach(e => { if (!e.isIntersecting) return; const el = e.target, to = +el.dataset.count; let t0; const step = (t) => { t0 ??= t; const p = Math.min((t - t0) / 1200, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); }; if (!reduce) { el.textContent = '0'; requestAnimationFrame(step); } cnt.unobserve(el); }); }); $$
+('[data-count]').forEach(el => cnt.observe(el));
 
-      /* 5. Count-up */
-      const cnt = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          const el = e.target, to = +el.dataset.count; let t0;
-          const step = (t) => {
-            t0 ??= t; const p = Math.min((t - t0) / 1200, 1);
-            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
-            if (p < 1) requestAnimationFrame(step);
-          };
-          if (!reduce) { el.textContent = '0'; requestAnimationFrame(step); }
-          cnt.unobserve(el);
-        });
-      });
-      $$('[data-count]').forEach(el => cnt.observe(el));
-
-      /* 6. Typewriter */
+      /* 7. Typewriter */
       const roles = ['Data Scientist in the making', 'Machine Learning & NLP Enthusiast', 'Statistician — R & Python', 'Menteri Advokasi Mahasiswa FTMM', 'Web Developer untuk UMKM'];
       const out = $('#typed');
       if (reduce) { out.textContent = roles[0]; }
@@ -1126,12 +1413,12 @@
           if (!del && c === w.length) { del = true; return setTimeout(tick, 1600); }
           if (del && c === 0) { del = false; r = (r + 1) % roles.length; }
           c += del ? -1 : 1;
-          setTimeout(tick, del ? 28 : 65);
+          setTimeout(tick, del ? 28 : 60);
         };
         tick();
       }
 
-      /* 7. Cursor glow, card spotlight, tilt, magnetic buttons */
+      /* 8. Cursor glow, card spotlight, tilt, magnetic buttons */
       if (fine) {
         const glow = $('#cursorGlow');
         addEventListener('pointermove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
@@ -1145,17 +1432,17 @@
         }, { passive: true });
 
         const attachTilt = (el, max) => {
+          if (!el) return;
           el.addEventListener('pointermove', e => {
             const r = el.getBoundingClientRect();
             const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-            el.style.transform = `perspective(900px) rotateY(${x * max}deg) rotateX(${-y * max}deg) translateY(-4px)`;
+            el.style.transform = `perspective(950px) rotateY(${x * max}deg) rotateX(${-y * max}deg) translateY(-4px)`;
           });
           el.addEventListener('pointerleave', () => { el.style.transform = ''; });
         };
         attachTilt($('#tilt'), 10);
-        $$('.tilt-soft').forEach(el => attachTilt(el, 3));
-
-        $$('.magnetic').forEach(b => {
+        $$('.tilt-soft').forEach(el => attachTilt(el, 3.2));          $$
+('.magnetic').forEach(b => {
           b.addEventListener('pointermove', e => {
             const r = b.getBoundingClientRect();
             b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .22}px, ${(e.clientY - r.top - r.height / 2) * .3}px)`;
@@ -1164,8 +1451,8 @@
         });
       }
 
-      /* 8. Committee filter */
-      const fbtns = $$('.filter-btn'), cards = $$('.comm-card');
+      /* 9. Committee filter */
+      const fbtns = $$('.filter-btn'), cards =$$('.comm-card');
       fbtns.forEach(btn => btn.addEventListener('click', () => {
         fbtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1182,16 +1469,173 @@
         });
       }));
 
-      /* 9. Lightbox */
-      const lb = $('#lightbox'), lbImg = $('img', lb);
-      $$('.zoomable').forEach(z => z.addEventListener('click', () => {
+      /* 10. Toast & Copy Email */
+      const toast = $('#toast'), toastMsg = $('#toastMsg');
+      let toastTimer;
+      const showToast = (msg) => {
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+      };
+      const copyEmail = () => {
+        navigator.clipboard?.writeText('joeang.ikhsan.maulana-2024@ftmm.unair.ac.id');
+        showToast('Email joeang.ikhsan.maulana-2024@ftmm.unair.ac.id berhasil disalin!');
+      };
+      $('#copyEmailHero')?.addEventListener('click', copyEmail);
+      $('#copyEmailFooter')?.addEventListener('click', copyEmail);
+
+      /* 11. Live Clock Surabaya (WIB) */
+      const clockEl = $('#sbyClock');
+      const tickClock = () => {
+        if (!clockEl) return;
+        const now = new Intl.DateTimeFormat('id-ID', {
+          timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+        }).format(new Date());
+        clockEl.textContent = now + ' WIB';
+      };
+      tickClock(); setInterval(tickClock, 1000);
+
+      /* 12. Project Deep-Dive Modal */
+      const projectDetails = {
+        ikg: {
+          tag: 'Econometrics & Unsupervised Clustering • RShiny',
+          title: 'Analisis Indeks Ketimpangan Gender (IKG) Indonesia 2023',
+          html: `
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-bullseye" style="color:var(--indigo)"></i> Latar Belakang & Tujuan</h4>
+              <p>Memodelkan determinan ketimpangan gender lintas 34 provinsi di Indonesia menggunakan indikator resmi BPS & KemenPPPA 2023 untuk merumuskan intervensi kebijakan tepat sasaran.</p>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-gears" style="color:var(--sky)"></i> Metodologi & Pipeline</h4>
+              <ul>
+                <li><strong>Regresi Linear Berganda (OLS):</strong> Menguji signifikansi simultan dan parsial variabel kesehatan reproduksi, pemberdayaan, serta pasar kerja dengan uji asumsi klasik ketat (Shapiro-Wilk & VIF).</li>
+                <li><strong>K-Means Clustering (k=3) & PCA:</strong> Mengelompokkan provinsi ke dalam 3 zona prioritas pembangunan kesetaraan gender.</li>
+                <li><strong>Interactive Deployment:</strong> Membangun RShiny Dashboard untuk eksplorasi peta dan simulasi indikator.</li>
+              </ul>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-chart-line" style="color:var(--emerald)"></i> Hasil Kunci</h4>
+              <p>Model mencapai <strong>R² = 88,52% (F-Stat = 44,70, p &lt; 0.001)</strong>. Variabel melahirkan usia &lt;20 tahun (MHPK20) dan komplikasi persalinan (MTF) menjadi pendorong utama ketimpangan, sedangkan keterwakilan parlemen (R_Leg) dan TPAK perempuan terbukti menurunkan ketimpangan secara signifikan.</p>
+            </div>
+          `
+        },
+        nlp: {
+          tag: 'Deep Learning & Aspect-Based Emotion Analysis • PyTorch',
+          title: 'Klasifikasi Aspek & Emosi Respons Bencana (IndoBERT)',
+          html: `
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-bullseye" style="color:var(--rose)"></i> Latar Belakang & Inovasi</h4>
+              <p>Melampaui analisis sentimen positif-negatif konvensional dengan memetakan secara simultan <strong>9 Aspek Penanganan</strong> dan <strong>6 Emosi Publik</strong> pada korpus 2.890 komentar X dan TikTok terkait Gempa M7.7 NTT & Karhutla Kalimantan.</p>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-microchip" style="color:var(--sky)"></i> Arsitektur & Eksperimen</h4>
+              <ul>
+                <li><strong>Anotasi Multi-Rater (Fleiss' Kappa Substantial):</strong> Sampel Cochran (n=340) dianotasi oleh 3 penilai lintas disiplin (Sains Data & Fakultas Hukum) menghasilkan κ = 0,741 (Aspek) dan κ = 0,705 (Emosi).</li>
+                <li><strong>Komparasi 5 Arsitektur + Optuna TPE (15 Trials):</strong> Membandingkan SVM+TF-IDF, 1D-CNN, BiLSTM, Conv1D+BiLSTM, dan Fine-Tuned IndoBERT (fp16, AdamW, Weighted Cross-Entropy).</li>
+              </ul>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-chart-pie" style="color:var(--emerald)"></i> Temuan Populasi (N = 2.890)</h4>
+              <p><strong>IndoBERT</strong> menjadi model juara pada kedua tugas (Akurasi Emosi 73,53%, Macro-F1 0,384). Inferensi penuh mengungkap kontras tajam: wacana Gempa NTT didominasi emosi <em>Sadness</em> pada aspek Korban (A1), sedangkan Karhutla Kalimantan didominasi <em>Anger</em> terkait Regulasi & Penegakan Hukum (A7).</p>
+            </div>
+          `
+        },
+        sna: {
+          tag: 'Text Mining, Topic Modeling & Network Science • Python',
+          title: 'Social Media Mining & Clustering: Tren Isu Flu A di TikTok',
+          html: `
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-bullseye" style="color:var(--teal)"></i> Akuisisi & Skala Data</h4>
+              <p>Mengekstraksi percakapan video publik TikTok terkait lonjakan kasus Flu A menggunakan Apify Scraper, mencakup 261 unggahan terkurasi dengan total <strong>41,34 Juta Likes</strong>, <strong>499 Ribu Komentar</strong>, dan <strong>407 Juta Tayangan</strong>.</p>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-circle-nodes" style="color:var(--sky)"></i> Tiga Pilar Analisis</h4>
+              <ul>
+                <li><strong>Bilingual Text Preprocessing:</strong> Pembersihan teks otomatis dan stopword removal gabungan Bahasa Indonesia & Inggris.</li>
+                <li><strong>K-Means (k=8) & LDA Topic Modelling:</strong> Evaluasi Silhouette Score menemukan 8 klaster optimal dan memisahkan narasi gejala medis organik dari agregator berita umum.</li>
+                <li><strong>Social Network Analysis (356 Node, 958 Edge):</strong> Pemetaan jaringan <em>co-occurrence hashtag</em> dengan algoritma Greedy Modularity mendeteksi 4 komunitas utama dan menempatkan #influenza (Degree Centrality 0,483) sebagai hub sentral.</li>
+              </ul>
+            </div>
+          `
+        },
+        finhealth: {
+          tag: 'Rule-Based Expert System & Backend Engineering • Flask',
+          title: 'FinHealth: Expert System Kesehatan Finansial UMKM',
+          html: `
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-bullseye" style="color:var(--sky)"></i> Solusi untuk Pelaku UMKM</h4>
+              <p>Membantu pemilik UMKM non-akuntan mendiagnosa kondisi kesehatan usaha secara cepat tanpa perlu menyusun laporan akuntansi rumit.</p>
+            </div>
+            <div class="modal-sec">
+              <h4><i class="fa-solid fa-server" style="color:var(--emerald)"></i> Arsitektur Sistem</h4>
+              <ul>
+                <li><strong>Flask RESTful API:</strong> Memproses input arus kas, kewajiban lancar, aset, dan omzet penjualan secara real-time.</li>
+                <li><strong>Rule-Based Inference Engine:</strong> Mengevaluasi rasio likuiditas dan profitabilitas terhadap ambang batas standar finansial UMKM.</li>
+                <li><strong>Actionable Recommendations:</strong> Menghasilkan rekomendasi operasional spesifik yang mudah dipahami pelaku usaha.</li>
+              </ul>
+            </div>
+          `
+        }
+      };
+
+      const projModal = $('#projModal'), mTag = $('#modalTag'), mTitle = $('#modalTitle'), mBody = $('#modalBody'); $$('[data-project]').forEach(btn => btn.addEventListener('click', () => {
+        const d = projectDetails[btn.dataset.project];
+        if (!d) return;
+        mTag.textContent = d.tag; mTitle.textContent = d.title; mBody.innerHTML = d.html;
+        projModal.classList.add('open'); document.body.style.overflow = 'hidden';
+      }));
+      const closeProjModal = () => { projModal.classList.remove('open'); document.body.style.overflow = ''; };
+      $('#closeModal')?.addEventListener('click', closeProjModal);
+      projModal?.addEventListener('click', e => { if (e.target === projModal) closeProjModal(); });
+
+      /* 13. Command Palette (Ctrl+K / Cmd+K) */
+      const cmdModal = $('#cmdModal'), cmdInput = $('#cmdInput'), cmdItems = $$('.cmd-item');
+      const openCmd = () => {
+        cmdModal.classList.add('open');
+        cmdInput.value = '';
+        cmdItems.forEach(i => i.hidden = false);
+        setTimeout(() => cmdInput.focus(), 60);
+      };
+      const closeCmd = () => cmdModal.classList.remove('open');
+      $('#openCmd')?.addEventListener('click', openCmd);
+      cmdModal?.addEventListener('click', e => { if (e.target === cmdModal) closeCmd(); });
+
+      cmdInput?.addEventListener('input', () => {
+        const q = cmdInput.value.toLowerCase().trim();
+        cmdItems.forEach(item => {
+          item.hidden = !item.textContent.toLowerCase().includes(q);
+        });
+      });
+
+      cmdItems.forEach(item => item.addEventListener('click', () => {
+        const act = item.dataset.action;
+        closeCmd();
+        if (act === 'scroll') $(item.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+        else if (act === 'copy-email') copyEmail();
+        else if (act === 'cv') {
+          const a = document.createElement('a');
+          a.href = 'CV_Joeang Ikhsan Maulana.pdf'; a.download = ''; a.click();
+        } else if (act === 'link') window.open(item.dataset.url, '_blank', 'noopener');
+      }));
+
+      /* 14. Lightbox with Caption */
+      const lb = $('#lightbox'), lbImg = $('img', lb), lbCap = $('#lightboxCap'); $$('.zoomable').forEach(z => z.addEventListener('click', () => {
         const img = $('img', z); if (!img) return;
         lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt;
+        if (lbCap) lbCap.textContent = img.alt || '';
         lb.classList.add('open'); document.body.style.overflow = 'hidden';
       }));
       const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
       lb.addEventListener('click', closeLb);
-      addEventListener('keydown', e => { if (e.key === 'Escape') { closeLb(); toggleMenu(false); } });
+
+      addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          cmdModal.classList.contains('open') ? closeCmd() : openCmd();
+        }
+        if (e.key === 'Escape') { closeLb(); closeProjModal(); closeCmd(); toggleMenu(false); }
+      });
     })();
   </script>
 </body>
